@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: e0997e496adf84d22bfc00086d07aeaf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4580662864907310770
+    second: EvolutionaryEnergyImage_0
+  - first:
+      213: 1528324070822789585
+    second: EvolutionaryEnergyImage_1
+  - first:
+      213: -1213224426771264194
+    second: EvolutionaryEnergyImage_2
+  - first:
+      213: -1098256942910332311
+    second: EvolutionaryEnergyImage_3
+  - first:
+      213: -4171034417500058141
+    second: EvolutionaryEnergyImage_4
+  - first:
+      213: -3649108558501571929
+    second: EvolutionaryEnergyImage_5
+  - first:
+      213: 8596899688861474956
+    second: EvolutionaryEnergyImage_6
+  - first:
+      213: 8307265541216435967
+    second: EvolutionaryEnergyImage_7
+  - first:
+      213: -807550978677959118
+    second: EvolutionaryEnergyImage_8
+  - first:
+      213: -6062562726080282894
+    second: EvolutionaryEnergyImage_9
+  - first:
+      213: 6070934243471731086
+    second: EvolutionaryEnergyImage_10
+  - first:
+      213: 9068416487057529573
+    second: EvolutionaryEnergyImage_11
+  - first:
+      213: -2972652575865981473
+    second: EvolutionaryEnergyImage_12
+  - first:
+      213: 6392165035409150512
+    second: EvolutionaryEnergyImage_13
+  - first:
+      213: 595413194152648117
+    second: EvolutionaryEnergyImage_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_0
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 840
+        width: 38
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49606dc4673e60c0800000000000000
+      internalID: -4580662864907310770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_1
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 863
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d1421f15a2b53510800000000000000
+      internalID: 1528324070822789585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 876
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3dc871dfc2c92fe0800000000000000
+      internalID: -1213224426771264194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_3
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 859
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96229b5112532c0f0800000000000000
+      internalID: -1098256942910332311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_4
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 780
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ed0bfedb428d16c0800000000000000
+      internalID: -4171034417500058141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_5
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 458
+        width: 374
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a21daf8913cb5dc0800000000000000
+      internalID: -3649108558501571929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_6
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 791
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c80214cf7b25e4770800000000000000
+      internalID: 8596899688861474956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_7
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 715
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe7c07fef5594370800000000000000
+      internalID: 8307265541216435967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_8
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 695
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23691e9d9a00bc4f0800000000000000
+      internalID: -807550978677959118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_9
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 642
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fef57b42537ddba0800000000000000
+      internalID: -6062562726080282894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_10
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 621
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8923ec778a404450800000000000000
+      internalID: 6070934243471731086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_11
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 615
+        width: 39
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea1c5a9fbc79dd70800000000000000
+      internalID: 9068416487057529573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_12
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 608
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd5bbd66b340fb6d0800000000000000
+      internalID: -2972652575865981473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_13
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 415
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0321c398b3885b850800000000000000
+      internalID: 6392165035409150512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EvolutionaryEnergyImage_14
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 375
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bd9c0c3525534800800000000000000
+      internalID: 595413194152648117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EvolutionaryEnergyImage_0: -4580662864907310770
+      EvolutionaryEnergyImage_1: 1528324070822789585
+      EvolutionaryEnergyImage_10: 6070934243471731086
+      EvolutionaryEnergyImage_11: 9068416487057529573
+      EvolutionaryEnergyImage_12: -2972652575865981473
+      EvolutionaryEnergyImage_13: 6392165035409150512
+      EvolutionaryEnergyImage_14: 595413194152648117
+      EvolutionaryEnergyImage_2: -1213224426771264194
+      EvolutionaryEnergyImage_3: -1098256942910332311
+      EvolutionaryEnergyImage_4: -4171034417500058141
+      EvolutionaryEnergyImage_5: -3649108558501571929
+      EvolutionaryEnergyImage_6: 8596899688861474956
+      EvolutionaryEnergyImage_7: 8307265541216435967
+      EvolutionaryEnergyImage_8: -807550978677959118
+      EvolutionaryEnergyImage_9: -6062562726080282894
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

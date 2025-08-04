@@ -1,0 +1,15 @@
+bf.png
+size:856,856
+filter:Linear,Linear
+pma:true
+chibang1
+bounds:489,681,172,230
+rotate:90
+chibang2
+bounds:647,689,164,206
+rotate:90
+tou
+bounds:314,680,173,173
+yz
+bounds:2,789,310,64
+offsets:3,3,316,70

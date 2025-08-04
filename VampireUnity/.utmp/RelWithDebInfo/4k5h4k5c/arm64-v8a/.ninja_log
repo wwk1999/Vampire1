@@ -1,0 +1,12 @@
+# ninja log v5
+11	209	1747827568750779881	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e89782616578e8b0
+211	473	1747827569012126772	/Users/tal/Vampire/VampireUnity/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4k5h4k5c/obj/arm64-v8a/libswappywrapper.so	c1f8a7b32a73edb6
+1	922	1747827569469814029	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	89d94f946895ec62
+4	929	1747827569475484851	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	d4d67d297ef7a46f
+6	1002	1747827569542416205	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	ac0237f095029f61
+7	1009	1747827569548094068	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	480f09eba76e8574
+9	1026	1747827569569256772	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	9f3b41559a550891
+2	1094	1747827569638660996	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f39810585b2dfb6b
+5	1166	1747827569714200582	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	fd0bbf2d69a5105b
+1	1323	1747827569870456118	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e3337f8e690310a4
+1323	1406	1747827569948040658	/Users/tal/Vampire/VampireUnity/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4k5h4k5c/obj/arm64-v8a/libgame.so	b711260c7aed6fb4
