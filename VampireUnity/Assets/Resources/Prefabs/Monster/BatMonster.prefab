@@ -238,10 +238,10 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 525328603255163140}
   - {fileID: 3210903512496397860}
   - {fileID: 6573709775183112807}
   - {fileID: 7153435761541351460}
+  - {fileID: 4798000464209883934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &4554567784233832272
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSkeletonAnimation: {fileID: 3511246800086974078}
-  hpSlider: {fileID: 9135119495851481690}
+  hpSlider: {fileID: 0}
 --- !u!61 &5350974059942255611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a01d7d03c6c745209f757918d6a4339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &7050384783511030354
+--- !u!1001 &2596400019095253064
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -490,46 +490,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2526423993814307592}
     m_Modifications:
-    - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 8288426215254106694, guid: eb01c6ab8e2ea4916a54e3d3f581bf3c, type: 3}
-    - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_PixelsPerUnitMultiplier
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2238721480228048904, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748408247304331468, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748408247304331468, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 4130640169021434097, guid: 61c6d7aa0dd0047a981af3dec47b086e, type: 3}
-    - target: {fileID: 2748408247304331468, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748408247304331468, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_PixelsPerUnitMultiplier
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4248315732215992852, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_Name
       value: MonsterHPBloodBar
@@ -541,22 +501,6 @@ PrefabInstance:
     - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.8700104
-      objectReference: {fileID: 0}
-    - target: {fileID: 6905762847697611726, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -15.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 6905762847697611726, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -9.03
       objectReference: {fileID: 0}
     - target: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalScale.x
@@ -572,11 +516,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.35
+      value: -0.34999844
       objectReference: {fileID: 0}
     - target: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.87
+      value: 1.8700002
       objectReference: {fileID: 0}
     - target: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -610,32 +554,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9021539952801725111, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -16.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 9021539952801725111, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -8.4502
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
---- !u!4 &525328603255163140 stripped
+--- !u!4 &4798000464209883934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-  m_PrefabInstance: {fileID: 7050384783511030354}
+  m_PrefabInstance: {fileID: 2596400019095253064}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9135119495851481690 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2238721480228048904, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
-  m_PrefabInstance: {fileID: 7050384783511030354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
