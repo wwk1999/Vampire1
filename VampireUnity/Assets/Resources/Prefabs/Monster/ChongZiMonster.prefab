@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSkeletonAnimation: {fileID: 39191097545976010}
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 7794369761932567108}
 --- !u!1001 &8303128442976531020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,3 +484,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
   m_PrefabInstance: {fileID: 8303128442976531020}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7794369761932567108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2238721480228048904, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+  m_PrefabInstance: {fileID: 8303128442976531020}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
