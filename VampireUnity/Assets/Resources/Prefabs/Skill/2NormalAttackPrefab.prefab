@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2447520947494588407}
   - component: {fileID: 5406437981930245846}
-  - component: {fileID: 696098431147849892}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trigger
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -41,7 +40,6 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508781003083147660}
   m_Enabled: 1
-  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -65,22 +63,10 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0.019175768, y: -0.35155588}
+  serializedVersion: 2
   m_Radius: 0.4744323
---- !u!114 &696098431147849892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6508781003083147660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe507ab5129b4ce1819b5aacdc67905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8077884847693378898
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +118,7 @@ MonoBehaviour:
   ps: {fileID: 7764294357109828893}
 --- !u!50 &926326437314677559
 Rigidbody2D:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -143,8 +129,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

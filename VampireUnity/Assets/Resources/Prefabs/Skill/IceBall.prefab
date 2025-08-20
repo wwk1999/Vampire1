@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4172513042054883882}
   m_Layer: 10
   m_Name: IceBall
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 392772867228603928, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 392772867228603928, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 831907464296492076, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
       propertyPath: m_LocalScale.x
@@ -248,6 +252,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 392772867228603928, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
+      objectReference: {fileID: 0}
     - target: {fileID: 831907464296492076, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -411,6 +419,10 @@ PrefabInstance:
     - target: {fileID: 392772867228603928, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 392772867228603928, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 831907464296492076, guid: 3a29017fd4dcb114b9d1e5a6296f24fd, type: 3}
       propertyPath: m_LocalScale.x

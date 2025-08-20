@@ -13,11 +13,13 @@ public class MainWindow1 : MonoBehaviour
 
    private void Start()
    {
-      loginButton.onClick.AddListener(() =>
+       _=PlayerInfoController.S;
+      loginButton.onClick.AddListener(async () =>
       {
+          await ServerConnect.S.ConnectAsync();
           WindowController.S.LoginWindow.SetActive(true);
       });
-      startButton.onClick.AddListener(() =>
+      startButton.onClick.AddListener(async () =>
       {
           if (!IsLogin)
           {

@@ -6,31 +6,53 @@ using MySqlConnector;
 using Tool;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+public class SavaEquipData
+{
+    public int Equipid{ get; set; }
+    public int Quality { get; set; }
+    public int Damage { get; set; }
+    public int Crit { get; set; }
+    public int Critdamage { get; set; }
+    public int Damagespeed { get; set; }
+    public int Bloodsuck { get; set; }
+    public int Hp { get; set; }
+    public int Movespeed { get; set; }
+    public string Equipname { get; set; }
+    public int Suitid { get; set; }
+    public string Suitname { get; set; }
+    public int Equip_type_id { get; set; }
+    public string Equip_type_name { get; set; }
+    public int Userid { get; set; }
+    public int Defense { get; set; }
+    public int Goodfortune { get; set; }
+    public int Type { get; set; }
+}
 public class BagController : XSingleton<BagController>
 {
     [NonSerialized]public bool IsInit = false;
     [NonSerialized] public Dictionary<string, Sprite>EquipidSpriteConfig = new Dictionary<string, Sprite>(); //装备的Sprite配置
     [NonSerialized] public Dictionary<int, Sprite> EquipidSprite = new Dictionary<int, Sprite>(); //背包里所有的装备的Sprite
-    [NonSerialized] public Dictionary<int, EquipTable> EquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的装备的属性
-    [NonSerialized] public List<TableBase> EquipIdList = new List<TableBase>();//翻页
+    //[NonSerialized] public List<EquipTable> EquipidTable = new List<EquipTable>(); //背包里所有的装备的属性
+    [NonSerialized] public List<EquipTable> EquipIdList = new List<EquipTable>();//翻页,所有的装备
     
-    [NonSerialized] public Dictionary<int, EquipTable> WhiteEquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的白色装备
-    [NonSerialized] public Dictionary<int, EquipTable> GreenEquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的绿色装备
-    [NonSerialized] public Dictionary<int, EquipTable> BlueEquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的蓝色色装备
-    [NonSerialized] public Dictionary<int, EquipTable> PurpleEquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的紫色色装备
-    [NonSerialized] public Dictionary<int, EquipTable> OrangeEquipidTable = new Dictionary<int, EquipTable>(); //背包里所有的橙色装备
+    [NonSerialized] public List<EquipTable> WhiteEquipidTable = new List<EquipTable>(); //背包里所有的白色装备
+    [NonSerialized] public List<EquipTable> GreenEquipidTable = new List<EquipTable>(); //背包里所有的绿色装备
+    [NonSerialized] public List<EquipTable> BlueEquipidTable = new List<EquipTable>(); //背包里所有的蓝色色装备
+    [NonSerialized] public List<EquipTable> PurpleEquipidTable = new List<EquipTable>(); //背包里所有的紫色色装备
+    [NonSerialized] public List<EquipTable> OrangeEquipidTable = new List<EquipTable>(); //背包里所有的橙色装备
     
     //源石相关
-    [NonSerialized] public Dictionary<int, Sprite> SourceStoneSpriteConfig = new Dictionary<int, Sprite>(); //源石的Sprite，int是源石类型
-    [NonSerialized]public Dictionary<int,SourceStoneTable>SourceStoneTable = new Dictionary<int,SourceStoneTable>();//int时equipid
+    [NonSerialized]public List<SourceStoneTable>SourceStoneTable = new List<SourceStoneTable>();//源石列表
     
-    [NonSerialized] public Dictionary<int, SourceStoneTable> WhiteWeaponSourceStoneTable = new Dictionary<int, SourceStoneTable>(); //背包里所有的白色源石
-    [NonSerialized] public Dictionary<int, SourceStoneTable> GreenWeaponSourceStoneTable = new Dictionary<int, SourceStoneTable>(); //背包里所有的绿色源石
-    [NonSerialized] public Dictionary<int, SourceStoneTable> BlueWeaponSourceStoneTable = new Dictionary<int, SourceStoneTable>(); //背包里所有的蓝色源石
-    [NonSerialized] public Dictionary<int, SourceStoneTable> PurpleWeaponSourceStoneTable = new Dictionary<int, SourceStoneTable>(); //背包里所有的紫色源石
-    [NonSerialized] public Dictionary<int, SourceStoneTable> OrangeWeaponSourceStoneTable = new Dictionary<int, SourceStoneTable>(); //背包里所有的橙色源石
+    [NonSerialized] public List<SourceStoneTable> WhiteWeaponSourceStoneTable = new List<SourceStoneTable>(); //背包里所有的白色源石
+    [NonSerialized] public List<SourceStoneTable> GreenWeaponSourceStoneTable = new List<SourceStoneTable>(); //背包里所有的绿色源石
+    [NonSerialized] public List<SourceStoneTable> BlueWeaponSourceStoneTable = new List<SourceStoneTable>(); //背包里所有的蓝色源石
+    [NonSerialized] public List<SourceStoneTable> PurpleWeaponSourceStoneTable = new List<SourceStoneTable>(); //背包里所有的紫色源石
+    [NonSerialized] public List<SourceStoneTable> OrangeWeaponSourceStoneTable = new List<SourceStoneTable>(); //背包里所有的橙色源石
     
     
     
@@ -89,6 +111,8 @@ public class BagController : XSingleton<BagController>
         SceneManager.sceneLoaded += OnSceneLoaded;
         
     }
+    
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // 场景加载后重新初始化UI
@@ -97,15 +121,13 @@ public class BagController : XSingleton<BagController>
 
     public void InitBag()
     {
-        Debug.Log("开始执行InitBag方法");
         
         // 加载装备背景图
-        Debug.Log("正在加载装备背景图");
-        whiteBg = Resources.Load<Sprite>("Sprite/EquipWhiteBG");
-        greenBg = Resources.Load<Sprite>("Sprite/EquipGreenBG");
-        blueBg = Resources.Load<Sprite>("Sprite/EquipBlueBG");
-        purpleBg = Resources.Load<Sprite>("Sprite/EquipPurpleBG");
-        orangeBg = Resources.Load<Sprite>("Sprite/EquipOrangeBG");
+        whiteBg = ResourcesConfig.WhiteBg;
+        greenBg = ResourcesConfig.GreenBg;
+        blueBg =ResourcesConfig.BlueBg;
+        purpleBg = ResourcesConfig.PurpleBg;
+        orangeBg = ResourcesConfig.OrangeBg;
         
         // 检查装备背景图是否加载成功
         if (whiteBg == null || greenBg == null || blueBg == null || purpleBg == null || orangeBg == null)
@@ -114,7 +136,6 @@ public class BagController : XSingleton<BagController>
         }
 
         // 查找UIRoot
-        Debug.Log("正在查找UIRoot对象");
         GameObject uiRoot = GameObject.Find("UIRoot");
         if (uiRoot == null)
         {
@@ -122,10 +143,8 @@ public class BagController : XSingleton<BagController>
             return;
         }
         
-        Debug.Log("找到UIRoot对象");
 
         // 加载背包预制体
-        Debug.Log("正在加载背包预制体");
         GameObject bagPrefab = Resources.Load("Prefabs/Window/Bag") as GameObject;
         if (bagPrefab == null)
         {
@@ -136,12 +155,10 @@ public class BagController : XSingleton<BagController>
         // 销毁旧的背包UI
         if (bag != null)
         {
-            Debug.Log("销毁旧的背包UI");
             Destroy(bag.gameObject);
         }
         
         // 实例化新的背包UI
-        Debug.Log("实例化新的背包UI");
         try
         {
             bag = Instantiate(bagPrefab);
@@ -154,7 +171,6 @@ public class BagController : XSingleton<BagController>
         }
         
         // 加载背包格子预制体
-        Debug.Log("加载背包格子预制体");
         bagGrid = Resources.Load("Prefabs/Equip/BagGrid") as GameObject;
         if (bagGrid == null)
         {
@@ -162,27 +178,26 @@ public class BagController : XSingleton<BagController>
         }
         
         // 查找背包内的组件
-        Debug.Log("查找背包内的组件");
         try
         {
-            PlayerPanel = bag.transform.Find("BagPanel").Find("PlayerPanel").gameObject;
+            PlayerPanel = bag.GetComponent<BagPanel>().playerPanel;
             if (PlayerPanel == null)
             {
                 Debug.LogError("InitBag出错: 找不到PlayerPanel");
             }
             
-            AttributePanel = bag.transform.Find("BagPanel").Find("AttributePanel").gameObject;
+            AttributePanel = bag.GetComponent<BagPanel>().attributePanel;
             if (AttributePanel == null)
             {
                 Debug.LogError("InitBag出错: 找不到AttributePanel");
             }
             
-            playerCloth = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Cloth").gameObject;
-            playerCloak = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Cloak").gameObject;
-            playerRing = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Ring").gameObject;
-            playerNecklace = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Necklace").gameObject;
-            playerShoe = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Shoe").gameObject;
-            playerHelmet = bag.transform.Find("BagPanel").Find("PlayerPanel").Find("Helmet").gameObject;
+            playerCloth = bag.GetComponent<BagPanel>().playerCloth;
+            playerCloak =bag.GetComponent<BagPanel>().playerCloak;
+            playerRing = bag.GetComponent<BagPanel>().playerRing;
+            playerNecklace = bag.GetComponent<BagPanel>().playerNecklace;
+            playerShoe = bag.GetComponent<BagPanel>().playerShoe;
+            playerHelmet = bag.GetComponent<BagPanel>().playerHelmet;
             
             if (playerCloth == null || playerCloak == null || playerRing == null || 
                 playerNecklace == null || playerShoe == null || playerHelmet == null)
@@ -206,38 +221,23 @@ public class BagController : XSingleton<BagController>
             Debug.LogError($"InitBag出错: 初始化装备图标配置失败: {e.Message}\n{e.StackTrace}");
         }
         
-        // 初始化源石图标配置
-        Debug.Log("初始化源石图标配置");
-        try
-        {
-            InitSourceStoneSpriteConfig();
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"InitBag出错: 初始化源石图标配置失败: {e.Message}\n{e.StackTrace}");
-        }
         
         // 检查装备数据是否已初始化
-        Debug.Log("检查装备数据");
         if (EquipIdList == null)
         {
-            Debug.LogWarning("InitBag警告: EquipIdList为null，初始化为空列表");
-            EquipIdList = new List<TableBase>();
+            EquipIdList = new List<EquipTable>();
         }
         
         if (EquipidSprite == null)
         {
-            Debug.LogWarning("InitBag警告: EquipidSprite为null，初始化为空字典");
             EquipidSprite = new Dictionary<int, Sprite>();
         }
         
-        if (EquipidTable == null)
+        if (EquipIdList == null)
         {
-            Debug.LogWarning("InitBag警告: EquipidTable为null，初始化为空字典");
-            EquipidTable = new Dictionary<int, EquipTable>();
+            EquipIdList = new List<EquipTable>();
         }
         
-        Debug.Log($"InitBag完成，EquipIdList中有 {EquipIdList.Count} 件装备，EquipidSprite中有 {EquipidSprite.Count} 个图标，EquipidTable中有 {EquipidTable.Count} 个装备属性");
     }
 
 
@@ -256,100 +256,162 @@ public class BagController : XSingleton<BagController>
     {
         if (!EquipidSpriteConfig.ContainsKey("PrimaryCloth"))
         {
-            EquipidSpriteConfig.Add("PrimaryCloth", Resources.Load<Sprite>("Sprite/Equip/PrimaryCloth"));
+            EquipidSpriteConfig.Add("PrimaryCloth", ResourcesConfig.PrimaryCloth);
         }
         if (!EquipidSpriteConfig.ContainsKey("PrimaryCloak"))
         {
-            EquipidSpriteConfig.Add("PrimaryCloak", Resources.Load<Sprite>("Sprite/Equip/PrimaryCloak"));
+            EquipidSpriteConfig.Add("PrimaryCloak", ResourcesConfig.PrimaryCloak);
         }
         if (!EquipidSpriteConfig.ContainsKey("PrimaryRing"))
         {
-            EquipidSpriteConfig.Add("PrimaryRing", Resources.Load<Sprite>("Sprite/Equip/PrimaryRing"));
+            EquipidSpriteConfig.Add("PrimaryRing", ResourcesConfig.PrimaryRing);
         }
         if (!EquipidSpriteConfig.ContainsKey("PrimaryNecklace"))
         {
-            EquipidSpriteConfig.Add("PrimaryNecklace", Resources.Load<Sprite>("Sprite/Equip/PrimaryNecklace"));
+            EquipidSpriteConfig.Add("PrimaryNecklace",ResourcesConfig.PrimaryNecklace);
         }
         if (!EquipidSpriteConfig.ContainsKey("PrimaryShoe"))
         {
-            EquipidSpriteConfig.Add("PrimaryShoe", Resources.Load<Sprite>("Sprite/Equip/PrimaryShoe"));
+            EquipidSpriteConfig.Add("PrimaryShoe", ResourcesConfig.PrimaryShoe);
         }
         if (!EquipidSpriteConfig.ContainsKey("PrimaryHelmet"))
         {
-            EquipidSpriteConfig.Add("PrimaryHelmet", Resources.Load<Sprite>("Sprite/Equip/PrimaryHelmet"));
+            EquipidSpriteConfig.Add("PrimaryHelmet",ResourcesConfig.PrimaryHelmet);
         }
+        
+        
         
         if (!EquipidSpriteConfig.ContainsKey("TreeManCloth"))
         {
-            EquipidSpriteConfig.Add("TreeManCloth", Resources.Load<Sprite>("Sprite/Equip/TreeManCloth"));
+            EquipidSpriteConfig.Add("TreeManCloth", ResourcesConfig.TreeManCloth);
         }
         if (!EquipidSpriteConfig.ContainsKey("TreeManCloak"))
         {
-            EquipidSpriteConfig.Add("TreeManCloak", Resources.Load<Sprite>("Sprite/Equip/TreeManCloak"));
+            EquipidSpriteConfig.Add("TreeManCloak", ResourcesConfig.TreeManCloak);
         }
         if (!EquipidSpriteConfig.ContainsKey("TreeManRing"))
         {
-            EquipidSpriteConfig.Add("TreeManRing", Resources.Load<Sprite>("Sprite/Equip/TreeManRing"));
+            EquipidSpriteConfig.Add("TreeManRing",ResourcesConfig.TreeManRing);
         }
         if (!EquipidSpriteConfig.ContainsKey("TreeManNecklace"))
         {
-            EquipidSpriteConfig.Add("TreeManNecklace", Resources.Load<Sprite>("Sprite/Equip/TreeManNecklace"));
+            EquipidSpriteConfig.Add("TreeManNecklace", ResourcesConfig.TreeManNecklace);
         }
         if (!EquipidSpriteConfig.ContainsKey("TreeManShoe"))
         {
-            EquipidSpriteConfig.Add("TreeManShoe", Resources.Load<Sprite>("Sprite/Equip/TreeManShoe"));
+            EquipidSpriteConfig.Add("TreeManShoe", ResourcesConfig.TreeManShoe);
         }
         if (!EquipidSpriteConfig.ContainsKey("TreeManHelmet"))
         {
-            EquipidSpriteConfig.Add("TreeManHelmet", Resources.Load<Sprite>("Sprite/Equip/TreeManHelmet"));
+            EquipidSpriteConfig.Add("TreeManHelmet", ResourcesConfig.TreeManHelmet);
         }
         
-        // EquipidSpriteConfig.Add("PrimaryCloak", Resources.Load<Sprite>("Sprite/Equip/PrimaryCloak"));
-        // EquipidSpriteConfig.Add("PrimaryRing", Resources.Load<Sprite>("Sprite/Equip/PrimaryRing"));
-        // EquipidSpriteConfig.Add("PrimaryNecklace", Resources.Load<Sprite>("Sprite/Equip/PrimaryNecklace"));
-        // EquipidSpriteConfig.Add("PrimaryShoe", Resources.Load<Sprite>("Sprite/Equip/PrimaryShoe"));
-        // EquipidSpriteConfig.Add("PrimaryHelmet", Resources.Load<Sprite>("Sprite/Equip/PrimaryHelmet"));
-        // EquipidSpriteConfig.Add("TreeManCloth", Resources.Load<Sprite>("Sprite/Equip/TreeManCloth"));
-        // EquipidSpriteConfig.Add("TreeManCloak", Resources.Load<Sprite>("Sprite/Equip/TreeManCloak"));
-        // EquipidSpriteConfig.Add("TreeManRing", Resources.Load<Sprite>("Sprite/Equip/TreeManRing"));
-        // EquipidSpriteConfig.Add("TreeManNecklace", Resources.Load<Sprite>("Sprite/Equip/TreeManNecklace"));
-        // EquipidSpriteConfig.Add("TreeManShoe", Resources.Load<Sprite>("Sprite/Equip/TreeManShoe"));
-        // EquipidSpriteConfig.Add("TreeManHelmet", Resources.Load<Sprite>("Sprite/Equip/TreeManHelmet"));
+       
+        
+        if (!EquipidSpriteConfig.ContainsKey("GreenCloth"))
+        {
+            EquipidSpriteConfig.Add("GreenCloth", ResourcesConfig.GreenCloth);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("GreenCloak"))
+        {
+            EquipidSpriteConfig.Add("GreenCloak", ResourcesConfig.GreenCloak);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("GreenRing"))
+        {
+            EquipidSpriteConfig.Add("GreenRing",ResourcesConfig.GreenRing);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("GreenNecklace"))
+        {
+            EquipidSpriteConfig.Add("GreenNecklace", ResourcesConfig.GreenNecklace);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("GreenShoe"))
+        {
+            EquipidSpriteConfig.Add("GreenShoe", ResourcesConfig.GreenShoe);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("GreenHelmet"))
+        {
+            EquipidSpriteConfig.Add("GreenHelmet", ResourcesConfig.GreenHelmet);
+        }
+        
+        
+        if (!EquipidSpriteConfig.ContainsKey("BlueCloth"))
+        {
+            EquipidSpriteConfig.Add("BlueCloth", ResourcesConfig.BlueCloth);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("BlueCloak"))
+        {
+            EquipidSpriteConfig.Add("BlueCloak", ResourcesConfig.BlueCloak);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("BlueRing"))
+        {
+            EquipidSpriteConfig.Add("BlueRing",ResourcesConfig.BlueRing);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("BlueNecklace"))
+        {
+            EquipidSpriteConfig.Add("BlueNecklace", ResourcesConfig.BlueNecklace);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("BlueShoe"))
+        {
+            EquipidSpriteConfig.Add("BlueShoe", ResourcesConfig.BlueShoe);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("BlueHelmet"))
+        {
+            EquipidSpriteConfig.Add("BlueHelmet", ResourcesConfig.BlueHelmet);
+        }
+        
+        
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanCloth"))
+        {
+            EquipidSpriteConfig.Add("HuoShanCloth", ResourcesConfig.HuoShanCloth);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanCloak"))
+        {
+            EquipidSpriteConfig.Add("HuoShanCloak", ResourcesConfig.HuoShanCloak);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanRing"))
+        {
+            EquipidSpriteConfig.Add("HuoShanRing",ResourcesConfig.HuoShanRing);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanNecklace"))
+        {
+            EquipidSpriteConfig.Add("HuoShanNecklace", ResourcesConfig.HuoShanNecklace);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanShoe"))
+        {
+            EquipidSpriteConfig.Add("HuoShanShoe", ResourcesConfig.HuoShanShoe);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("HuoShanHelmet"))
+        {
+            EquipidSpriteConfig.Add("HuoShanHelmet", ResourcesConfig.HuoShanHelmet);
+        }
+        
+        
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeCloth"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeCloth", ResourcesConfig.ZhaoZeCloth);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeCloak"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeCloak", ResourcesConfig.ZhaoZeCloak);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeRing"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeRing",ResourcesConfig.ZhaoZeRing);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeNecklace"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeNecklace", ResourcesConfig.ZhaoZeNecklace);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeShoe"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeShoe", ResourcesConfig.ZhaoZeShoe);
+        }
+        if (!EquipidSpriteConfig.ContainsKey("ZhaoZeHelmet"))
+        {
+            EquipidSpriteConfig.Add("ZhaoZeHelmet", ResourcesConfig.ZhaoZeHelmet);
+        }
     }
     
-    
-    public void InitSourceStoneSpriteConfig()
-    {
-        if (!SourceStoneSpriteConfig.ContainsKey(1))
-        {
-            SourceStoneSpriteConfig.Add(1, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Penetrate"));
-        }
-        if (!SourceStoneSpriteConfig.ContainsKey(2))
-        {
-            SourceStoneSpriteConfig.Add(2, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Division"));
-        }
-        if (!SourceStoneSpriteConfig.ContainsKey(3))
-        {
-            SourceStoneSpriteConfig.Add(3, Resources.Load<Sprite>("Sprite/WeaponSourceStone/ExtremeSpeed"));
-        }
-        if (!SourceStoneSpriteConfig.ContainsKey(4))
-        {
-            SourceStoneSpriteConfig.Add(4, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Explosion"));
-        }
-        if (!SourceStoneSpriteConfig.ContainsKey(5))
-        {
-            SourceStoneSpriteConfig.Add(5, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Scale"));
-        }
-        if (!SourceStoneSpriteConfig.ContainsKey(6))
-        {
-            SourceStoneSpriteConfig.Add(6, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Duration"));
-        }
-        // SourceStoneSpriteConfig.Add(2, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Division"));
-        // SourceStoneSpriteConfig.Add(3, Resources.Load<Sprite>("Sprite/WeaponSourceStone/ExtremeSpeed"));
-        // SourceStoneSpriteConfig.Add(4, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Explosion"));
-        // SourceStoneSpriteConfig.Add(5, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Scale"));
-        // SourceStoneSpriteConfig.Add(6, Resources.Load<Sprite>("Sprite/WeaponSourceStone/Duration"));
-    }
     
 
     /// <summary>
@@ -363,26 +425,20 @@ public class BagController : XSingleton<BagController>
             Debug.LogWarning("No white equips to delete.");
             return;
         }
-    
-        // 保存当前需要处理的装备ID以避免并发修改问题
-        List<int> equipIdsToRemove = new List<int>(WhiteEquipidTable.Keys);
+        
         
         // 同步处理Unity部分：清除内存中的数据
-        foreach (var equipId in equipIdsToRemove)
+        foreach (var equip in WhiteEquipidTable)
         {
-            if (WhiteEquipidTable.TryGetValue(equipId, out var equipData))
-            {
-                EquipidTable.Remove(equipId); // 删除 EquipidTable 中的记录
-                EquipIdList.Remove(equipData); // 删除 EquipIdList 中的记录
-                EquipidSprite.Remove(equipId); // 删除 EquipidSprite 中的记录
-            }
+            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+            // EquipidSprite.Remove(equip); // 删除 EquipidSprite 中的记录
         }
-        
+
         WhiteEquipidTable.Clear(); // 清空白色装备表
         Debug.Log("已从内存中移除白色装备。");
         
         // 启动异步任务处理MySQL操作
-        System.Threading.Tasks.Task.Run(() => DeleteWhiteEquipsFromDatabase(equipIdsToRemove));
+       // System.Threading.Tasks.Task.Run(() => DeleteWhiteEquipsFromDatabase(equipIdsToRemove));
     }
     
     // 异步处理MySQL部分
@@ -433,26 +489,20 @@ public class BagController : XSingleton<BagController>
             Debug.LogWarning("No Green equips to delete.");
             return;
         }
-    
-        // 保存当前需要处理的装备ID以避免并发修改问题
-        List<int> equipIdsToRemove = new List<int>(GreenEquipidTable.Keys);
+        
         
         // 同步处理Unity部分：清除内存中的数据
-        foreach (var equipId in equipIdsToRemove)
+        foreach (var equip in GreenEquipidTable)
         {
-            if (GreenEquipidTable.TryGetValue(equipId, out var equipData))
-            {
-                EquipidTable.Remove(equipId); // 删除 EquipidTable 中的记录
-                EquipIdList.Remove(equipData); // 删除 EquipIdList 中的记录
-                EquipidSprite.Remove(equipId); // 删除 EquipidSprite 中的记录
-            }
+            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+           // EquipidSprite.Remove(equipId); // 删除 EquipidSprite 中的记录
         }
-        
+
         GreenEquipidTable.Clear(); // 清空绿色装备表
         Debug.Log("已从内存中移除绿色装备。");
         
         // 启动异步任务处理MySQL操作
-        System.Threading.Tasks.Task.Run(() => DeleteGreenEquipsFromDatabase(equipIdsToRemove));
+        //System.Threading.Tasks.Task.Run(() => DeleteGreenEquipsFromDatabase(equipIdsToRemove));
     }
     
     // 异步处理MySQL部分
@@ -503,26 +553,19 @@ public class BagController : XSingleton<BagController>
             Debug.LogWarning("No blue equips to delete.");
             return;
         }
-    
-        // 保存当前需要处理的装备ID以避免并发修改问题
-        List<int> equipIdsToRemove = new List<int>(BlueEquipidTable.Keys);
         
         // 同步处理Unity部分：清除内存中的数据
-        foreach (var equipId in equipIdsToRemove)
+        foreach (var equip in BlueEquipidTable)
         {
-            if (BlueEquipidTable.TryGetValue(equipId, out var equipData))
-            {
-                EquipidTable.Remove(equipId); // 删除 EquipidTable 中的记录
-                EquipIdList.Remove(equipData); // 删除 EquipIdList 中的记录
-                EquipidSprite.Remove(equipId); // 删除 EquipidSprite 中的记录
-            }
+            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+            //EquipidSprite.Remove(equip); // 删除 EquipidSprite 中的记录
         }
-        
+
         BlueEquipidTable.Clear(); // 清空蓝色装备表
         Debug.Log("已从内存中移除蓝色装备。");
         
         // 启动异步任务处理MySQL操作
-        System.Threading.Tasks.Task.Run(() => DeleteBlueEquipsFromDatabase(equipIdsToRemove));
+        //System.Threading.Tasks.Task.Run(() => DeleteBlueEquipsFromDatabase(equipIdsToRemove));
     }
     
     // 异步处理MySQL部分
@@ -567,10 +610,9 @@ public class BagController : XSingleton<BagController>
     /// </summary>
     public void EquipSort()
     {
-        EquipidTable.Clear();
         EquipIdList.Clear();
         
-        GameObject equipContent = bag.transform.Find("BagPanel/EquipPanel/BagScrollView/Viewport/EquipContent").gameObject;
+        GameObject equipContent = bag.GetComponent<BagPanel>().content;
         foreach (Transform child in equipContent.transform)
         {
             Destroy(child.gameObject);
@@ -579,62 +621,57 @@ public class BagController : XSingleton<BagController>
         foreach (var equip in OrangeEquipidTable)
         {
             GameObject bagGridins = Instantiate(bagGrid, equipContent.transform); //背包格子
-            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
+            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(equip);
             //bagGrid.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
-            bagGridins.GetComponent<BagGrid>().EquipId = equip.Key;
-            bagGridins.GetComponent<BagGrid>().equipAttributeImage = EquipidSprite[equip.Key];
+            bagGridins.GetComponent<BagGrid>().tableBase = equip;
+            bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=orangeBg;
-            EquipidTable.Add(equip.Key,equip.Value);
-            EquipIdList.Add(equip.Value);
+            EquipIdList.Add(equip);
         }
         
         foreach (var equip in PurpleEquipidTable)
         {
             GameObject bagGridins = Instantiate(bagGrid, equipContent.transform); //背包格子
-            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
+            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(equip);
             //bagGrid.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
-            bagGridins.GetComponent<BagGrid>().EquipId = equip.Key;
-            bagGridins.GetComponent<BagGrid>().equipAttributeImage = EquipidSprite[equip.Key];
+            bagGridins.GetComponent<BagGrid>().tableBase = equip;
+            bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=purpleBg;
-            EquipidTable.Add(equip.Key,equip.Value);
-            EquipIdList.Add(equip.Value);
+            EquipIdList.Add(equip);
 
         }
         
         foreach (var equip in BlueEquipidTable)
         {
             GameObject bagGridins = Instantiate(bagGrid, equipContent.transform); //背包格子
-            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
+            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equip);
            // bagGrid.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
-            bagGridins.GetComponent<BagGrid>().EquipId = equip.Key;
-            bagGridins.GetComponent<BagGrid>().equipAttributeImage = EquipidSprite[equip.Key];
+           bagGridins.GetComponent<BagGrid>().tableBase = equip;
+            bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=blueBg;
-            EquipidTable.Add(equip.Key,equip.Value);
-            EquipIdList.Add(equip.Value);
+            EquipIdList.Add(equip);
         }
         
         foreach (var equip in GreenEquipidTable)
         {
             GameObject bagGridins = Instantiate(bagGrid, equipContent.transform); //背包格子
-            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
+            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equip);
             //bagGrid.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
-            bagGridins.GetComponent<BagGrid>().EquipId = equip.Key;
-            bagGridins.GetComponent<BagGrid>().equipAttributeImage = EquipidSprite[equip.Key];
+            bagGridins.GetComponent<BagGrid>().tableBase = equip;
+            bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=greenBg;
-            EquipidTable.Add(equip.Key,equip.Value);
-            EquipIdList.Add(equip.Value);
+            EquipIdList.Add(equip);
         }
         
         foreach (var equip in WhiteEquipidTable)
         {
             GameObject bagGridins = Instantiate(bagGrid, equipContent.transform); //背包格子
-            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
+            bagGridins.transform.Find("BagGridImage").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equip);
             //bagGrid.transform.Find("BagGridImage").GetComponent<Button>().image.sprite = EquipidSprite[equip.Key];
-            bagGridins.GetComponent<BagGrid>().EquipId = equip.Key;
-            bagGridins.GetComponent<BagGrid>().equipAttributeImage = EquipidSprite[equip.Key];
+            bagGridins.GetComponent<BagGrid>().tableBase = equip;
+            bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=whiteBg;
-            EquipidTable.Add(equip.Key,equip.Value);
-            EquipIdList.Add(equip.Value);
+            EquipIdList.Add(equip);
         }
     }
     
@@ -711,65 +748,32 @@ public class BagController : XSingleton<BagController>
 
 
     /// <summary>
-    /// 显示背包的装备
+    /// 显示背包的装备，源石和道具
     /// </summary>
     public void ShowEquip()
     {
         Debug.Log("开始执行ShowEquip方法");
-        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         // 检查bag是否为空
         if (bag == null)
         {
             Debug.LogError("ShowEquip出错: bag对象为null");
             return;
         }
-        Debug.Log("bbbbbbbbbbbbbbbbbbb");
-
         
-        // // 检查bag父对象
-        // if (bag.transform.parent == null)
-        // {
-        //     Debug.LogError("ShowEquip出错: bag.transform.parent为null");
-        //     return;
-        // }
-        
-        //Debug.Log("bag对象正常，激活父对象");
-        bag.transform.gameObject.SetActive(true);
-        Debug.Log("ccccccccccccccccccccccccccc");
-
-        
-        // // 查找SceneLoading对象并设置为不可见
-        // Transform sceneLoadingTransform = bag.transform.transform.Find("SceneLoading");
-        // Debug.Log("ddddddddddddddddddddddddddddddd");
-        //
-        // if (sceneLoadingTransform == null)
-        // {
-        //     Debug.LogWarning("ShowEquip警告: 找不到SceneLoading对象");
-        // }
-        // else
-        // {
-        //     Debug.Log("找到SceneLoading对象，设置为不可见");
-        //     sceneLoadingTransform.gameObject.SetActive(false);
-        // }
-        // Debug.Log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
         // 查找装备内容面板
-        Transform equipContentTransform = bag.transform.Find("BagPanel/EquipPanel/BagScrollView/Viewport/EquipContent");
-        Debug.Log("fffffffffffffffffffffffffffffffffffffff");
+        Transform bagPanelContent = bag.GetComponent<BagPanel>().content.transform;
 
-        if (equipContentTransform == null)
+        if (bagPanelContent == null)
         {
-            Debug.LogError("ShowEquip出错: 找不到装备内容面板路径 BagPanel/EquipPanel/BagScrollView/Viewport/EquipContent");
+            Debug.LogError("ShowEquip出错: 找不到装备内容面板路径 Bag/Mask/BagBg/BagBG (1)/EquipPanel/BagScrollView/Viewport/EquipContent");
             return;
         }
-        Debug.Log("gggggggggggggggggggggggggggg");
 
         
-        Debug.Log("找到装备内容面板");
-        GameObject equipContent = equipContentTransform.gameObject;
+        GameObject equipContent = bagPanelContent.gameObject;
         
         // 清空装备内容面板
-        Debug.Log($"开始清空装备内容面板，子物体数量: {equipContent.transform.childCount}");
         foreach (Transform child in equipContent.transform)
         {
             Destroy(child.gameObject);
@@ -781,10 +785,8 @@ public class BagController : XSingleton<BagController>
             Debug.LogError("ShowEquip出错: EquipIdList为null");
             return;
         }
-        Debug.Log("1111111111111");
 
         
-        Debug.Log($"EquipIdList包含 {EquipIdList.Count} 件装备，开始显示装备，当前页码: {PageNum}");
         
         // 检查背包格子预制体是否为空
         if (bagGrid == null)
@@ -792,186 +794,114 @@ public class BagController : XSingleton<BagController>
             Debug.LogError("ShowEquip出错: bagGrid预制体为null");
             return;
         }
-
         // 计算显示的装备范围
         int startIndex = (PageNum - 1) * 20;
         int endIndex = Mathf.Min(PageNum * 20, EquipIdList.Count);
-        Debug.Log($"开始显示装备，范围: {startIndex} - {endIndex-1}");
-        
-        for (int i = startIndex; i < endIndex; i++)
+
+        if (bag.GetComponent<BagPanel>().currentBagType == 1) //如果是显示装备
         {
-            try
+
+            for (int i = startIndex; i < endIndex; i++)
             {
-                // 检查当前索引的装备是否为空
-                if (EquipIdList[i] == null)
+                try
                 {
-                    Debug.LogError($"ShowEquip出错: EquipIdList[{i}]为null");
-                    continue;
-                }
-                
-                Debug.Log($"处理索引 {i} 的装备，ID: {EquipIdList[i].Equipid}, 类型: {EquipIdList[i].TableType}");
-                
-                // 实例化背包格子
-                GameObject bagGridins = Instantiate(bagGrid, equipContent.transform);
-                
-                if (EquipIdList[i].TableType == TableType.SourceStoneTable) // 源石
-                {
-                    Debug.Log($"索引 {i} 是源石类型");
-                    SourceStoneTable sourceStoneTable = (SourceStoneTable)EquipIdList[i];
-                    
-                    // 检查源石配置
-                    if (SourceStoneSpriteConfig == null)
+                    // 检查当前索引的装备是否为空
+                    if (EquipIdList[i] == null)
                     {
-                        Debug.LogError($"ShowEquip出错: SourceStoneSpriteConfig为null");
+                        Debug.LogError($"ShowEquip出错: EquipIdList[{i}]为null");
                         continue;
                     }
-                    
-                    // 检查源石类型是否存在
-                    if (!SourceStoneSpriteConfig.ContainsKey(sourceStoneTable.SourceStoneType))
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到源石类型 {sourceStoneTable.SourceStoneType} 的图标配置");
-                        continue;
-                    }
-                    
-                    // 检查BagGridImage是否存在
-                    Transform bagGridImageTransform = bagGridins.transform.Find("BagGridImage");
-                    if (bagGridImageTransform == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到BagGridImage");
-                        continue;
-                    }
-                    
-                    Button bagGridButton = bagGridImageTransform.GetComponent<Button>();
-                    if (bagGridButton == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: BagGridImage上没有Button组件");
-                        continue;
-                    }
-                    
-                    Debug.Log($"设置源石图标，类型: {sourceStoneTable.SourceStoneType}");
-                    bagGridButton.image.sprite = SourceStoneSpriteConfig[sourceStoneTable.SourceStoneType];
-                    
-                    // 检查BagGrid组件
-                    BagGrid bagGridComponent = bagGridins.GetComponent<BagGrid>();
-                    if (bagGridComponent == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 背包格子上没有BagGrid组件");
-                        continue;
-                    }
-                    
-                    bagGridComponent.equipAttributeImage = SourceStoneSpriteConfig[sourceStoneTable.SourceStoneType];
-                    bagGridComponent.EquipType = EquipType.SourceStone;
-                    
-                    // 设置数量
-                    Transform countTransform = bagGridins.transform.Find("Count");
-                    if (countTransform == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到Count文本");
-                        continue;
-                    }
-                    
-                    Text countText = countTransform.GetComponent<Text>();
-                    if (countText == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: Count上没有Text组件");
-                        continue;
-                    }
-                    
-                    countText.text = sourceStoneTable.Count.ToString();
-                    
-                } else if (EquipIdList[i].TableType == TableType.EquipTable) // 装备
-                {
-                    Debug.Log($"索引 {i} 是装备类型, 装备ID: {EquipIdList[i].Equipid}");
-                    
-                    // 检查装备图标配置
-                    if (EquipidSprite == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: EquipidSprite为null");
-                        continue;
-                    }
-                    
-                    // 检查装备ID是否存在
-                    if (!EquipidSprite.ContainsKey(EquipIdList[i].Equipid))
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到装备ID {EquipIdList[i].Equipid} 的图标配置");
-                        continue;
-                    }
-                    
+
+
+                    // 实例化背包格子
+                    GameObject bagGridins = Instantiate(bagGrid, equipContent.transform);
+
+
+
                     // 设置装备图标
                     Transform bagGridImageTransform = bagGridins.transform.Find("BagGridImage");
-                    if (bagGridImageTransform == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到BagGridImage");
-                        continue;
-                    }
-                    
+
                     Button bagGridButton = bagGridImageTransform.GetComponent<Button>();
-                    if (bagGridButton == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: BagGridImage上没有Button组件");
-                        continue;
-                    }
-                    
-                    bagGridButton.image.sprite = EquipidSprite[EquipIdList[i].Equipid];
-                    
+
+                    bagGridButton.image.sprite = ResourcesConfig.GetEquipSprite((EquipTable)EquipIdList[i]);
+
                     // 设置装备属性图标
                     BagGrid bagGridComponent = bagGridins.GetComponent<BagGrid>();
-                    if (bagGridComponent == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 背包格子上没有BagGrid组件");
-                        continue;
-                    }
-                    
-                    bagGridComponent.equipAttributeImage = EquipidSprite[EquipIdList[i].Equipid];
+
+                    bagGridComponent.equipAttributeImage =
+                        ResourcesConfig.GetEquipSprite((EquipTable)EquipIdList[i]);
                     bagGridComponent.EquipType = EquipType.Equip;
-                    
+
                     // 隐藏数量显示
                     Transform countTransform = bagGridins.transform.Find("Count");
-                    if (countTransform == null)
-                    {
-                        Debug.LogError($"ShowEquip出错: 找不到Count文本");
-                        continue;
-                    }
-                    
+
                     countTransform.gameObject.SetActive(false);
+
+                    bagGridComponent.tableBase = EquipIdList[i];
+
+                    // 设置装备背景颜色
+                    Transform equipGridBGTransform = bagGridins.transform.Find("EquipGridBG");
+
+                    Image equipGridBGImage = equipGridBGTransform.GetComponent<Image>();
+
+                    switch (EquipIdList[i].Quality)
+                    {
+                        case 1:
+                            equipGridBGImage.sprite = whiteBg;
+                            break;
+                        case 2:
+                            equipGridBGImage.sprite = greenBg;
+                            break;
+                        case 3:
+                            equipGridBGImage.sprite = blueBg;
+                            break;
+                        case 4:
+                            equipGridBGImage.sprite = purpleBg;
+                            break;
+                        case 5:
+                            equipGridBGImage.sprite = orangeBg;
+                            break;
+
+                    }
                 }
-                
-                // 设置装备ID
-                BagGrid bagGridComponent2 = bagGridins.GetComponent<BagGrid>();
-                if (bagGridComponent2 == null)
+                catch (System.Exception e)
                 {
-                    Debug.LogError($"ShowEquip出错: 背包格子上没有BagGrid组件");
-                    continue;
+                    Debug.LogError($"ShowEquip异常: 处理索引 {i} 的装备时出错: {e.Message}\n{e.StackTrace}");
                 }
+            }
+        }else if (bag.GetComponent<BagPanel>().currentBagType == 2)//如果是显示源石
+        {
+            foreach (var item in SourceStoneTable)
+            {
+                // 实例化背包格子
+                GameObject bagGridins = Instantiate(bagGrid, equipContent.transform);
+                // 设置装备图标
+                Transform bagGridImageTransform = bagGridins.transform.Find("BagGridImage");
+
+                Button bagGridButton = bagGridImageTransform.GetComponent<Button>();
+
+                bagGridButton.image.sprite = WeaponSourceConfig.GetWeaponSourceStoneSprite(item.SourceStoneId);
                 
-                bagGridComponent2.EquipId = EquipIdList[i].Equipid;
-                TableBase bagGridinsequiptable = EquipIdList[i];
+                // 设置装备属性图标
+                BagGrid bagGridComponent = bagGridins.GetComponent<BagGrid>();
+
+                bagGridComponent.equipAttributeImage =
+                    WeaponSourceConfig.GetWeaponSourceStoneSprite(item.SourceStoneId);
+                bagGridComponent.EquipType = EquipType.SourceStone;
+                
+                // 设置bagGrid的TableBase属性
+                bagGridComponent.tableBase = item;
                 
                 // 设置装备背景颜色
                 Transform equipGridBGTransform = bagGridins.transform.Find("EquipGridBG");
-                if (equipGridBGTransform == null)
-                {
-                    Debug.LogError($"ShowEquip出错: 找不到EquipGridBG");
-                    continue;
-                }
-                
+
                 Image equipGridBGImage = equipGridBGTransform.GetComponent<Image>();
-                if (equipGridBGImage == null)
-                {
-                    Debug.LogError($"ShowEquip出错: EquipGridBG上没有Image组件");
-                    continue;
-                }
+                //设置数量
+                Transform countTransform = bagGridins.transform.Find("Count");
+                countTransform.GetComponent<Text>().text = item.Count.ToString();
+                countTransform.gameObject.SetActive(true);
                 
-                Debug.Log($"设置装备 {EquipIdList[i].Equipid} 的背景，品质: {bagGridinsequiptable.Quality}");
-                
-                // 检查背景图是否为空
-                if (whiteBg == null || greenBg == null || blueBg == null || purpleBg == null || orangeBg == null)
-                {
-                    Debug.LogError($"ShowEquip出错: 装备背景图为null，whiteBg: {whiteBg != null}, greenBg: {greenBg != null}, blueBg: {blueBg != null}, purpleBg: {purpleBg != null}, orangeBg: {orangeBg != null}");
-                    continue;
-                }
-                
-                switch (bagGridinsequiptable.Quality)
+                switch (item.Quality)
                 {
                     case 1:
                         equipGridBGImage.sprite = whiteBg;
@@ -988,18 +918,10 @@ public class BagController : XSingleton<BagController>
                     case 5:
                         equipGridBGImage.sprite = orangeBg;
                         break;
-                    default:
-                        Debug.LogWarning($"ShowEquip警告: 装备 {EquipIdList[i].Equipid} 的品质异常: {bagGridinsequiptable.Quality}");
-                        break;
                 }
             }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"ShowEquip异常: 处理索引 {i} 的装备时出错: {e.Message}\n{e.StackTrace}");
-            }
         }
-        
-        Debug.Log("ShowEquip方法执行完成");
+
     }
 
     /// <summary>
@@ -1007,7 +929,6 @@ public class BagController : XSingleton<BagController>
     /// </summary>
     public void ShowBag()
     {
-        Debug.Log("开始执行ShowBag方法");
         
         // 检查背包对象是否为空
         if (bag == null)
@@ -1027,7 +948,7 @@ public class BagController : XSingleton<BagController>
         if (EquipIdList == null)
         {
             Debug.LogWarning("ShowBag警告: EquipIdList为null，初始化为空列表");
-            EquipIdList = new List<TableBase>();
+            EquipIdList = new List<EquipTable>();
         }
         
         Debug.Log($"暂停游戏，当前EquipIdList中有 {EquipIdList.Count} 件装备");
@@ -1040,6 +961,7 @@ public class BagController : XSingleton<BagController>
         {
             Debug.Log("调用ShowEquip方法显示装备");
             ShowEquip();
+            InitPlayerEquip();
         }
         catch (System.Exception e)
         {
@@ -1049,6 +971,311 @@ public class BagController : XSingleton<BagController>
         Debug.Log("ShowBag方法执行完成");
     }
 
+    
+    public void InitPlayerEquip()
+    {
+        // 初始化玩家装备
+        
+        Debug.Log("初始化玩家装备显示");
+        playerCloth.transform.Find("Image").gameObject.SetActive(false);
+        playerCloth.transform.Find("ImageBG").gameObject.SetActive(false);
+        playerCloak.transform.Find("Image").gameObject.SetActive(false);
+        playerCloak.transform.Find("ImageBG").gameObject.SetActive(false);
+        playerRing.transform.Find("Image").gameObject.SetActive(false);
+        playerRing.transform.Find("ImageBG").gameObject.SetActive(false);
+        playerNecklace.transform.Find("Image").gameObject.SetActive(false);
+        playerNecklace.transform.Find("ImageBG").gameObject.SetActive(false);
+        playerShoe.transform.Find("Image").gameObject.SetActive(false);
+        playerShoe.transform.Find("ImageBG").gameObject.SetActive(false);
+        playerHelmet.transform.Find("Image").gameObject.SetActive(false);
+        playerHelmet.transform.Find("ImageBG").gameObject.SetActive(false);
+
+        IsInstallCloth = false;
+        IsInstallCloak = false;
+        IsInstallRing = false;
+        IsInstallNecklace = false;
+        IsInstallShoe = false;
+        IsInstallHelmet = false;
+        
+        
+        if (PlayerEquipConfig.playerEquipData.戒指 != null)
+        {
+            IsInstallRing = true;
+            playerRing.transform.Find("Image").gameObject.SetActive(true);
+            playerRing.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable ringEquip = new EquipTable();
+            ringEquip.suitid= PlayerEquipConfig.playerEquipData.戒指.suitid;
+            ringEquip.Quality= PlayerEquipConfig.playerEquipData.戒指.quality;
+            ringEquip.equip_type_id= PlayerEquipConfig.playerEquipData.戒指.equip_type_id;
+            ringEquip.EquipName= PlayerEquipConfig.playerEquipData.戒指.equipname;
+            ringEquip.equip_type_name= PlayerEquipConfig.playerEquipData.戒指.equip_type_name;
+            ringEquip.equipid= PlayerEquipConfig.playerEquipData.戒指.equipid;
+            ringEquip.suitname= PlayerEquipConfig.playerEquipData.戒指.suitname;
+            ringEquip.Damage= PlayerEquipConfig.playerEquipData.戒指.damage;
+            ringEquip.Defense= PlayerEquipConfig.playerEquipData.戒指.defense;
+            ringEquip.BloodSuck= PlayerEquipConfig.playerEquipData.戒指.bloodsuck;
+            ringEquip.GoodFortune= PlayerEquipConfig.playerEquipData.戒指.goodfortune;
+            ringEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.戒指.movespeed;
+            ringEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.戒指.damagespeed;
+            ringEquip.CRIT= PlayerEquipConfig.playerEquipData.戒指.crit;
+            ringEquip.CRITDamage= PlayerEquipConfig.playerEquipData.戒指.critdamage;
+            ringEquip.HP= PlayerEquipConfig.playerEquipData.戒指.hp;
+
+
+            
+            playerRing.GetComponent<BagGrid>().tableBase = ringEquip;
+            playerRing.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+
+            playerRing.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(ringEquip);
+            switch (ringEquip.Quality)
+            {
+                case 1:
+                    playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+        
+        
+        if (PlayerEquipConfig.playerEquipData.头盔 != null)
+        {
+            IsInstallHelmet = true;
+            playerHelmet.transform.Find("Image").gameObject.SetActive(true);
+            playerHelmet.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable HelmetEquip = new EquipTable();
+            HelmetEquip.suitid= PlayerEquipConfig.playerEquipData.头盔.suitid;
+            HelmetEquip.Quality= PlayerEquipConfig.playerEquipData.头盔.quality;
+            HelmetEquip.equip_type_id= PlayerEquipConfig.playerEquipData.头盔.equip_type_id;
+            HelmetEquip.EquipName= PlayerEquipConfig.playerEquipData.头盔.equipname;
+            HelmetEquip.equip_type_name= PlayerEquipConfig.playerEquipData.头盔.equip_type_name;
+            HelmetEquip.equipid= PlayerEquipConfig.playerEquipData.头盔.equipid;
+            HelmetEquip.suitname= PlayerEquipConfig.playerEquipData.头盔.suitname;
+            HelmetEquip.Damage= PlayerEquipConfig.playerEquipData.头盔.damage;
+            HelmetEquip.Defense= PlayerEquipConfig.playerEquipData.头盔.defense;
+            HelmetEquip.BloodSuck= PlayerEquipConfig.playerEquipData.头盔.bloodsuck;
+            HelmetEquip.GoodFortune= PlayerEquipConfig.playerEquipData.头盔.goodfortune;
+            HelmetEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.头盔.movespeed;
+            HelmetEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.头盔.damagespeed;
+            HelmetEquip.CRIT= PlayerEquipConfig.playerEquipData.头盔.crit;
+            HelmetEquip.CRITDamage= PlayerEquipConfig.playerEquipData.头盔.critdamage;
+            HelmetEquip.HP= PlayerEquipConfig.playerEquipData.头盔.hp;
+            playerHelmet.GetComponent<BagGrid>().tableBase = HelmetEquip;
+            playerHelmet.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+            playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(HelmetEquip);
+            switch (HelmetEquip.Quality)
+            {
+                case 1:
+                    playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+        
+        if (PlayerEquipConfig.playerEquipData.项链 != null)
+        {
+            IsInstallNecklace = true;
+            playerNecklace.transform.Find("Image").gameObject.SetActive(true);
+            playerNecklace.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable NecklaceEquip = new EquipTable();
+            NecklaceEquip.suitid= PlayerEquipConfig.playerEquipData.项链.suitid;
+            NecklaceEquip.Quality= PlayerEquipConfig.playerEquipData.项链.quality;
+            NecklaceEquip.equip_type_id= PlayerEquipConfig.playerEquipData.项链.equip_type_id;
+            NecklaceEquip.EquipName= PlayerEquipConfig.playerEquipData.项链.equipname;
+            NecklaceEquip.equip_type_name= PlayerEquipConfig.playerEquipData.项链.equip_type_name;
+            NecklaceEquip.equipid= PlayerEquipConfig.playerEquipData.项链.equipid;
+            NecklaceEquip.suitname= PlayerEquipConfig.playerEquipData.项链.suitname;
+            NecklaceEquip.Damage= PlayerEquipConfig.playerEquipData.项链.damage;
+            NecklaceEquip.Defense= PlayerEquipConfig.playerEquipData.项链.defense;
+            NecklaceEquip.BloodSuck= PlayerEquipConfig.playerEquipData.项链.bloodsuck;
+            NecklaceEquip.GoodFortune= PlayerEquipConfig.playerEquipData.项链.goodfortune;
+            NecklaceEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.项链.movespeed;
+            NecklaceEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.项链.damagespeed;
+            NecklaceEquip.CRIT= PlayerEquipConfig.playerEquipData.项链.crit;
+            NecklaceEquip.CRITDamage= PlayerEquipConfig.playerEquipData.项链.critdamage;
+            NecklaceEquip.HP= PlayerEquipConfig.playerEquipData.项链.hp;
+            playerNecklace.GetComponent<BagGrid>().tableBase = NecklaceEquip;
+            playerNecklace.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+            playerNecklace.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(NecklaceEquip);
+            switch (NecklaceEquip.Quality)
+            {
+                case 1:
+                    playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+        
+        if (PlayerEquipConfig.playerEquipData.鞋子 != null)
+        {
+            IsInstallShoe = true;
+            playerShoe.transform.Find("Image").gameObject.SetActive(true);
+            playerShoe.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable ShoeEquip = new EquipTable();
+            ShoeEquip.suitid= PlayerEquipConfig.playerEquipData.鞋子.suitid;
+            ShoeEquip.Quality= PlayerEquipConfig.playerEquipData.鞋子.quality;
+            ShoeEquip.equip_type_id= PlayerEquipConfig.playerEquipData.鞋子.equip_type_id;
+            ShoeEquip.EquipName= PlayerEquipConfig.playerEquipData.鞋子.equipname;
+            ShoeEquip.equip_type_name= PlayerEquipConfig.playerEquipData.鞋子.equip_type_name;
+            ShoeEquip.equipid= PlayerEquipConfig.playerEquipData.鞋子.equipid;
+            ShoeEquip.suitname= PlayerEquipConfig.playerEquipData.鞋子.suitname;
+            ShoeEquip.Damage= PlayerEquipConfig.playerEquipData.鞋子.damage;
+            ShoeEquip.Defense= PlayerEquipConfig.playerEquipData.鞋子.defense;
+            ShoeEquip.BloodSuck= PlayerEquipConfig.playerEquipData.鞋子.bloodsuck;
+            ShoeEquip.GoodFortune= PlayerEquipConfig.playerEquipData.鞋子.goodfortune;
+            ShoeEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.鞋子.movespeed;
+            ShoeEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.鞋子.damagespeed;
+            ShoeEquip.CRIT= PlayerEquipConfig.playerEquipData.鞋子.crit;
+            ShoeEquip.CRITDamage= PlayerEquipConfig.playerEquipData.鞋子.critdamage;
+            ShoeEquip.HP= PlayerEquipConfig.playerEquipData.鞋子.hp;
+            playerShoe.GetComponent<BagGrid>().tableBase = ShoeEquip;
+            playerShoe.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+            playerShoe.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(ShoeEquip);
+            switch (ShoeEquip.Quality)
+            {
+                case 1:
+                    playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+        
+        if (PlayerEquipConfig.playerEquipData.手套 != null)
+        {
+            IsInstallCloak = true;
+            playerCloak.transform.Find("Image").gameObject.SetActive(true);
+            playerCloak.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable CloakEquip = new EquipTable();
+            CloakEquip.suitid= PlayerEquipConfig.playerEquipData.手套.suitid;
+            CloakEquip.Quality= PlayerEquipConfig.playerEquipData.手套.quality;
+            CloakEquip.equip_type_id= PlayerEquipConfig.playerEquipData.手套.equip_type_id;
+            CloakEquip.EquipName= PlayerEquipConfig.playerEquipData.手套.equipname;
+            CloakEquip.equip_type_name= PlayerEquipConfig.playerEquipData.手套.equip_type_name;
+            CloakEquip.equipid= PlayerEquipConfig.playerEquipData.手套.equipid;
+            CloakEquip.suitname= PlayerEquipConfig.playerEquipData.手套.suitname;
+            CloakEquip.Damage= PlayerEquipConfig.playerEquipData.手套.damage;
+            CloakEquip.Defense= PlayerEquipConfig.playerEquipData.手套.defense;
+            CloakEquip.BloodSuck= PlayerEquipConfig.playerEquipData.手套.bloodsuck;
+            CloakEquip.GoodFortune= PlayerEquipConfig.playerEquipData.手套.goodfortune;
+            CloakEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.手套.movespeed;
+            CloakEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.手套.damagespeed;
+            CloakEquip.CRIT= PlayerEquipConfig.playerEquipData.手套.crit;
+            CloakEquip.CRITDamage= PlayerEquipConfig.playerEquipData.手套.critdamage;
+            CloakEquip.HP= PlayerEquipConfig.playerEquipData.手套.hp;
+            playerCloak.GetComponent<BagGrid>().tableBase = CloakEquip;
+            playerCloak.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+            playerCloak.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(CloakEquip);
+            switch (CloakEquip.Quality)
+            {
+                case 1:
+                    playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+        
+        if (PlayerEquipConfig.playerEquipData.衣服 != null)
+        {
+            IsInstallCloth = true;
+            playerCloth.transform.Find("Image").gameObject.SetActive(true);
+            playerCloth.transform.Find("ImageBG").gameObject.SetActive(true);
+            EquipTable ClothEquip = new EquipTable();
+            ClothEquip.suitid= PlayerEquipConfig.playerEquipData.衣服.suitid;
+            ClothEquip.Quality= PlayerEquipConfig.playerEquipData.衣服.quality;
+            ClothEquip.equip_type_id= PlayerEquipConfig.playerEquipData.衣服.equip_type_id;
+            ClothEquip.EquipName= PlayerEquipConfig.playerEquipData.衣服.equipname;
+            ClothEquip.equip_type_name= PlayerEquipConfig.playerEquipData.衣服.equip_type_name;
+            ClothEquip.equipid= PlayerEquipConfig.playerEquipData.衣服.equipid;
+            ClothEquip.suitname= PlayerEquipConfig.playerEquipData.衣服.suitname;
+            ClothEquip.Damage= PlayerEquipConfig.playerEquipData.衣服.damage;
+            ClothEquip.Defense= PlayerEquipConfig.playerEquipData.衣服.defense;
+            ClothEquip.BloodSuck= PlayerEquipConfig.playerEquipData.衣服.bloodsuck;
+            ClothEquip.GoodFortune= PlayerEquipConfig.playerEquipData.衣服.goodfortune;
+            ClothEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.衣服.movespeed;
+            ClothEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.衣服.damagespeed;
+            ClothEquip.CRIT= PlayerEquipConfig.playerEquipData.衣服.crit;
+            ClothEquip.CRITDamage= PlayerEquipConfig.playerEquipData.衣服.critdamage;
+            ClothEquip.HP= PlayerEquipConfig.playerEquipData.衣服.hp;
+            playerCloth.GetComponent<BagGrid>().tableBase = ClothEquip;
+            playerCloth.GetComponent<BagGrid>().EquipType= EquipType.Equip;
+            playerCloth.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(ClothEquip);
+            switch (ClothEquip.Quality)
+            {
+                case 1:
+                    playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    break;
+                case 2:
+                    playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    break;
+                case 3:
+                    playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    break;
+                case 4:
+                    playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    break;
+                case 5:
+                    playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    break;
+            }
+        }
+    }
+    
+    
+    
     /// <summary>
     /// 隐藏背包面板
     /// </summary>
@@ -1064,14 +1291,13 @@ public class BagController : XSingleton<BagController>
     /// 装装备
     /// </summary>
     /// <param name="equipId"></param>
-    public void InstallCloth(int equipId)
+    public void 
+        InstallCloth(EquipTable equiptable)
     {
         IsInstallCloth = true;
         playerCloth.transform.Find("Image").gameObject.SetActive(true);
         playerCloth.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerCloth.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerCloth.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        switch (EquipidTable[equipId].Quality)
+        switch (equiptable.Quality)
         {
             case 1:
                 playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1089,18 +1315,16 @@ public class BagController : XSingleton<BagController>
                 playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
                 break;
         }
-        playerCloth.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip); });
+        playerCloth.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equiptable,EquipType.Equip,playerCloth); });
     }
 
-    public void InstallCloak(int equipId)
+    public void InstallCloak(EquipTable equiptable)
     {
         IsInstallCloak = true;
         playerCloak.transform.Find("Image").gameObject.SetActive(true);
         playerCloak.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerCloak.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        playerCloak.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerCloak.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip); });
-        switch (EquipidTable[equipId].Quality)
+        playerCloak.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(equiptable);
+        switch (equiptable.Quality)
         {
             case 1:
                 playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1120,15 +1344,13 @@ public class BagController : XSingleton<BagController>
         }
     }
 
-    public void InstallRing(int equipId)
+    public void InstallRing(EquipTable equiptable)
     {
         IsInstallRing = true;
         playerRing.transform.Find("Image").gameObject.SetActive(true);
         playerRing.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerRing.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        playerRing.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerRing.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip); });
-        switch (EquipidTable[equipId].Quality)
+        playerRing.transform.Find("Image").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equiptable);
+        switch (equiptable.Quality)
         {
             case 1:
                 playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1148,15 +1370,13 @@ public class BagController : XSingleton<BagController>
         }
     }
 
-    public void InstallNecklace(int equipId)
+    public void InstallNecklace(EquipTable equiptable)
     {
         IsInstallNecklace = true;
         playerNecklace.transform.Find("Image").gameObject.SetActive(true);
         playerNecklace.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerNecklace.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        playerNecklace.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerNecklace.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip); });
-        switch (EquipidTable[equipId].Quality)
+        playerNecklace.transform.Find("Image").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equiptable);
+        switch (equiptable.Quality)
         {
             case 1:
                 playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1176,15 +1396,13 @@ public class BagController : XSingleton<BagController>
         }
     }
 
-    public void InstallShoe(int equipId)
+    public void InstallShoe(EquipTable equiptable)
     {
         IsInstallShoe = true;
         playerShoe.transform.Find("Image").gameObject.SetActive(true);
         playerShoe.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerShoe.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        playerShoe.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerShoe.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip); });
-        switch (EquipidTable[equipId].Quality)
+        playerShoe.transform.Find("Image").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equiptable);
+        switch (equiptable.Quality)
         {
             case 1:
                 playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1204,15 +1422,13 @@ public class BagController : XSingleton<BagController>
         }
     }
 
-    public void InstallHelmet(int equipId)
+    public void InstallHelmet(EquipTable equiptable)
     {
         IsInstallHelmet = true;
         playerHelmet.transform.Find("Image").gameObject.SetActive(true);
         playerHelmet.transform.Find("ImageBG").gameObject.SetActive(true);
-        playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite = EquipidSprite[equipId];
-        playerHelmet.transform.Find("Image").GetComponent<Button>().onClick.RemoveAllListeners();
-        playerHelmet.transform.Find("Image").GetComponent<Button>().onClick.AddListener(() => { CreateMaskLayer();ShowEquipAttributePanel(equipId,EquipType.Equip);});
-        switch (EquipidTable[equipId].Quality)
+        playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equiptable);
+        switch (equiptable.Quality)
         {
             case 1:
                 playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite= whiteBg;
@@ -1277,23 +1493,11 @@ public class BagController : XSingleton<BagController>
         playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite = null;
     }
 
-    public void ShowEquipAttributePanel(int EquipId, EquipType EquipType)
+    public void ShowEquipAttributePanel(TableBase tablebase, EquipType EquipType,GameObject bagGrid )
     {
-        Debug.Log($"开始显示装备属性面板，装备ID: {EquipId}, 类型: {EquipType}");
-        
         if (EquipType == EquipType.Equip)
         {
-            // 检查装备ID是否存在
-            if (!EquipidTable.ContainsKey(EquipId))
-            {
-                Debug.LogError($"ShowEquipAttributePanel出错: 装备ID不存在: {EquipId}");
-                DestroyMaskLayer();  // 确保销毁蒙层
-                return;
-            }
-
-            Debug.Log($"找到装备ID: {EquipId}, 准备显示属性面板");
-            EquipTable equipTable = EquipidTable[EquipId];
-            
+            EquipTable equipTable = (EquipTable)tablebase;
             // 加载预制体
             GameObject attributePrefab = Resources.Load<GameObject>("Prefabs/Equip/EquipAttribute");
             if (attributePrefab == null)
@@ -1316,8 +1520,11 @@ public class BagController : XSingleton<BagController>
                 return;
             }
             
+            equipAttribute.GetComponent<EquipAttributePanel>().tableBase = tablebase;
+            
             // 设置装备ID
             EquipAttributePanel panel = equipAttribute.GetComponent<EquipAttributePanel>();
+            panel.BagGrid= bagGrid;// 设置BagGrid给装备属性面板
             if (panel == null)
             {
                 Debug.LogError("ShowEquipAttributePanel出错: 找不到EquipAttributePanel组件");
@@ -1326,14 +1533,13 @@ public class BagController : XSingleton<BagController>
                 return;
             }
             
-            panel.CurrentequipId = EquipId; //当前装备ID传给属性面板
             
             // 设置装备图标
             try
             {
                 GameObject equipAttributeEquip = equipAttribute.transform.Find("EquipAttributeEquip").gameObject;
                 GameObject equipAttributeEquipImage = equipAttributeEquip.transform.Find("EquipAttributeEquipImage").gameObject;
-                equipAttributeEquipImage.GetComponent<Image>().sprite = EquipidSprite[EquipId];
+                equipAttributeEquipImage.GetComponent<Image>().sprite = ResourcesConfig.GetEquipSprite(equipTable);
                 
                 // 设置装备名称
                 GameObject equipAttributeName = equipAttribute.transform.Find("EquipAttributeName").gameObject;
@@ -1363,17 +1569,7 @@ public class BagController : XSingleton<BagController>
         }
         else if (EquipType == EquipType.SourceStone) // 源石
         {
-            // 检查源石ID是否存在
-            if (!SourceStoneTable.ContainsKey(EquipId))
-            {
-                Debug.LogError($"ShowEquipAttributePanel出错: 源石ID不存在: {EquipId}");
-                DestroyMaskLayer();
-                return;
-            }
-            
-            Debug.Log($"找到源石ID: {EquipId}, 准备显示属性面板");
-            SourceStoneTable sourceStoneTable = SourceStoneTable[EquipId];
-            
+            SourceStoneTable sourceStoneTable = (SourceStoneTable)tablebase;
             // 加载预制体
             GameObject attributePrefab = Resources.Load<GameObject>("Prefabs/Equip/EquipAttribute");
             if (attributePrefab == null)
@@ -1382,7 +1578,7 @@ public class BagController : XSingleton<BagController>
                 DestroyMaskLayer();
                 return;
             }
-            
+
             // 实例化预制体
             GameObject equipAttribute = null;
             try
@@ -1393,17 +1589,16 @@ public class BagController : XSingleton<BagController>
                 equipAttribute.transform.Find("InstallButton").gameObject.SetActive(false);
                 equipAttribute.transform.Find("SellButton").gameObject.SetActive(false);
                 
-                // 设置装备ID
-                equipAttribute.GetComponent<EquipAttributePanel>().CurrentequipId = EquipId;
-                
+                 // 设置装备ID
+                 equipAttribute.GetComponent<EquipAttributePanel>().tableBase = tablebase;
+
                 // 设置源石图标
                 GameObject equipAttributeEquip = equipAttribute.transform.Find("EquipAttributeEquip").gameObject;
                 GameObject equipAttributeEquipImage = equipAttributeEquip.transform.Find("EquipAttributeEquipImage").gameObject;
-                equipAttributeEquipImage.GetComponent<Image>().sprite = SourceStoneSpriteConfig[sourceStoneTable.SourceStoneType];
-                
+                equipAttributeEquipImage.GetComponent<Image>().sprite =  WeaponSourceConfig.GetWeaponSourceStoneSprite(sourceStoneTable.SourceStoneId);
                 // 设置源石名称
                 GameObject equipAttributeName = equipAttribute.transform.Find("EquipAttributeName").gameObject;
-                equipAttributeName.GetComponent<Text>().text = sourceStoneTable.EquipName;
+                equipAttributeName.GetComponent<Text>().text = sourceStoneTable.SourceStoneName;
                 
                 // 显示源石介绍
                 GameObject equipAttributeContent = equipAttribute.transform.Find("ScrollView").Find("Viewport").Find("Content").gameObject;
@@ -1468,9 +1663,9 @@ public class BagController : XSingleton<BagController>
             CreateAttributeItem(contentPanel, "生命值：" + equipTable.HP);
         }
 
-        if (equipTable.Denfense != 0)
+        if (equipTable.Defense != 0)
         {
-            CreateAttributeItem(contentPanel, "防御力：" + equipTable.Denfense);
+            CreateAttributeItem(contentPanel, "防御力：" + equipTable.Defense);
         }
 
         if (equipTable.CRIT != 0)
@@ -1639,120 +1834,93 @@ public class BagController : XSingleton<BagController>
         GlobalPlayerAttribute.EquipBloodSuck=PlayerClothAttribute.BloodSuck+PlayerCloakAttribute.BloodSuck+
             PlayerRingAttribute.BloodSuck+PlayerNecklaceAttribute.BloodSuck+PlayerShoeAttribute.BloodSuck+
             PlayerHelmetAttribute.BloodSuck;
-        GlobalPlayerAttribute.EquipDenfense=PlayerClothAttribute.Denfense+PlayerCloakAttribute.Denfense+
-            PlayerRingAttribute.Denfense+PlayerNecklaceAttribute.Denfense+PlayerShoeAttribute.Denfense+
-            PlayerHelmetAttribute.Denfense;
+        GlobalPlayerAttribute.EquipDefense=PlayerClothAttribute.Defense+PlayerCloakAttribute.Defense+
+            PlayerRingAttribute.Defense+PlayerNecklaceAttribute.Defense+PlayerShoeAttribute.Defense+
+            PlayerHelmetAttribute.Defense;
         GlobalPlayerAttribute.EquipGoodFortune=PlayerClothAttribute.GoodFortune+PlayerCloakAttribute.GoodFortune+
             PlayerRingAttribute.GoodFortune+PlayerNecklaceAttribute.GoodFortune+PlayerShoeAttribute.GoodFortune+
             PlayerHelmetAttribute.GoodFortune;
     }
-
-    // public void ComputeTotalAttribute()
-    // {
-    //     ComputeEquipAttribute();
-    //     GlobalPlayerAttribute.TotalDamage = GlobalPlayerAttribute.PlayerDamage + GlobalPlayerAttribute.EquipDamage;
-    //     GlobalPlayerAttribute.TotalMaxHp = GlobalPlayerAttribute.PlayerMaxHp + GlobalPlayerAttribute.EquipMaxHp;
-    //     GlobalPlayerAttribute.TotalMoveSpeed = GlobalPlayerAttribute.PlayerMoveSpeed + GlobalPlayerAttribute.EquipMoveSpeed;
-    //     GlobalPlayerAttribute.TotalAttackSpeed = GlobalPlayerAttribute.PlayerAttackSpeed + GlobalPlayerAttribute.EquipAttackSpeed;
-    //     GlobalPlayerAttribute.TotalCRIT = GlobalPlayerAttribute.PlayerCRIT + GlobalPlayerAttribute.EquipCRIT;
-    //     GlobalPlayerAttribute.TotalCRITDamage = GlobalPlayerAttribute.PlayerCRITDamage + GlobalPlayerAttribute.EquipCRITDamage;
-    //     GlobalPlayerAttribute.TotalBloodSuck = GlobalPlayerAttribute.PlayerBloodSuck + GlobalPlayerAttribute.EquipBloodSuck;
-    //     GlobalPlayerAttribute.TotalDenfense = GlobalPlayerAttribute.PlayerDenfense + GlobalPlayerAttribute.EquipDenfense;
-    //     GlobalPlayerAttribute.TotalGoodFortune = GlobalPlayerAttribute.PlayerGoodFortune + GlobalPlayerAttribute.EquipGoodFortune;
-    // }
+    
 
     /// <summary>
     /// 出售所有选中类型的装备
     /// </summary>
-    public void SellAllSelectedEquips(List<int> equipIdsToRemove, bool isWhite, bool isGreen, bool isBlue)
+    public void SellAllSelectedEquips(bool isWhite, bool isGreen, bool isBlue)
     {
         // 从内存中同步移除装备数据
         if(isWhite)
         {
             // 从内存中移除白色装备
-            foreach (var equipId in equipIdsToRemove.FindAll(id => WhiteEquipidTable.ContainsKey(id)))
+            foreach (var item in WhiteEquipidTable)
             {
-                var equipData = WhiteEquipidTable[equipId];
-                EquipidTable.Remove(equipId);
-                EquipIdList.Remove(equipData);
-                EquipidSprite.Remove(equipId);
-                WhiteEquipidTable.Remove(equipId);
+                EquipIdList.Remove(item);
             }
             Debug.Log("已从内存中移除白色装备。");
+            WhiteEquipidTable.Clear();
         }
         
         if(isGreen)
         {
             // 从内存中移除绿色装备
-            foreach (var equipId in equipIdsToRemove.FindAll(id => GreenEquipidTable.ContainsKey(id)))
+            foreach (var item in GreenEquipidTable)
             {
-                var equipData = GreenEquipidTable[equipId];
-                EquipidTable.Remove(equipId);
-                EquipIdList.Remove(equipData);
-                EquipidSprite.Remove(equipId);
-                GreenEquipidTable.Remove(equipId);
+                EquipIdList.Remove(item);
             }
             Debug.Log("已从内存中移除绿色装备。");
+            GreenEquipidTable.Clear();
+
         }
-        
         if(isBlue)
         {
             // 从内存中移除蓝色装备
-            foreach (var equipId in equipIdsToRemove.FindAll(id => BlueEquipidTable.ContainsKey(id)))
+            foreach (var item in BlueEquipidTable)
             {
-                var equipData = BlueEquipidTable[equipId];
-                EquipidTable.Remove(equipId);
-                EquipIdList.Remove(equipData);
-                EquipidSprite.Remove(equipId);
-                BlueEquipidTable.Remove(equipId);
+                EquipIdList.Remove(item);
             }
             Debug.Log("已从内存中移除蓝色装备。");
+            BlueEquipidTable.Clear();
         }
         
-        // 如果没有装备需要删除，直接返回
-        if(equipIdsToRemove.Count == 0)
-        {
-            Debug.LogWarning("没有装备需要删除");
-            return;
-        }
-        
-        // 启动异步任务处理MySQL操作，一次性删除所有选中装备
-        System.Threading.Tasks.Task.Run(() => DeleteAllSelectedEquipsFromDatabase(equipIdsToRemove));
     }
-
-    // 异步处理MySQL部分，一次性删除所有选中的装备
-    private void DeleteAllSelectedEquipsFromDatabase(List<int> equipIds)
+    
+    
+    public void SellAllSelectedSourceStones(bool isWhite, bool isGreen, bool isBlue)
     {
-        if(equipIds.Count == 0) return;
+        // 从内存中同步移除装备数据
+        if(isWhite)
+        {
+            // 从内存中移除白色装备
+            foreach (var item in WhiteWeaponSourceStoneTable)
+            {
+                SourceStoneTable.Remove(item);
+            }
+            Debug.Log("已从内存中移除白色源石。");
+            WhiteWeaponSourceStoneTable.Clear();
+        }
         
-        MySqlTransaction transaction = null;
-        try
+        if(isGreen)
         {
-            // 后台线程执行MySQL操作
-            transaction = ConnectMysql.Connection.BeginTransaction();
-            
-            string sql = "DELETE FROM equip WHERE equipid IN (" + string.Join(", ", equipIds) + ")";
-            MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection, transaction);
-            
-            int rowsAffected = command.ExecuteNonQuery();
-            transaction.Commit();
-            
-            // 使用主线程安全的方式记录日志
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.Log($"{rowsAffected} 件装备已从数据库中移除");
-                Debug.Log("事务提交成功");
-            });
+            // 从内存中移除绿色装备
+            foreach (var item in GreenWeaponSourceStoneTable)
+            {
+                SourceStoneTable.Remove(item);
+            }
+            Debug.Log("已从内存中移除绿色源石。");
+            GreenWeaponSourceStoneTable.Clear();
+
         }
-        catch(MySqlConnector.MySqlException ex)
+        if(isBlue)
         {
-            if(transaction != null)
-                transaction.Rollback();
-                
-            // 使用主线程安全的方式记录错误
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.LogError($"删除装备时出错: {ex.Message}. 事务已回滚");
-            });
+            // 从内存中移除蓝色装备
+            foreach (var item in BlueWeaponSourceStoneTable)
+            {
+                SourceStoneTable.Remove(item);
+            }
+            Debug.Log("已从内存中移除蓝色源石。");
+            BlueWeaponSourceStoneTable.Clear();
         }
+        
     }
     
 }

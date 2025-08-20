@@ -5,7 +5,10 @@ public class PlayerHit : MonoBehaviour
 {
     private void OnEnable()
     {
-        GameController.S.gamePlayer.IsWuDi = true;
+        if (GameController.S.gamePlayer != null)
+        {
+            GameController.S.gamePlayer.IsWuDi = true;
+        }
         GetComponent<Animator>().Play("PlayerHit");
     }
 

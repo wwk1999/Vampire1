@@ -5,6 +5,8 @@ using Random = System.Random;
 
 public class HuoShanCloak : EquipBase
 {
+    private bool isSend = false; //是否发送消息
+
     public HuoShanCloak() : base( "HuoShanCloakFight", SuitType.HuoShan,new EquipTable()){}
     
     private void Awake()
@@ -17,9 +19,13 @@ public class HuoShanCloak : EquipBase
         // //添加生命值，随机10-20
         // EquipAttributes.Attributes.Add(EquipAttribute.HP, random.Next(10, 20));
         EquipAttributes.EquipName = "HuoShanCloak";
+        EquipAttributes.suitid = 2;
+        EquipAttributes.suitname = "火山套装";
+        EquipAttributes.equip_type_id = 1;
+        EquipAttributes.equip_type_name = "手套";
         //暂时写死
         EquipAttributes.Userid = GlobalUserInfo.Userid;
-        EquipAttributes.Quality = 1;
+        EquipAttributes.Quality = 3;
         EquipAttributes.CRIT=random.Next(4,8);
         EquipAttributes.CRITDamage=random.Next(6,10);
             
@@ -31,18 +37,12 @@ public class HuoShanCloak : EquipBase
             isPickUp= true;
         }else if (other.CompareTag("Player"))
         {
+            if (isSend) return;
             Debug.Log("名字："+EquipAttributes.EquipName);
             //将这件装备的属性添加到数据库
-            EquipAttributes.Equipid= BagController.S.MaxEquipid["BlueCloak"]+1;
-            BagController.S.MaxEquipid["BlueCloak"]= EquipAttributes.Equipid;
-
-            //EquipAttributes.Equipid= EquipController.S.MaxCloakID(EquipAttributes.Quality) + 1;
-            //EquipController.S.InsertEquip(EquipAttributes);
-            //将这件装备的属性添加到BagController上
-            BagController.S.EquipidSprite.Add(EquipAttributes.Equipid,SpriteRenderer.sprite);
-            BagController.S.EquipidTable.Add(EquipAttributes.Equipid,EquipAttributes);
-            BagController.S.BlueEquipidTable.Add(EquipAttributes.Equipid,EquipAttributes);
-            BagController.S.EquipIdList.Add(EquipAttributes);
+            ServerConnect.S.SendSaveEquipRequest(EquipAttributes);
+            isSend = true;
+            
 
 
             //如果被拾取，销毁装备

@@ -2,70 +2,133 @@ using System;
 using System.Collections.Generic;
 using MySqlConnector;
 using UnityEngine;
-
+public class EquipData
+{
+    public int equipid { get; set; }
+    public int quality { get; set; }
+    public int damage { get; set; }
+    public int crit { get; set; }
+    public int critdamage { get; set; }
+    public int damagespeed { get; set; }
+    public int bloodsuck { get; set; }
+    public int hp { get; set; }
+    public int movespeed { get; set; }
+    public string equipname { get; set; }
+    public int suitid { get; set; }
+    public string suitname { get; set; }
+    public int equip_type_id { get; set; }
+    public string equip_type_name { get; set; }
+    public int userid { get; set; }
+    public int defense { get; set; }
+    public int goodfortune { get; set; }
+    public int type { get; set; }
+}
 namespace Mysql
 {
     public class EquipController : XSingleton<EquipController>
     {
-        public List<EquipTable> equipList = new List<EquipTable>(); //Mysql中所有的装备
-
+        public List<EquipData> equipDatas = new List<EquipData>();
 
         protected override void Awake()
         {
+            ObserverModuleManager.S.RegisterEvent("GetAllEquipSuccess",GetAllEquipSuccess);
+
             base.Awake();
             DontDestroyOnLoad(gameObject);
+        }
+        
+        
+
+        public void GetAllEquipSuccess(object[] args)
+        {
+            if (args == null || args.Length == 0)
+            {
+                Debug.LogError("GetAllEquipSuccess: args为空");
+                return;
+            }
+            try
+            {
+        
+                // 将args[0]转换为JSON字符串
+                string jsonData = args[0].ToString();
+                Debug.Log($"接收到的装备数据: {jsonData}");
+        
+                // 直接反序列化为EquipTable列表
+                 equipDatas = Newtonsoft.Json.JsonConvert.DeserializeObject<List<EquipData>>(jsonData);
+                if (equipDatas != null)
+                {
+                    foreach (var equipTable in equipDatas)
+                    {
+                        EquipTable e=new EquipTable();
+                        e.equipid = equipTable.equipid;
+                        e.Quality = equipTable.quality;
+                        e.Damage = equipTable.damage;
+                        e.CRIT = equipTable.crit;
+                        e.CRITDamage = equipTable.critdamage;
+                        e.DamageSpeed = equipTable.damagespeed;
+                        e.BloodSuck = equipTable.bloodsuck;
+                        e.Defense = equipTable.defense;
+                        e.HP = equipTable.hp;
+                        e.MoveSpeed = equipTable.movespeed;
+                        e.EquipName = equipTable.equipname;
+                        e.suitid = equipTable.suitid;
+                        e.suitname = equipTable.suitname;
+                        e.equip_type_id = equipTable.equip_type_id;
+                        e.equip_type_name = equipTable.equip_type_name;
+                        e.Userid = equipTable.userid;
+                        e.GoodFortune = equipTable.goodfortune;
+                        BagController.S.EquipIdList.Add(e);
+                    }
+            
+                    Debug.Log($"成功解析并添加了 {equipDatas.Count} 件装备");
+                    
+                    BagController.S.WhiteEquipidTable.Clear();
+                    BagController.S.GreenEquipidTable.Clear();
+                    BagController.S.BlueEquipidTable.Clear();
+                    BagController.S.PurpleEquipidTable.Clear();
+                    BagController.S.OrangeEquipidTable.Clear();
+
+                    foreach (var equip in BagController.S.EquipIdList)
+                    {
+                        if (equip.Quality == 1) // 白色装备
+                        {
+                            BagController.S.WhiteEquipidTable.Add(equip);
+                        }
+                        else if (equip.Quality == 2) // 绿色装备
+                        {
+                            BagController.S.GreenEquipidTable.Add(equip);
+                        }
+                        else if (equip.Quality == 3) // 蓝色装备
+                        {
+                            BagController.S.BlueEquipidTable.Add( equip);
+                        }
+                        else if (equip.Quality == 4) // 紫色装备
+                        {
+                            BagController.S.PurpleEquipidTable.Add(equip);
+                        } 
+                        else if (equip.Quality == 5) // 金色装备
+                        {
+                            BagController.S.OrangeEquipidTable.Add(equip);
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("解析装备数据失败: equipmentDataList为null");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"GetAllEquipSuccess处理失败: {ex.Message}");
+                Debug.LogError($"异常堆栈: {ex.StackTrace}");
+            }
+            
         }
 
 
         public void GetAllEquipFromMysql()
         {
-            // 从数据库中获取所有的装备
-            string sql = "SELECT * FROM equip WHERE userid=@userid"; // 使用参数化查询，防止SQL注入
-            MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection);
-    
-            // 添加参数，确保安全查询
-            command.Parameters.AddWithValue("@userid", GlobalUserInfo.Userid);
-
-            MySqlDataReader reader = null; // 初始化Reader
-            try
-            {
-                reader = command.ExecuteReader(); // 执行查询
-
-                // 遍历读取结果
-                while (reader.Read())
-                {
-                    EquipTable equip = new EquipTable
-                    {
-                        Equipid = reader.GetInt32("equipid"),
-                        Userid = reader.GetInt32("userid"),
-                        EquipName = reader.GetString("equipname"),
-                        Quality = reader.GetInt32("quality"),
-                        Damage = reader.GetInt32("damage"),
-                        CRIT = reader.GetInt32("crit"),
-                        CRITDamage = reader.GetInt32("critdamage"),
-                        DamageSpeed = reader.GetInt32("damagespeed"),
-                        BloodSuck = reader.GetInt32("bloodsuck"),
-                        Denfense = reader.GetInt32("denfense"),
-                        HP = reader.GetInt32("hp"),
-                        MoveSpeed = reader.GetInt32("movespeed"),
-                        GoodFortune = reader.GetInt32("goodfortune")
-                    };
-                    equipList.Add(equip); // 将结果加入列表
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Debug.LogError("Error getting all equips: " + ex.Message); // 捕获异常
-            }
-            finally
-            {
-                if (reader != null && !reader.IsClosed)
-                {
-                    reader.Close(); // 确保资源被关闭
-                }
-            }
-
-            Debug.Log($"Successfully loaded {equipList.Count} equips for UserID {GlobalUserInfo.Userid}.");
+            ServerConnect.S.SendGetAllEquipRequest();//获取所有装备请求
         }
 
         
@@ -75,7 +138,6 @@ namespace Mysql
         /// </summary>
      public void GetMaxEquipId()
 {
-    Debug.logger.Log("nnnnnnnnnnnnn拉取装备最大ID");
     // 构造完整 SQL 查询
     string sql = @"
         SELECT 
@@ -240,7 +302,7 @@ namespace Mysql
                 }
             }
             // 使用 INSERT IGNORE 避免重复 equipid 导致的主键冲突
-            string sql = "INSERT IGNORE INTO equip (equipid, userid, equipname, quality, damage, crit, critdamage, damagespeed, bloodsuck, denfense, hp, movespeed, goodfortune) VALUES ";
+            string sql = "INSERT IGNORE INTO equip (equipid, userid, equipname, quality, damage, crit, critdamage, damagespeed, bloodsuck, defense, hp, movespeed, goodfortune) VALUES ";
             string sql1 = "INSERT IGNORE INTO sourcestone (equipid, userid, sourcetype, count, quality) VALUES ";
 
             List<string> valueRows = new List<string>();
@@ -249,13 +311,13 @@ namespace Mysql
             foreach (var equip in equiptables)
             {
                 EquipTable equip1 = equip; // 确保类型转换正确
-                string value = $"({equip1.Equipid}, {equip1.Userid}, '{equip1.EquipName}', {equip1.Quality}, {equip1.Damage}, {equip1.CRIT}, {equip1.CRITDamage}, {equip1.DamageSpeed}, {equip1.BloodSuck}, {equip1.Denfense}, {equip1.HP}, {equip1.MoveSpeed}, {equip1.GoodFortune})";
+                string value = $"({equip1.equipid}, {equip1.Userid}, '{equip1.EquipName}', {equip1.Quality}, {equip1.Damage}, {equip1.CRIT}, {equip1.CRITDamage}, {equip1.DamageSpeed}, {equip1.BloodSuck}, {equip1.Defense}, {equip1.HP}, {equip1.MoveSpeed}, {equip1.GoodFortune})";
                 valueRows.Add(value);
             }
             foreach (var sourcestone in sourcestonetables)
             {
                 SourceStoneTable sourcestone1 = sourcestone; // 确保类型转换正确
-                string value = $"({sourcestone1.Equipid}, {sourcestone1.Userid}, '{sourcestone1.SourceStoneType}', {sourcestone1.Count}, {sourcestone1.Quality})";
+                string value = $"({sourcestone1.SourceStoneId}, {sourcestone1.Userid}, '{sourcestone1.SourceStoneType}', {sourcestone1.Count}, {sourcestone1.Quality})";
                 valueRows1.Add(value);
             }
 
@@ -294,8 +356,8 @@ namespace Mysql
         {
             // 插入记录，如果 equip 已存在（基于主键或唯一约束），会忽略插入
             string sql =
-                $"INSERT IGNORE INTO equip (equipid, userid, equipname, quality, damage, crit, critdamage, damagespeed, bloodsuck, denfense, hp, movespeed, goodfortune) " +
-                $"VALUES ({equip.Equipid}, {equip.Userid}, '{equip.EquipName}', {equip.Quality}, {equip.Damage}, {equip.CRIT}, {equip.CRITDamage}, {equip.DamageSpeed}, {equip.BloodSuck}, {equip.Denfense}, {equip.HP}, {equip.MoveSpeed}, {equip.GoodFortune})";
+                $"INSERT IGNORE INTO equip (equipid, userid, equipname, quality, damage, crit, critdamage, damagespeed, bloodsuck, defense, hp, movespeed, goodfortune) " +
+                $"VALUES ({equip.equipid}, {equip.Userid}, '{equip.EquipName}', {equip.Quality}, {equip.Damage}, {equip.CRIT}, {equip.CRITDamage}, {equip.DamageSpeed}, {equip.BloodSuck}, {equip.Defense}, {equip.HP}, {equip.MoveSpeed}, {equip.GoodFortune})";
 
             MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection);
 
@@ -323,7 +385,7 @@ namespace Mysql
         //     //插入装备到Mysql,包括equipname
         //     string sql =
         //         $"INSERT INTO equip (equipid, userid,equipname, quality, damage, crit, critdamage, damagespeed, bloodsuck, denfense, hp, movespeed, goodfortune) " +
-        //         $"VALUES ({equip.Equipid}, {equip.Userid},'{equip.EquipName}', {equip.Quality}, {equip.Damage}, {equip.CRIT}, {equip.CRITDamage}, {equip.DamageSpeed}, {equip.BloodSuck}, {equip.Denfense}, {equip.HP}, {equip.MoveSpeed}, {equip.GoodFortune})";
+        //         $"VALUES ({equip.Equipid}, {equip.Userid},'{equip.EquipName}', {equip.Quality}, {equip.Damage}, {equip.CRIT}, {equip.CRITDamage}, {equip.DamageSpeed}, {equip.BloodSuck}, {equip.Defense}, {equip.HP}, {equip.MoveSpeed}, {equip.GoodFortune})";
         //     MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection);
         //     try
         //     {
@@ -899,7 +961,7 @@ namespace Mysql
                 {
                     equipTable = new EquipTable
                     {
-                        Equipid = reader.GetInt32("equipid"),
+                        equipid = reader.GetInt32("equipid"),
                         Userid = reader.GetInt32("userid"),
                         EquipName = reader.GetString("equipname"),
                         Quality = reader.GetInt32("quality"),
@@ -908,7 +970,7 @@ namespace Mysql
                         CRITDamage = reader.GetInt32("critdamage"),
                         DamageSpeed = reader.GetInt32("damagespeed"),
                         BloodSuck = reader.GetInt32("bloodsuck"),
-                        Denfense = reader.GetInt32("denfense"),
+                        Defense = reader.GetInt32("defense"),
                         HP = reader.GetInt32("hp"),
                         MoveSpeed = reader.GetInt32("movespeed"),
                         GoodFortune = reader.GetInt32("goodfortune")

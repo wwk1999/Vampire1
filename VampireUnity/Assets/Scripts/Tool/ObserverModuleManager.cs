@@ -36,17 +36,26 @@ public class ObserverModuleManager : XSingleton<ObserverModuleManager>
 
     public void SendEvent(string key, params object[] args)
     {
-        if (!_observerDic.ContainsKey(key)) return;
-        //Debug.Log("SendEvent==key:"+ key);
+        if (!_observerDic.ContainsKey(key)) 
+        {
+            Debug.LogWarning($"没有找到事件 {key} 的监听器");
+            return;
+        }
 
         var arr = _observerDic[key].ToArray();
         
-        foreach (var action in arr)
+        for (int i = 0; i < arr.Length; i++)
         {
-            //Debug.Log("SendEvent==action:"+ action);
-
-            action(args);
+            try
+            {
+                arr[i](args);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"异常堆栈: {ex.StackTrace}");
+            }
         }
+        
     }
 
     public void ClearAllEvent()

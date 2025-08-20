@@ -25,35 +25,35 @@ public class ConnectMysql : XSingleton<ConnectMysql>
     
     void Start()
     {
-        //DontDestroyOnLoad(gameObject);  // 确保场景切换时不销毁此对象
-
-        // 根据你的 MySQL 服务器配置填写这些信息
-        string server = "rm-2zevr95ez9rrid70uho.mysql.rds.aliyuncs.com";
-        string database = "Vampire";
-        string user = "wwk18255113901";
-        string password = "BaiChen123456+";
-
-        // 增加Connect Timeout参数，设置为30秒
-        connectionString = $"server={server};database={database};uid={user};pwd={password};Connect Timeout=30;";
-        ConnectToDatabase();
-        
-        // 只有在连接成功时才执行数据库操作
-        if (IsConnected)
-        {
-            try
-            {
-                UserController.S.GetUserTable();
-                UserController.S.GetMaxUserId();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("执行数据库操作时出错: " + ex.Message);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("数据库连接失败，无法执行后续操作");
-        }
+        // //DontDestroyOnLoad(gameObject);  // 确保场景切换时不销毁此对象
+        //
+        // // 根据你的 MySQL 服务器配置填写这些信息
+        // string server = "rm-2zevr95ez9rrid70uho.mysql.rds.aliyuncs.com";
+        // string database = "Vampire";
+        // string user = "wwk18255113901";
+        // string password = "BaiChen123456+";
+        //
+        // // 增加Connect Timeout参数，设置为30秒
+        // connectionString = $"server={server};database={database};uid={user};pwd={password};Connect Timeout=30;";
+        // ConnectToDatabase();
+        //
+        // // 只有在连接成功时才执行数据库操作
+        // if (IsConnected)
+        // {
+        //     try
+        //     {
+        //         UserController.S.GetUserTable();
+        //         UserController.S.GetMaxUserId();
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Debug.LogError("执行数据库操作时出错: " + ex.Message);
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("数据库连接失败，无法执行后续操作");
+        // }
     }
 
     void ConnectToDatabase()

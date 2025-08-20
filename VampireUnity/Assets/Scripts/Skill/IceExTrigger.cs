@@ -16,9 +16,13 @@ public class IceExTrigger : MonoBehaviour
 
    private void OnTriggerStay2D(Collider2D other)
    {
-      if ((other.CompareTag("Monster")||other.CompareTag("Boss"))&&other.GetComponent<MonsterBase>())
+      if (other.CompareTag("Monster")||other.CompareTag("Boss"))
       {
-         other.GetComponent<MonsterBase>().Hurt(100);
+         MonsterBase monster = other.transform.parent.GetComponent<MonsterBase>();
+         if (monster != null && !monster.IsDead)
+         {
+            monster.Hurt(100);
+         }
       }
    }
 }

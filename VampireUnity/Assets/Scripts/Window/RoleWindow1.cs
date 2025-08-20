@@ -5,6 +5,13 @@ using Mysql;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class AddUserSourceStoneData
+{
+    public int id;
+    public int userid;
+    public int sourcestoneid;
+    public int sourcestonecount;
+}
 public class RoleWindow1 : MonoBehaviour
 {
     public Text yuanLinText;
@@ -21,18 +28,131 @@ public class RoleWindow1 : MonoBehaviour
     public Button bloodEnergyButton;
     public Text levelText; // 等级文本
     public Slider expSlider; // 经验条
+    public Button friendButton; // 好友按钮
+    public Button rankButton;
 
+    public void UpdateRoleWindow(object[] args)
+    {
+        yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
+        GetExperienceFromMysql();
+    }
+    
+    public void GetSourceStoneConfigSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        WeaponSourceConfig.SourceStoneConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SourceStoneConfigItem>>(args[0].ToString());
+        Debug.Log("获取服务端源石配置成功！");
+    }
+    public void GetLevelRankSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        RankConfig.LevelRankData = Newtonsoft.Json.JsonConvert.DeserializeObject<LevelRankData>(args[0].ToString());
+
+        Debug.Log("获取服务端等级排行榜成功！");
+    }
+    public void GetUserLevelRankSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        RankConfig.UserLevelRankData = Newtonsoft.Json.JsonConvert.DeserializeObject<UserLevelRankData>(args[0].ToString());
+        Debug.Log("获取服务端用户个人等级排行榜成功！");
+    }
+    
+    public void GetUserMonsterCountRankSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        RankConfig.UserMonsterCountRankData = Newtonsoft.Json.JsonConvert.DeserializeObject<UserMonsterCountRankData>(args[0].ToString());
+        Debug.Log("获取服务端用户个人怪物数量排行榜成功！");
+    }
+    
+    public void GetMonsterCountRankSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        RankConfig.MonsterCountRankData = Newtonsoft.Json.JsonConvert.DeserializeObject<List<MonsterCountRankDataItem>>(args[0].ToString());
+        Debug.Log("获取服务端怪物数量排行榜成功！");
+    }
+    public void GetUserSourceStoneSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        WeaponSourceConfig.UserSourceStone = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SourceStoneData>>(args[0].ToString());
+        foreach (var item in WeaponSourceConfig.UserSourceStone)
+        {
+            SourceStoneTable sourceStoneTable = new SourceStoneTable();
+            sourceStoneTable.SourceStoneId = item.sourcestoneid;
+            sourceStoneTable.SourceStoneName = WeaponSourceConfig.GetSourceStoneConfigById(item.sourcestoneid).sourcestonename;
+            sourceStoneTable.SourceStoneDesc = item.sourcestone.sourcestoneeffect;
+            sourceStoneTable.Count = item.sourcestonecount;
+            sourceStoneTable.Quality = WeaponSourceConfig.GetSourceStoneConfigById(item.sourcestoneid).quality;
+            sourceStoneTable.SourceStoneType = WeaponSourceConfig.GetSourceStoneConfigById(item.sourcestoneid).sourcestonetype;
+            BagController.S.SourceStoneTable.Add(sourceStoneTable);
+            switch (sourceStoneTable.Quality)
+            {
+                case 1:
+                    BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                    break;
+                case 2:
+                    BagController.S.GreenWeaponSourceStoneTable.Add(sourceStoneTable);
+                    break;
+                case 3:
+                    BagController.S.BlueWeaponSourceStoneTable.Add(sourceStoneTable);
+                    break;
+                case 4:
+                    BagController.S.PurpleWeaponSourceStoneTable.Add(sourceStoneTable);
+                    break;
+                case 5:
+                    BagController.S.OrangeWeaponSourceStoneTable.Add(sourceStoneTable);
+                    break;
+            }
+        }
+        Debug.Log("获取服务器用户源石成功！");
+    }
+    
+    public void GetPlayerEquipSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        PlayerEquipConfig.playerEquipData = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerEquipData>(args[0].ToString());
+        BagController.S.ShowEquip();
+    }
+    
+   
+    
+    
     private void Start()
     {
-        PlayerInfoController.S.GetPlayerInfo(UserController.S.selfuserId);// 获取玩家信息
-        yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
-        GlobalPlayerAttribute.ExpDic = ExperienceController.S.GetExperienceFromMysql();
-        expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
-        expSlider.value = GlobalPlayerAttribute.Exp;
-        levelText.text = GlobalPlayerAttribute.Level.ToString();
+        ObserverModuleManager.S.RegisterEvent("GetExPlayerTableSuccess",OnGetExPlayerTableSuccess);
+        ObserverModuleManager.S.RegisterEvent("UpdateRoleWindow",UpdateRoleWindow);
+        ObserverModuleManager.S.RegisterEvent("GetSourceStoneConfigSuccess",GetSourceStoneConfigSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetLevelRankSuccess",GetLevelRankSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetUserLevelRankSuccess",GetUserLevelRankSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetUserMonsterCountRankSuccess",GetUserMonsterCountRankSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetMonsterCountRankSuccess",GetMonsterCountRankSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetUserSourceStoneSuccess",GetUserSourceStoneSuccess);
+        ObserverModuleManager.S.RegisterEvent("GetPlayerEquipSuccess",GetPlayerEquipSuccess);
+
+        
+        ServerInit();
+        // yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
+        // //GlobalPlayerAttribute.ExpDic = ExperienceController.S.GetExperienceFromMysql();
+        // expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
+        // expSlider.value = GlobalPlayerAttribute.Exp;
+        // levelText.text = GlobalPlayerAttribute.Level.ToString();
         Debug.Log("点击进入角色界面");
         InitEquip();
         BagController.S.IsInit = true;
+        
+        
+        
+        
+        rankButton.onClick.AddListener(() =>
+        {
+            WindowController.S.RankWindow.SetActive(true);
+        });
+        
+        friendButton.onClick.AddListener(() =>
+        {
+            Debug.Log("点击进入好友列表界面");
+            WindowController.S.FriendList.SetActive(true);
+        });
+        
         monsterBookButton.onClick.AddListener(() =>
         {
             Debug.Log("点击进入怪物图鉴界面");
@@ -60,7 +180,7 @@ public class RoleWindow1 : MonoBehaviour
             if (BagController.S.EquipIdList == null)
             {
                 Debug.LogWarning("ShowBag警告: EquipIdList为null，初始化为空列表");
-                BagController.S.EquipIdList = new List<TableBase>();
+                BagController.S.EquipIdList = new List<EquipTable>();
             }
         
             Debug.Log($"暂停游戏，当前EquipIdList中有 {BagController.S.EquipIdList.Count} 件装备");
@@ -68,15 +188,11 @@ public class RoleWindow1 : MonoBehaviour
             // 暂停游戏
             BagController.S.bag.gameObject.SetActive(true);
         
-            try
-            {
-                Debug.Log("调用ShowEquip方法显示装备");
-                BagController.S.ShowEquip();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"ShowBag出错: 调用ShowEquip方法时发生异常: {e.Message}\n{e.StackTrace}");
-            }
+            
+            Debug.Log("调用ShowEquip方法显示装备");
+            BagController.S.ShowEquip();
+            BagController.S.InitPlayerEquip();
+            
         
             Debug.Log("ShowBag方法执行完成");
         });
@@ -106,44 +222,43 @@ public class RoleWindow1 : MonoBehaviour
         });
         
     }
+
+    public void ServerInit()
+    {
+        ServerConnect.S.SendgetPlayerInfoRequest();
+        SourceStoneServer.S.SendGetSourceStoneConfigRequest();
+        RankServer.S.GetLevelRankRequest("level", 0);
+        RankServer.S.GetUserLevelRankRequest();
+        RankServer.S.GetUserMonsterCountRequest();
+        RankServer.S.GetMonsterCountRequest();
+        SourceStoneServer.S.GetUserSourceStoneRequest();
+        EquipServer.S.GetPlayerEquipRequest();
+    }
+    
+    public void OnGetExPlayerTableSuccess(object[] args)
+    {
+        var extable = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Experience>>(args[0].ToString());
+        //将extable转换为字典GlobalPlayerAttribute.ExpDic
+        foreach (var experience in extable)
+        {
+            GlobalPlayerAttribute.ExpDic.Add(experience.Level, experience.Value);
+        }
+        Debug.Log("获取经验表成功");
+        expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
+        expSlider.value = GlobalPlayerAttribute.Exp;
+        levelText.text = GlobalPlayerAttribute.Level.ToString();
+    }
+    
+    public void GetExperienceFromMysql()
+    {
+        ServerConnect.S.SendGetExPlayerTableRequest();
+    }
     
     public void InitEquip()
     {
         if (BagController.S.IsInit)
             return;
         BagController.S.InitEquipidSpriteConfig();
-        BagController.S.InitSourceStoneSpriteConfig();// 初始化源石的图片配置
         EquipController.S.GetAllEquipFromMysql();
-        //BagController.S.EquipIdList= EquipController.S.equipList;
-        foreach (var equip in EquipController.S.equipList)//mysql的装备赋值到 BagController.S.EquipIdList
-        {
-            BagController.S.EquipIdList.Add(equip);
-        }
-        foreach (var equip in BagController.S.EquipIdList)
-        {
-            EquipTable equipTable= equip as EquipTable;
-            BagController.S.EquipidTable.Add(equip.Equipid, equipTable);
-            BagController.S.EquipidSprite.Add(equip.Equipid, BagController.S.EquipidSpriteConfig[equipTable.EquipName]);
-            if (equip.Quality == 1) // 白色装备
-            {
-                BagController.S.WhiteEquipidTable.Add(equip.Equipid, equipTable);
-            }
-            else if (equip.Quality == 2) // 绿色装备
-            {
-                BagController.S.GreenEquipidTable.Add(equip.Equipid, equipTable);
-            }
-            else if (equip.Quality == 3) // 蓝色装备
-            {
-                BagController.S.BlueEquipidTable.Add(equip.Equipid, equipTable);
-            }
-            else if (equip.Quality == 4) // 紫色装备
-            {
-                BagController.S.PurpleEquipidTable.Add(equip.Equipid, equipTable);
-            } 
-            else if (equip.Quality == 5) // 金色装备
-            {
-                BagController.S.OrangeEquipidTable.Add(equip.Equipid, equipTable);
-            }
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace Mysql
             if (!ConnectMysql.S.CheckConnection()) return false;
             
     
-            string query = "INSERT INTO user (userid, username, passward) VALUES (@userid, @username, @password)";
+            string query = "INSERT INTO user (userid, username, password) VALUES (@userid, @username, @password)";
             MySqlCommand command = new MySqlCommand(query, ConnectMysql.Connection);
             command.Parameters.AddWithValue("@userid", userid);
             command.Parameters.AddWithValue("@username", username);
@@ -90,7 +90,7 @@ namespace Mysql
                     {
                         UserId = reader.GetInt32("userid"),
                         Username = reader.GetString("username"),
-                        Password = reader.GetString("passward")
+                        Password = reader.GetString("password")
                     };
                     Users.Add(userTable);
                 }
@@ -127,7 +127,7 @@ namespace Mysql
                     // 假设 user 表有 id、username、email 三个字段
                     int id = reader.GetInt32("userid");
                     string username = reader.GetString("username");
-                    string email = reader.GetString("passward");
+                    string email = reader.GetString("password");
 
                     Debug.Log($"ID: {id}, 用户名: {username}, 密码: {email}");
                 }

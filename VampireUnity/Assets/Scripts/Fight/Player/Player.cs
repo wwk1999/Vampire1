@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     public Slider hpSlider;
     public Slider exSlider;
     public Text levelText;
+    public float size = 0.28f;
     [NonSerialized] public bool IsWuDi = false;//红闪的时候无敌
 
 
@@ -205,6 +206,10 @@ public class Player : MonoBehaviour
     /// <param name="damage"></param>
     public void PlayerHurt(int damage)
     {
+        if (IsWuDi)
+            return;
+        //打印调用这个方法的脚本name
+        Debug.Log("PlayerHurt被调用，来自脚本：" + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType.Name);
         AudioController.S.PlayPlayerHurt();
         CameraContraller.S.CameraShake(0.2f, 0.01f);
         var playerhit = FightBGController.S.PlayerHitQueue.Dequeue();

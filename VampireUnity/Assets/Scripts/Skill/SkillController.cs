@@ -44,11 +44,6 @@ public class SkillController : XSingleton<SkillController>
 
     void Start()
     {
-        //技能按钮点击特效
-        IceArrowUIFX=GameController.S.transform.Find("FightBG(Clone)/Canvas/Skill/IceArrowUIParticle").GetComponent<UIParticle>();
-        IceBallUIFX=GameController.S.transform.Find("FightBG(Clone)/Canvas/Skill/IceBallUIParticle").GetComponent<UIParticle>();
-        IceExUIFX=GameController.S.transform.Find("FightBG(Clone)/Canvas/Skill/IceEXUIParticle").GetComponent<UIParticle>();
-
         //技能相关
         IceArrow = GameController.S.transform.Find("Player(Clone)/Pistol(Clone)/IceArrow/IceArrowParticleSystem").GetComponent<ParticleSystem>();
         IceArrow.Stop();

@@ -10,7 +10,6 @@ namespace Mysql
     {
         public TableType TableType;
         public int Userid { get; set; }
-        public int Equipid { get; set; }
         public int Quality { get; set; }
         public string EquipName { get; set; }
     }

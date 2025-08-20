@@ -17,14 +17,36 @@ public class GunBase : MonoBehaviour
         set { _attackSpeed = value; }
     }
 
+    /// <summary>
+    /// 第二个武器普通攻击
+    /// </summary>
+    /// <param name="scale"></param>
+    /// <param name="division"></param>
+    /// <param name="extremeSpeed"></param>
+    /// <param name="duration"></param>
     public void TwoShot(int scale, int division, int extremeSpeed, int duration)
     {
-        Vector2 direction = (GameController.S.nearMonsterPosition- GameController.S.gamePlayer.transform.position).normalized;
-        GameObject bullet = GameController.S.TwoNormalAttackQueue.Dequeue();
-        bullet.transform.position = GameController.S.gamePlayer.transform.position;
-        bullet.gameObject.SetActive(true);
-        bullet.GetComponent<TwoNormalAttack>().MoveDirection = direction;
-        bullet.GetComponent<TwoNormalAttack>().MoveSpeed = 2f;
+        // 原始方向
+        Vector2 baseDir = (GameController.S.nearMonsterPosition -GameController.S.gamePlayer.transform.position).normalized;
+
+        // 两个偏移角度：+10° 和 -10°
+        Vector2[] dirs =
+        {
+            Quaternion.AngleAxis( 10f, Vector3.forward) * baseDir,
+            Quaternion.AngleAxis(-10f, Vector3.forward) * baseDir
+        };
+
+        // 连发两颗
+        foreach (Vector2 dir in dirs)
+        {
+            GameObject bullet = GameController.S.TwoNormalAttackQueue.Dequeue();
+            bullet.transform.position = GameController.S.gamePlayer.transform.position;
+            bullet.SetActive(true);
+
+            var attack = bullet.GetComponent<TwoNormalAttack>();
+            attack.MoveDirection = dir;
+            attack.MoveSpeed = 2f;
+        }
     }
     
     public void ThreeShot(int scale, int division, int extremeSpeed, int duration)

@@ -4,15 +4,25 @@ using System.Diagnostics;
 using Mysql;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class GameController : XSingleton<GameController>
 {
+    //怪物数量排行榜相关
+    [NonSerialized] public int NormalCount = 0;
+    [NonSerialized] public int EliteCount = 0;
+    [NonSerialized] public int BossCount = 0;
+    
+    
+    
+    
     private float distanceUpdateTimer = 0f;
     [NonSerialized]public Player gamePlayer;
     [NonSerialized]public GameObject MonsterBirthPoint1;
     [NonSerialized]public GameObject MonsterBirthPoint2;
+    [NonSerialized]public GameObject MonsterBirthPoint3;
     [NonSerialized]public GameObject PlayerBirthPoint1;
     [NonSerialized]public GameObject PlayerBirthPoint2;
     //怪物相关
@@ -37,6 +47,13 @@ public class GameController : XSingleton<GameController>
    //[NonSerialized]public Queue<DunDiAttackTrigger> DunDiAttackTriggerQueue = new Queue<DunDiAttackTrigger>();
     [NonSerialized]public Queue<DaZuiSkillTriggerLeft> DaZuiSkillTriggerQueueLeft = new Queue<DaZuiSkillTriggerLeft>();
     [NonSerialized]public Queue<DaZuiSkillTriggerRight> DaZuiSkillTriggerQueueRight = new Queue<DaZuiSkillTriggerRight>();
+    
+    
+    //第三关怪
+    [NonSerialized] public Queue<JiaChongMonster> JiaChongMonsterQueue = new Queue<JiaChongMonster>();
+    [NonSerialized] public Queue<WenZiMonster> WenZiMonsterQueue = new Queue<WenZiMonster>();
+    [NonSerialized] public Queue<QingWaMonster> QingWaMonsterQueue = new Queue<QingWaMonster>();
+    [NonSerialized] public Queue<ShiRenHuaMonster> ShiRenHuaMonsterQueue = new Queue<ShiRenHuaMonster>();
 
 
     
@@ -69,12 +86,13 @@ public class GameController : XSingleton<GameController>
     public GameObject fightBG;
     [NonSerialized]public Transform[] MonsterBirthPoints1;
     [NonSerialized]public Transform[] MonsterBirthPoints2;
+    [NonSerialized]public Transform[] MonsterBirthPoints3;
     [NonSerialized]public Transform[] PlayerBirthPoints;
     //怪物探测器，检测最近的怪物
-    public List<MonsterBase> monsterDetetor1 = new List<MonsterBase>();
-    public List<MonsterBase> monsterDetetor2 = new List<MonsterBase>();
-    public List<MonsterBase> monsterDetetor3 = new List<MonsterBase>();
-    public List<MonsterBase> monsterDetetor4 = new List<MonsterBase>();
+    public HashSet<MonsterBase> monsterDetetor1 = new HashSet<MonsterBase>();
+    public HashSet<MonsterBase> monsterDetetor2 = new HashSet<MonsterBase>();
+    public HashSet<MonsterBase> monsterDetetor3 = new HashSet<MonsterBase>();
+    public HashSet<MonsterBase> monsterDetetor4 = new HashSet<MonsterBase>();
 
     //最近怪物位置
     public Vector3 nearMonsterPosition;
@@ -100,7 +118,153 @@ public class GameController : XSingleton<GameController>
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossEnergy,BossEnergy);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossWarning, ShowBossWarning);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.ResumePlayerCamera, ResumePlayerCamera);
-
+        ObserverModuleManager.S.RegisterEvent("SaveEquipSuccess",SaveEquipSuccess);
+        ObserverModuleManager.S.RegisterEvent("AddUserSourceStoneSuccess",AddUserSourceStoneSuccess);
+    }
+    
+    public void AddUserSourceStoneSuccess(object[] args)
+    {
+        if (args[0] == null) return;
+        Debug.Log("添加源石成功！");
+        AddUserSourceStoneData addUserSourceStoneData = Newtonsoft.Json.JsonConvert.DeserializeObject<AddUserSourceStoneData>(args[0].ToString());
+        SourceStoneTable sourceStoneTable = new SourceStoneTable();
+        sourceStoneTable.SourceStoneId = addUserSourceStoneData.sourcestoneid;
+        sourceStoneTable.SourceStoneName = WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestonename;
+        sourceStoneTable.SourceStoneDesc = WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestoneeffect;
+        sourceStoneTable.Count = addUserSourceStoneData.sourcestonecount;
+        sourceStoneTable.Quality =
+            WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).quality;
+        sourceStoneTable.SourceStoneType =WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestonetype;
+        bool exists = false;
+        foreach (var item in BagController.S.SourceStoneTable)
+        {
+            if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+            {
+                exists = true;
+                item.Count = addUserSourceStoneData.sourcestonecount;
+                break;
+            }
+        }
+        if(!exists) BagController.S.SourceStoneTable.Add(sourceStoneTable);
+        switch (sourceStoneTable.Quality)
+        {
+            case 1:
+                bool whiteExists = false;
+                foreach (var item in BagController.S.WhiteWeaponSourceStoneTable)
+                {
+                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+                    {
+                        whiteExists = true;
+                        item.Count = addUserSourceStoneData.sourcestonecount;
+                        break;
+                    }
+                }
+                if(!whiteExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                break;
+            case 2:
+                bool greenExists = false;
+                foreach (var item in BagController.S.GreenWeaponSourceStoneTable)
+                {
+                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+                    {
+                        greenExists = true;
+                        item.Count = addUserSourceStoneData.sourcestonecount;
+                        break;
+                    }
+                }
+                if(!greenExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                break;
+            case 3:
+                bool blueExists = false;
+                foreach (var item in BagController.S.BlueWeaponSourceStoneTable)
+                {
+                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+                    {
+                        blueExists = true;
+                        item.Count = addUserSourceStoneData.sourcestonecount;
+                        break;
+                    }
+                }
+                if(!blueExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                break;
+            case 4:
+                bool purpleExists = false;
+                foreach (var item in BagController.S.PurpleWeaponSourceStoneTable)
+                {
+                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+                    {
+                        purpleExists = true;
+                        item.Count = addUserSourceStoneData.sourcestonecount;
+                        break;
+                    }
+                }
+                if(!purpleExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                break;
+            case 5:
+                bool orangeExists = false;
+                foreach (var item in BagController.S.OrangeWeaponSourceStoneTable)
+                {
+                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
+                    {
+                        orangeExists = true;
+                        item.Count = addUserSourceStoneData.sourcestonecount;
+                        break;
+                    }
+                }
+                if(!orangeExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
+                break;
+        }
+    }
+    
+    
+     public void SaveEquipSuccess(object[] args)
+    {
+        Debug.Log("装备保存回调执行");
+        if (args[0] == null)
+        {
+            Debug.LogError("SaveEquipSuccess出错: args[0]为null");       
+            return;
+        }
+        SavaEquipData savaEquipData = Newtonsoft.Json.JsonConvert.DeserializeObject<SavaEquipData>(args[0].ToString());
+        EquipTable equipTable = new EquipTable();
+        equipTable.equipid = savaEquipData.Equipid;
+        equipTable.Quality = savaEquipData.Quality;
+        equipTable.Damage = savaEquipData.Damage;
+        equipTable.CRIT = savaEquipData.Crit;
+        equipTable.CRITDamage = savaEquipData.Critdamage;
+        equipTable.DamageSpeed = savaEquipData.Damagespeed;
+        equipTable.BloodSuck = savaEquipData.Bloodsuck;
+        equipTable.HP = savaEquipData.Hp;
+        equipTable.MoveSpeed = savaEquipData.Movespeed;
+        equipTable.EquipName = savaEquipData.Equipname;
+        equipTable.suitid = savaEquipData.Suitid;
+        equipTable.suitname = savaEquipData.Suitname;
+        equipTable.equip_type_id = savaEquipData.Equip_type_id;
+        equipTable.equip_type_name = savaEquipData.Equip_type_name;
+        equipTable.Userid = savaEquipData.Userid;
+        equipTable.Defense = savaEquipData.Defense;
+        equipTable.GoodFortune = savaEquipData.Goodfortune;
+        BagController.S.EquipIdList.Add(equipTable);
+        BagController.S.EquipIdList.Add(equipTable);
+        switch (equipTable.Quality)
+        {
+            case 1:
+                BagController.S.WhiteEquipidTable.Add(equipTable);
+                break;
+            case 2:
+                BagController.S.GreenEquipidTable.Add(equipTable);
+                break;
+            case 3:
+                BagController.S.BlueEquipidTable.Add(equipTable);
+                break;
+            case 4:
+                BagController.S.PurpleEquipidTable.Add(equipTable);
+                break;
+            case 5:
+                BagController.S.OrangeEquipidTable.Add(equipTable);
+                break;
+        }
+        
     }
     private void Awake()
     {
@@ -136,6 +300,112 @@ public class GameController : XSingleton<GameController>
         {
             transform.Find("FightBG(Clone)/Level3").gameObject.SetActive(true);
         }
+        
+        
+        //赋值
+        FightBGController.S.SaveButton = GameController.S.fightBG.GetComponent<FightBg>().saveButton;
+        FightBGController.S.WeaponButton= GameController.S.fightBG.GetComponent<FightBg>().weaponButton;
+        FightBGController.S.joystick=GameController.S.fightBG.GetComponent<FightBg>().joystick;
+        FightBGController.S.normalAttackButton=GameController.S.fightBG.GetComponent<FightBg>().normalAttackButton;
+        FightBGController.S.FightStopButton=GameController.S.fightBG.GetComponent<FightBg>().fightStopButton;
+        FightBGController.S.dashButton=GameController.S.fightBG.GetComponent<FightBg>().dashButton;
+        FightBGController.S.rageButton=GameController.S.fightBG.GetComponent<FightBg>().rageButton;
+        FightBGController.S.shieldButton=GameController.S.fightBG.GetComponent<FightBg>().shieldButton;
+        FightBGController.S.iceArrowButton=GameController.S.fightBG.GetComponent<FightBg>().iceArrowButton;
+        FightBGController.S.iceExButton=GameController.S.fightBG.GetComponent<FightBg>().iceExButton;
+        FightBGController.S.iceBallButton=GameController.S.fightBG.GetComponent<FightBg>().iceBallButton;
+        FightBGController.S.IceExYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceExYellowCd;
+        FightBGController.S.IceBallYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceBallYellowCd;
+        FightBGController.S.IceArrowYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceArrowYellowCd;
+        FightBGController.S.BossEnergySlider=GameController.S.fightBG.GetComponent<FightBg>().bossEnergySlider;
+        GameController.S.fightTimeText = GameController.S.fightBG.GetComponent<FightBg>().fightTimeText;
+
+        
+        //战斗暂停按钮点击事件
+        FightBGController.S.FightStopButton.onClick.AddListener(() =>
+        {
+            Instantiate(Resources.Load("Prefabs/Window/FightExitPanel"));
+            Time.timeScale=0;
+        });
+        
+         // EquipController.S.GetMaxEquipId();
+        
+        FightBGController.S.SaveButton.onClick.AddListener(() =>
+        {
+            //EquipController.S.BatchInsertEquipsWithTransaction(BagController.S.EquipIdList);
+        });
+        FightBGController.S.WeaponButton.onClick.AddListener(() =>
+        {
+            Time.timeScale = 0;
+            Instantiate(Resources.Load("Prefabs/Window/WeaponWindow"));
+        });
+        //普通攻击按钮
+        FightBGController.S.normalAttackButton.onClick.AddListener(() =>
+        {
+            if (SkillController.S.NormalAttackCoolingtime >SkillController.S.NormalAttacktime)
+            {
+                SkillController.S.NormalAttackCoolingtime = 0;
+                if (GameController.S.gamePlayer.playerState != PlayerState.Attack)
+                {
+                    Invoke("ShotBulletInvoke",0.3f);
+                    GameController.S.gamePlayer.playerSkeleton.AnimationState.SetAnimation(0, "attack", false);
+                }
+                GameController.S.gamePlayer.isAttack = true;
+                GameController.S.gamePlayer.playerState= PlayerState.Attack;
+            }
+        });
+        //冲击技能
+        FightBGController.S.dashButton.onClick.AddListener(() =>
+        {
+            SkillController.S. IsDash = true;
+        });
+        //怒气技能
+        FightBGController.S.rageButton.onClick.AddListener(() =>
+        {
+            GameController.S.gamePlayer.transform.Find("Rage").gameObject.SetActive(true);
+        });
+        //护盾技能
+        FightBGController.S.shieldButton.onClick.AddListener(() =>
+        {
+            GameController.S.gamePlayer.transform.Find("Shield").gameObject.SetActive(true);
+        });
+        //按钮冰箭技能
+        FightBGController.S.iceArrowButton.onClick.AddListener(() =>
+        {
+            if (SkillController.S.IceArrowCoolingtime > SkillController.S.IceArrowtime)
+            {
+                AudioController.S.PlayIceArrow();
+                SkillController.S.IceArrowUIFX.Play();
+                SkillController.S.IceArrowCoolingtime = 0;
+                SkillController.S.IceArrow.Play();
+                SkillController.S.IceArrow.transform.Find("Trail").gameObject.SetActive(true);
+            }
+        });
+        //按钮冰爆技能
+        FightBGController.S.iceExButton.onClick.AddListener(() =>
+        {
+            if (SkillController.S.IceExplosionCoolingtime > SkillController.S.IceExplosiontime)
+            {
+                SkillController.S.IceExUIFX.Play();
+                AudioController.S.PlayIceEx();
+                SkillController.S.IceExplosionCoolingtime=0;
+                SkillController.S.IceExplosion1.Play();
+                SkillController.S.IceExplosion2.Play();
+                SkillController.S.IceExplosion3.Play();
+                SkillController.S.IceExTrigger.gameObject.SetActive(true);
+            }
+        });
+        //按钮冰球
+        FightBGController.S.iceBallButton.onClick.AddListener(() =>
+        {
+            if (SkillController.S.IceBallCoolingtime > SkillController.S.IceBalltime)
+            {
+                AudioController.S.PlayIceBall();
+                SkillController.S.IceBallUIFX.Play();
+                SkillController.S.IceBallCoolingtime=0;
+                SkillController.S.StartIceBallSkill(3,3,3);
+            }
+        });
     }
 
     public void BossEnergy(object[] args)
@@ -242,6 +512,12 @@ public class GameController : XSingleton<GameController>
                 monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints2.Length);
                 monsterRandomPoint = MonsterBirthPoints2[monsterRandomIndex];
                 break;
+            case 7:
+            case 8:
+            case 9:
+                monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints3.Length);
+                monsterRandomPoint = MonsterBirthPoints3[monsterRandomIndex];
+                break;
         }
         // //从子物体里随机选择一个
         // int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints1.Length);
@@ -254,6 +530,8 @@ public class GameController : XSingleton<GameController>
             eliteBeeMonster.gameObject.SetActive(true);
             eliteBeeMonster.CurrentHp = eliteBeeMonster.MaxHp;
             eliteBeeMonster.transform.position = monsterRandomPoint.position;
+            eliteBeeMonster.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+
             TotalMonsterCount++;
             EliteMonsterCount++;
             BeeMonsterSkillTrigger beeMonsterSkillTrigger = BeeMonsterSkillTriggerQueue.Dequeue();
@@ -266,6 +544,8 @@ public class GameController : XSingleton<GameController>
             eliteDaZuiMonster.gameObject.SetActive(true);
             eliteDaZuiMonster.CurrentHp = eliteDaZuiMonster.MaxHp;
             eliteDaZuiMonster.transform.position = monsterRandomPoint.position;
+            eliteDaZuiMonster.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+
             TotalMonsterCount++;
             EliteMonsterCount++;
             
@@ -277,6 +557,19 @@ public class GameController : XSingleton<GameController>
             daZuiSkillTriggerRight.DaZuiMonster = eliteDaZuiMonster;
             daZuiSkillTriggerRight.gameObject.SetActive(true);
         }
+
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 ||
+            LevelInfoConfig.CurrentGameLevel == 9)
+        {
+            ShiRenHuaMonster shirenhuaMonster = ShiRenHuaMonsterQueue.Dequeue();
+            shirenhuaMonster.gameObject.SetActive(true);
+            shirenhuaMonster.CurrentHp = shirenhuaMonster.MaxHp;
+            shirenhuaMonster.transform.position = monsterRandomPoint.position;
+            shirenhuaMonster.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+
+            TotalMonsterCount++;
+            EliteMonsterCount++;
+        }
     }
 
     //生成怪物
@@ -286,10 +579,8 @@ public class GameController : XSingleton<GameController>
             return;
         //Debug.Log("怪物数量："+NormalMonsterCount);
         //从子物体里随机选择一个
-        int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints1.Length);
 
         //获取随机选择的子物体    
-        Transform monsterRandomPoint = MonsterBirthPoints1[monsterRandomIndex];
         //生成怪物
         GameObject monster;
         // if(DieNormalMonsterCount%10==0&&EliteMonsterCount<5)
@@ -300,6 +591,8 @@ public class GameController : XSingleton<GameController>
         // }
         if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3)
         {
+            int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints1.Length);
+            Transform monsterRandomPoint = MonsterBirthPoints1[monsterRandomIndex];
             if (NormalMonsterCount < LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel])
             {
                 MonsterBase monsterBase;
@@ -323,6 +616,8 @@ public class GameController : XSingleton<GameController>
                 monsterBase.transform.position = monsterRandomPoint.position;
                 monsterBase.CurrentHp = monsterBase.MaxHp;
                 monsterBase.transform.SetParent(MonsterBirthPoints1[monsterRandomIndex]);
+                monsterBase.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+
                 TotalMonsterCount++;
                 NormalMonsterCount++;
             }
@@ -334,6 +629,8 @@ public class GameController : XSingleton<GameController>
 
         if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel == 5 || LevelInfoConfig.CurrentGameLevel == 6)
         {
+            int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints2.Length);
+            Transform monsterRandomPoint = MonsterBirthPoints2[monsterRandomIndex];
             if (NormalMonsterCount < LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel])
             {
                 MonsterBase monsterBase;
@@ -344,22 +641,52 @@ public class GameController : XSingleton<GameController>
                 else if (NormalMonsterCount % 3 == 1)
                 {
                     monsterBase = XiaoHuoMonsterQueue.Dequeue();
-                    // XiaoHuoAttackTrigger xiaohuoAttackTrigger = XiaoHuoAttackTriggerQueue.Dequeue();
-                    // xiaohuoAttackTrigger.XiaoHuoMonster = monsterBase as XiaoHuoMonster;
-                    // xiaohuoAttackTrigger.gameObject.SetActive(true);
                 }
                 else
                 {
                     monsterBase = DunDiMonsterQueue.Dequeue();
-                   // DunDiAttackTrigger dundiAttackTrigger = DunDiAttackTriggerQueue.Dequeue();
-                    // dundiAttackTrigger.DundiMonster = monsterBase as DunDiMonster;
-                    // dundiAttackTrigger.gameObject.SetActive(true);
                 }
 
                 monsterBase.gameObject.SetActive(true);
                 monsterBase.transform.position = monsterRandomPoint.position;
                 monsterBase.CurrentHp = monsterBase.MaxHp;
-                monsterBase.transform.SetParent(MonsterBirthPoints1[monsterRandomIndex]);
+                monsterBase.transform.SetParent(MonsterBirthPoints2[monsterRandomIndex]);
+                monsterBase.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+                TotalMonsterCount++;
+                NormalMonsterCount++;
+            }
+            else
+            {
+                return;
+            }
+        }
+        
+        
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 || LevelInfoConfig.CurrentGameLevel == 9)
+        {
+            int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints3.Length);
+            Transform monsterRandomPoint = MonsterBirthPoints3[monsterRandomIndex];
+            if (NormalMonsterCount < LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel])
+            {
+                MonsterBase monsterBase;
+                if (NormalMonsterCount % 3 == 0)
+                {
+                    monsterBase = WenZiMonsterQueue.Dequeue();
+                }
+                else if (NormalMonsterCount % 3 == 1)
+                {
+                    monsterBase = QingWaMonsterQueue.Dequeue();
+                }
+                else
+                {
+                    monsterBase = JiaChongMonsterQueue.Dequeue();
+                }
+
+                monsterBase.gameObject.SetActive(true);
+                monsterBase.transform.position = monsterRandomPoint.position;
+                monsterBase.CurrentHp = monsterBase.MaxHp;
+                monsterBase.transform.SetParent(MonsterBirthPoints3[monsterRandomIndex]);
+                monsterBase.monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
                 TotalMonsterCount++;
                 NormalMonsterCount++;
             }
@@ -369,25 +696,12 @@ public class GameController : XSingleton<GameController>
             }
         }
 
+
         if(NormalMonsterCount%10==0&& NormalMonsterCount!=0)
          {
              Debug.Log("生成精英怪:"+NormalMonsterCount);
            CreateEliteMonster();
          }
-        // MonsterBase monsterBase = monster.GetComponent<MonsterBase>();
-        // monsterBase.CurrentHp=monsterBase.MaxHp;
-        // monster.transform.SetParent(MonsterBirthPoints[monsterRandomIndex]);
-        // //生成怪物血条
-        // GameObject monsterHpBar = Instantiate(monsterHpSliderPrefabs.gameObject, monster.transform);
-        // Slider monsterHpSlider = monsterHpBar.transform.Find("Canvas/MonsterHPSlider").GetComponent<Slider>();
-        // if (monsterBase.MonsterType == MonsterType.Elite)
-        // {
-        //     monsterHpBar.transform.localScale= new Vector3(0.02f, 0.02f, 0.02f);
-        //     monsterHpBar.transform.position = new Vector3(monsterHpBar.transform.position.x, monsterHpBar.transform.position.y + 0.8f, monsterHpBar.transform.position.z-0.1f);
-        // }
-        // monsterBase.hpSlider = monsterHpSlider;
-        // monsterHpBar.transform.position = new Vector3(monsterHpBar.transform.position.x, monsterHpBar.transform.position.y + 0.2f, monsterHpBar.transform.position.z-0.1f);
-
     }
     
     public void ShowBossWarning(object[] args)
@@ -433,35 +747,28 @@ public class GameController : XSingleton<GameController>
         if (distanceUpdateTimer > 0.2f)
         {
             distanceUpdateTimer = 0;
-            monsterDetetor1.RemoveAll(monster =>
+            // 清理无效的怪物引用
+            monsterDetetor1.RemoveWhere(monster =>
                 monster == null || monster.gameObject == null || !monster.gameObject.activeSelf || monster.IsDead);
-            monsterDetetor2.RemoveAll(monster =>
+            monsterDetetor2.RemoveWhere(monster =>
                 monster == null || monster.gameObject == null || !monster.gameObject.activeSelf || monster.IsDead);
-            monsterDetetor3.RemoveAll(monster =>
+            monsterDetetor3.RemoveWhere(monster =>
                 monster == null || monster.gameObject == null || !monster.gameObject.activeSelf || monster.IsDead);
-            monsterDetetor4.RemoveAll(monster =>
+            monsterDetetor4.RemoveWhere(monster =>
                 monster == null || monster.gameObject == null || !monster.gameObject.activeSelf || monster.IsDead);
 
-            monsterDetetor1 = SortMonsterDistance(monsterDetetor1);
-            monsterDetetor2 = SortMonsterDistance(monsterDetetor2);
-            monsterDetetor3 = SortMonsterDistance(monsterDetetor3);
-            monsterDetetor4 = SortMonsterDistance(monsterDetetor4);
+            // 直接找到最近的怪物，不需要排序
+            MonsterBase nearestMonster = FindNearestMonster(monsterDetetor1);
+            if (nearestMonster == null)
+                nearestMonster = FindNearestMonster(monsterDetetor2);
+            if (nearestMonster == null)
+                nearestMonster = FindNearestMonster(monsterDetetor3);
+            if (nearestMonster == null)
+                nearestMonster = FindNearestMonster(monsterDetetor4);
 
-            if (monsterDetetor1.Count > 0)
+            if (nearestMonster != null)
             {
-                nearMonsterPosition = monsterDetetor1[0].transform.position;
-            }
-            else if (monsterDetetor2.Count > 0)
-            {
-                nearMonsterPosition = monsterDetetor2[0].transform.position;
-            }
-            else if (monsterDetetor3.Count > 0)
-            {
-                nearMonsterPosition = monsterDetetor3[0].transform.position;
-            }
-            else if (monsterDetetor4.Count > 0)
-            {
-                nearMonsterPosition = monsterDetetor4[0].transform.position;
+                nearMonsterPosition = nearestMonster.transform.position;
             }
             else
             {
@@ -476,28 +783,67 @@ public class GameController : XSingleton<GameController>
     }
     
 
-    private List<MonsterBase> SortMonsterDistance(List<MonsterBase> monsters)
+    private MonsterBase FindNearestMonster(HashSet<MonsterBase> monsters)
     {
-        // 移除所有已经被销毁或无效的怪物
+        MonsterBase nearestMonster = null;
+        float nearestDistance = float.MaxValue;
+
         foreach (var monster in monsters)
         {
+            // 跳过无效的怪物
             if (monster == null || monster.gameObject == null || !monster.gameObject.activeSelf || monster.IsDead)
+                continue;
+
+            float distance = Vector3.Distance(gamePlayer.transform.position, monster.transform.position);
+            if (distance < nearestDistance)
             {
-                monsters.Remove(monster);
+                nearestDistance = distance;
+                nearestMonster = monster;
             }
         }
 
-        //按monsters距离player的距离排序，越小越在前面
-        monsters.Sort((a, b) =>
+        return nearestMonster;
+    }
+    
+    public void ShotBulletInvoke()
+    {
+        int penetrate=0;
+        int division=0;
+        int extremeSpeed=0;
+        int explosion=0;
+        foreach (var sourceStoneTable in WeaponSourceConfig.WeaponSourceStoneList)
         {
-            if (a == null || b == null || a.gameObject == null || b.gameObject == null)
-                return 0;
-            
-            float distanceA = Vector3.Distance(gamePlayer.transform.position, a.transform.position);
-            float distanceB = Vector3.Distance(gamePlayer.transform.position, b.transform.position);
-            return distanceA.CompareTo(distanceB);
-        });
-        return monsters;
+            if(sourceStoneTable.SourceStoneType== (int)WeaponSourceStoneType.Penetrate)
+            {
+                penetrate++;
+            }
+            if(sourceStoneTable.SourceStoneType== (int)WeaponSourceStoneType.Division)
+            {
+                division++;
+            }
+            if(sourceStoneTable.SourceStoneType== (int)WeaponSourceStoneType.ExtremeSpeed)
+            {
+                extremeSpeed++;
+            }
+            if(sourceStoneTable.SourceStoneType== (int)WeaponSourceStoneType.Explosion)
+            {
+                explosion++;
+            }
+        }
+
+        switch (GlobalPlayerAttribute.CurrentWeaponType)
+        {
+            case WeaponType.Primary:
+                GameController.S.gamePlayer.currentGun.PrimaryShot(penetrate,division,extremeSpeed,explosion);
+                AudioController.S.PlayNormalAttack1();
+                break;
+            case WeaponType.Two:
+                AudioController.S.PlayNormalAttack2();
+                GameController.S.gamePlayer.currentGun.TwoShot(penetrate,division,extremeSpeed,explosion);
+                break;
+        }
+        //GameController.S.gamePlayer.currentGun.TwoShot(penetrate,division,extremeSpeed,explosion);
+        SkillController.S.NormalAttackCoolingtime+=Time.deltaTime;
     }
     
     

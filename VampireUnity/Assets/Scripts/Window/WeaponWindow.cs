@@ -27,7 +27,7 @@ public class WeaponWindow : MonoBehaviour
    public GameObject towsourceStonePanel; // 第二武器源石面板
    public GameObject mask;
    [NonSerialized]public int CurrentKong;
-   [NonSerialized]public WeaponSourceStoneType CurrentSourceStoneType=WeaponSourceStoneType.Penetrate;
+   [NonSerialized] public int CurrentSourceStoneId = 0;
    [NonSerialized]public SourceStoneTable SourceStoneTable1=new SourceStoneTable(); // 当前源石属性
    [NonSerialized]public SourceStoneTable SourceStoneTable2=new SourceStoneTable(); // 当前源石属性
    [NonSerialized]public SourceStoneTable SourceStoneTable3=new SourceStoneTable(); // 当前源石属性
@@ -48,20 +48,20 @@ public class WeaponWindow : MonoBehaviour
          switch (CurrentKong)
          {
             case 1:
-               SourceStoneTable1.SourceStoneType= (int)CurrentSourceStoneType;
+               SourceStoneTable1.SourceStoneType= (int)CurrentSourceStoneId;
                SourceStoneTable1.Quality = 1;
-               sourceStone1Button.image.sprite = BagController.S.SourceStoneSpriteConfig[(int)CurrentSourceStoneType];
+               sourceStone1Button.image.sprite =  WeaponSourceConfig.GetWeaponSourceStoneSprite(CurrentSourceStoneId);
                break;
             case 2:
-               SourceStoneTable2.SourceStoneType= (int)CurrentSourceStoneType;
+               SourceStoneTable2.SourceStoneType= (int)CurrentSourceStoneId;
                SourceStoneTable2.Quality = 1;
-               sourceStone2Button.image.sprite = BagController.S.SourceStoneSpriteConfig[(int)CurrentSourceStoneType];
+               sourceStone2Button.image.sprite = WeaponSourceConfig.GetWeaponSourceStoneSprite(CurrentSourceStoneId);
 
                break;
             case 3:
-               SourceStoneTable3.SourceStoneType= (int)CurrentSourceStoneType;
+               SourceStoneTable3.SourceStoneType= (int)CurrentSourceStoneId;
                SourceStoneTable3.Quality = 1;
-               sourceStone3Button.image.sprite = BagController.S.SourceStoneSpriteConfig[(int)CurrentSourceStoneType];
+               sourceStone3Button.image.sprite = WeaponSourceConfig.GetWeaponSourceStoneSprite(CurrentSourceStoneId);
                break;
          }
          mask.gameObject.SetActive(false);
@@ -91,22 +91,22 @@ public class WeaponWindow : MonoBehaviour
       PenetrateButton.onClick.AddListener(() =>
       {
          sourceStoneText.text = SourceStoneText.WhitePenetrate;
-         CurrentSourceStoneType = WeaponSourceStoneType.Penetrate;
+         CurrentSourceStoneId = 1;
       });
       DivisionButton.onClick.AddListener(() =>
       {
          sourceStoneText.text = SourceStoneText.WhiteDivision;
-         CurrentSourceStoneType = WeaponSourceStoneType.Division;
+         CurrentSourceStoneId = 7;
       });
       ExtremeSpeedButton.onClick.AddListener(() =>
       {
          sourceStoneText.text = SourceStoneText.WhiteExtremeSpeed;
-         CurrentSourceStoneType = WeaponSourceStoneType.ExtremeSpeed;
+         CurrentSourceStoneId = 13;
       });
       ExplosionButton.onClick.AddListener(() =>
       {
          sourceStoneText.text = SourceStoneText.WhiteExplosion;
-         CurrentSourceStoneType = WeaponSourceStoneType.Explosion;
+         CurrentSourceStoneId = 19;
       });
       exitButton.onClick.AddListener(() =>
       {

@@ -1,0 +1,50 @@
+Unity Editor version:    2022.3.58f1c1 (12d559526a4e)
+Branch:                  2022.3/china_unity/release
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 14.6.1 (Build 23G93)
+Darwin version:          23.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        16384 MB
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-tal" at "2025-08-08T14:57:23.308847Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 3306, path: "/Applications/Unity Hub.app/Contents/Frameworks/UnityLicensingClient_V1.app/Contents/MacOS/Unity.Licensing.Client")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.16.1+e780b2e
+  Session Id:              2b37e2ce0da046d2b726387ce08b12a6
+  Correlation Id:          73e3e00355e094cc30c4b4e13c79106d
+  External correlation Id: 626512466287887314
+  Machine Id:              fz+LX/7jD6z7n4WM2VQS58wy+JQ=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-tal" (connect: 0.00s, validation: 0.02s, handshake: 0.45s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-tal-notifications" at "2025-08-08T14:57:23.777638Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-2JX2-6ENR-SV9Z-35SY-XXXX"
+Pro License: NO
+[Licensing::Client] Successfully resolved entitlement details
+Launching external process: /Applications/Unity/Hub/Editor/2022.3.58f1c1/Unity.app/Contents/Resources/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2022.3.58f1c1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-quit
+-projectPath
+.
+-logFile
+compile.log
+Successfully changed project path to: /Users/tal/vampire1/VampireUnity
+/Users/tal/vampire1/VampireUnity
+It looks like another Unity instance is running with this project open.
+
+Multiple Unity instances cannot open the same project.
+
+Project: /Users/tal/vampire1/VampireUnity
+Fatal Error! It looks like another Unity instance is running with this project open.
+
+Multiple Unity instances cannot open the same project.
+
+Project: /Users/tal/vampire1/VampireUnity
+[Package Manager] Server::Kill -- Server was shutdown

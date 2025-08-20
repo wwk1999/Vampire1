@@ -12,14 +12,13 @@ public enum EquipType
 }
 public class BagGrid : MonoBehaviour
 {
-    [NonSerialized]public int EquipId;
+    [NonSerialized]public TableBase tableBase;
     [NonSerialized]public EquipType EquipType;
     public Button gridButton;
     [NonSerialized]public Sprite equipAttributeImage;
 
     private void Awake()
     {
-        Debug.Log($"BagGrid.Awake: 初始化背包格子，ID: {EquipId}");
         
         // 移除旧的监听器，防止重复添加
         gridButton.onClick.RemoveAllListeners();
@@ -27,7 +26,6 @@ public class BagGrid : MonoBehaviour
         // 添加新的点击监听器
         gridButton.onClick.AddListener(() =>
         {
-            Debug.Log($"BagGrid.OnClick: 点击了装备，ID: {EquipId}, 类型: {EquipType}");
             
             // 检查是否已存在MaskLayer
             if (BagController.S.MaskLayer != null)
@@ -49,7 +47,7 @@ public class BagGrid : MonoBehaviour
             //显示装备属性面板
             try
             {
-                BagController.S.ShowEquipAttributePanel(EquipId, EquipType);
+                BagController.S.ShowEquipAttributePanel(tableBase, EquipType,gameObject);
             }
             catch (System.Exception e)
             {

@@ -24,6 +24,21 @@ public class LevelInfoConfig
         LevelMonsterCount[4] = 50;
         LevelMonsterCount[5] = 100;
         LevelMonsterCount[6] = 100;
+        LevelMonsterCount[7] = 50;
+        LevelMonsterCount[8] = 100;
+        LevelMonsterCount[9] = 100;
+        LevelMonsterCount[10] = 50;
+        LevelMonsterCount[11] = 100;
+        LevelMonsterCount[12] = 100;
+        LevelMonsterCount[13] = 50;
+        LevelMonsterCount[14] = 100;
+        LevelMonsterCount[15] = 100;
+        LevelMonsterCount[16] = 50;
+        LevelMonsterCount[17] = 100;
+        LevelMonsterCount[18] = 100;
+        LevelMonsterCount[19] = 50;
+        LevelMonsterCount[20] = 100;
+        LevelMonsterCount[21] = 100;
         if (IsOneGame)
         {
             LevelDiaoLuo1.Add(ResourcesConfig.PrimaryCloak);
@@ -43,12 +58,12 @@ public class LevelInfoConfig
             LevelDiaoLuo2.Add(ResourcesConfig.PrimaryNecklace);
             LevelDiaoLuo2.Add(ResourcesConfig.PrimaryRing);
 
-            LevelDiaoLuo2.Add(ResourcesConfig.Division);
-            LevelDiaoLuo2.Add(ResourcesConfig.Explosion);
-            LevelDiaoLuo2.Add(ResourcesConfig.Duration);
-            LevelDiaoLuo2.Add(ResourcesConfig.Scale);
-            LevelDiaoLuo2.Add(ResourcesConfig.Penetrate);
-            LevelDiaoLuo2.Add(ResourcesConfig.ExtremeSpeed);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhiteDivision);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhiteExplosion);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhiteDuration);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhiteScale);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhitePenetrate);
+            LevelDiaoLuo2.Add(ResourcesConfig.WhiteExtremeSpeed);
         }
         
         if (IsOneGame)
@@ -67,12 +82,12 @@ public class LevelInfoConfig
             LevelDiaoLuo3.Add(ResourcesConfig.TreeManNecklace);
             LevelDiaoLuo3.Add(ResourcesConfig.TreeManRing);
 
-            LevelDiaoLuo3.Add(ResourcesConfig.Division);
-            LevelDiaoLuo3.Add(ResourcesConfig.Explosion);
-            LevelDiaoLuo3.Add(ResourcesConfig.Duration);
-            LevelDiaoLuo3.Add(ResourcesConfig.Scale);
-            LevelDiaoLuo3.Add(ResourcesConfig.Penetrate);
-            LevelDiaoLuo3.Add(ResourcesConfig.ExtremeSpeed);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhiteDivision);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhiteExplosion);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhiteDuration);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhiteScale);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhitePenetrate);
+            LevelDiaoLuo3.Add(ResourcesConfig.WhiteExtremeSpeed);
         }
     }
    public static LevelInfoItem LevelInfoItem1= new LevelInfoItem
@@ -187,12 +202,12 @@ public class LevelInfoConfig
             LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.PrimaryHelmet);
             LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.PrimaryNecklace);
             LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.PrimaryRing);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.Division);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.Explosion);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.Duration);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.Scale);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.Penetrate);
-            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.ExtremeSpeed);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhiteDivision);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhiteExplosion);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhiteDuration);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhiteScale);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhitePenetrate);
+            LevelInfoItem2.DiaoLuoIconList.Add(ResourcesConfig.WhiteExtremeSpeed);
 
             LevelInfoItem2.DiaoLuoNameList.Add("新手披风");
             LevelInfoItem2.DiaoLuoNameList.Add("新手衣服");
@@ -217,19 +232,22 @@ public class LevelInfoConfig
             LevelInfoItem3.MonsterIconList.Add(ResourcesConfig.Spidericon);
             LevelInfoItem3.MonsterIconList.Add(ResourcesConfig.EliteBeeIcon);
             LevelInfoItem3.MonsterIconList.Add(ResourcesConfig.BossTreeManIcon);
-
+            
+            
+            
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhiteDivision);
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhiteExplosion);
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhiteDuration);
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhiteScale);
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhitePenetrate);
+            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.WhiteExtremeSpeed);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryCloak);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryCloth);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryShoe);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryHelmet);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryNecklace);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.PrimaryRing);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.Division);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.Explosion);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.Duration);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.Scale);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.Penetrate);
-            LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.ExtremeSpeed);
+          
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.TreeManCloak);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.TreeManCloth);
             LevelInfoItem3.DiaoLuoIconList.Add(ResourcesConfig.TreeManShoe);

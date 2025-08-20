@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Demo;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GameLevelWindow1 : MonoBehaviour
+public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject loopScrollRect;
+    //public GameObject loopScrollRect;
     private InitOnStart initOnStart;
     public GameObject levelInfoRight;
     public GameObject levelInfoLeft;
@@ -27,7 +28,6 @@ public class GameLevelWindow1 : MonoBehaviour
     public Button gameLevelFightLeftButton;//左挑战按钮
     public Button gameLevelFightRightButton;//右挑战按钮
 
-
     public Button level1Button;
     public Button level2Button;
     public Button level3Button;
@@ -37,9 +37,305 @@ public class GameLevelWindow1 : MonoBehaviour
     public Button level7Button;
     public Button level8Button;
     public Button level9Button;
+    public Button level10Button;
+    public Button level11Button;
+    public Button level12Button;
+    public Button level13Button;
+    public Button level14Button;
+    public Button level15Button;
+    public Button level16Button;
+    public Button level17Button;
+    public Button level18Button;
+    public Button level19Button;
+    public Button level20Button;
+    
+    
+    public GameObject level1Info;
+    public GameObject level2Info;
+    public GameObject level3Info;
+    public GameObject level4Info;
+    public GameObject level5Info;
+    public GameObject level6Info;
+    public GameObject level7Info;
+    public GameObject level8Info;
+    public GameObject level9Info;
+    public GameObject level10Info;
+    public GameObject level11Info;
+    public GameObject level12Info;
+    public GameObject level13Info;
+    public GameObject level14Info;
+    public GameObject level15Info;
+    public GameObject level16Info;
+    public GameObject level17Info;
+    public GameObject level18Info;
+    public GameObject level19Info;
+    public GameObject level20Info;
+
+    
+    public RectTransform rectTransform; // 当前UI的RectTransform
+    private Vector2 lastMousePosition;   // 上次鼠标位置
+    
+    // 地图尺寸常量
+    private const float MAP_WIDTH = 3840f;
+    private const float MAP_HEIGHT = 2160f;
+    
+    // 边界限制变量
+    private float maxXBound;
+    private float minXBound;
+    private float maxYBound;
+    private float minYBound;
+    
+    // 回弹边界变量
+    private float snapMaxX;
+    private float snapMinX;
+    private float snapMaxY;
+    private float snapMinY;
+    
+    // 开始拖动时
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("开始拖动");
+        lastMousePosition = eventData.position; // 记录开始拖拽位置
+    }
+
+    // 拖动中
+    public void OnDrag(PointerEventData eventData)
+    {
+        Vector2 currentMousePosition = eventData.position; // 当前鼠标位置
+        Vector2 delta = currentMousePosition - lastMousePosition;  // 鼠标移动的差值
+
+        // 改变地图位置
+        rectTransform.anchoredPosition += delta;
+        
+        // 应用边界限制（带阻尼效果）
+        Vector3 currentPos = rectTransform.transform.localPosition;
+        Vector3 clampedPos = currentPos;
+        
+        // 水平边界限制
+        if (currentPos.x > maxXBound) 
+        {
+            float overshoot = currentPos.x - maxXBound;
+            float damping = Mathf.Clamp01(1f - overshoot / 100f); // 阻尼系数
+            clampedPos.x = maxXBound + overshoot * damping * 0.3f;
+        }
+        else if (currentPos.x < minXBound) 
+        {
+            float overshoot = minXBound - currentPos.x;
+            float damping = Mathf.Clamp01(1f - overshoot / 100f); // 阻尼系数
+            clampedPos.x = minXBound - overshoot * damping * 0.3f;
+        }
+        
+        // 垂直边界限制
+        if (currentPos.y > maxYBound) 
+        {
+            float overshoot = currentPos.y - maxYBound;
+            float damping = Mathf.Clamp01(1f - overshoot / 100f); // 阻尼系数
+            clampedPos.y = maxYBound + overshoot * damping * 0.3f;
+        }
+        else if (currentPos.y < minYBound) 
+        {
+            float overshoot = minYBound - currentPos.y;
+            float damping = Mathf.Clamp01(1f - overshoot / 100f); // 阻尼系数
+            clampedPos.y = minYBound - overshoot * damping * 0.3f;
+        }
+        
+        rectTransform.transform.localPosition = clampedPos;
+
+        // 记录最新的鼠标位置
+        lastMousePosition = currentMousePosition;
+    }
+    
+    // 结束拖动时（不必须要实现，可以为空）
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Vector3 targetPosition = rectTransform.transform.localPosition;
+        Debug.Log("结束拖动");
+        
+        // 应用回弹边界
+        if (rectTransform.transform.localPosition.x > snapMaxX)
+        {
+            targetPosition.x = snapMaxX;
+        }
+        if (rectTransform.transform.localPosition.x < snapMinX)
+        {
+            targetPosition.x = snapMinX;
+        }
+        if (rectTransform.transform.localPosition.y > snapMaxY)
+        {
+            targetPosition.y = snapMaxY;
+        }
+        if (rectTransform.transform.localPosition.y < snapMinY)
+        {
+            targetPosition.y = snapMinY;
+        }
+        StartCoroutine(SnapToPosition(targetPosition));
+    }
+    
+    private IEnumerator SnapToPosition(Vector3 targetPosition)
+    {
+        float duration = 0.3f; // 回弹持续时间
+        Vector3 startPosition = rectTransform.transform.localPosition;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            
+            // 使用缓动函数使动画更自然
+            float easeOut = 1f - Mathf.Pow(1f - t, 3f); // 缓出效果
+            rectTransform.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, easeOut);
+            yield return null;
+        }
+        
+        rectTransform.transform.localPosition = targetPosition; // 确保最终位置准确
+    }
+    
+    // 计算边界限制
+    private void CalculateBounds()
+    {
+        // 获取当前屏幕分辨率
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+        
+        // 获取Canvas的缩放模式
+        Canvas canvas = GetComponentInParent<Canvas>();
+        CanvasScaler scaler = canvas?.GetComponent<CanvasScaler>();
+        
+        // 计算实际的可视区域尺寸
+        float viewportWidth = screenWidth;
+        float viewportHeight = screenHeight;
+        
+        if (scaler != null)
+        {
+            // 根据Canvas Scaler的缩放模式调整
+            switch (scaler.uiScaleMode)
+            {
+                case CanvasScaler.ScaleMode.ScaleWithScreenSize:
+                    // 使用参考分辨率
+                    viewportWidth = scaler.referenceResolution.x;
+                    viewportHeight = scaler.referenceResolution.y;
+                    break;
+                case CanvasScaler.ScaleMode.ConstantPixelSize:
+                    // 像素大小不变，直接使用屏幕分辨率
+                    break;
+                case CanvasScaler.ScaleMode.ConstantPhysicalSize:
+                    // 物理大小不变，需要考虑DPI
+                    viewportWidth = screenWidth / Screen.dpi * 96f; // 96 DPI作为参考
+                    viewportHeight = screenHeight / Screen.dpi * 96f;
+                    break;
+            }
+        }
+        
+        // 计算地图在屏幕上的显示尺寸
+        float mapDisplayWidth = MAP_WIDTH;
+        float mapDisplayHeight = MAP_HEIGHT;
+        
+        // 计算边界限制（地图边缘不能超出屏幕）
+        maxXBound = (mapDisplayWidth - viewportWidth) / 2f;
+        minXBound = -(mapDisplayWidth - viewportWidth) / 2f;
+        maxYBound = (mapDisplayHeight - viewportHeight) / 2f;
+        minYBound = -(mapDisplayHeight - viewportHeight) / 2f;
+        
+        // 计算回弹边界（稍微宽松一些，提供更好的用户体验）
+        float snapMargin = Mathf.Min(160f, Mathf.Min(viewportWidth, viewportHeight) * 0.1f); // 动态计算回弹边距
+        snapMaxX = maxXBound - snapMargin;
+        snapMinX = minXBound + snapMargin;
+        snapMaxY = maxYBound - snapMargin;
+        snapMinY = minYBound + snapMargin;
+        
+        // 确保边界值合理
+        if (maxXBound < 0) maxXBound = 0;
+        if (minXBound > 0) minXBound = 0;
+        if (maxYBound < 0) maxYBound = 0;
+        if (minYBound > 0) minYBound = 0;
+        if (snapMaxX < 0) snapMaxX = 0;
+        if (snapMinX > 0) snapMinX = 0;
+        if (snapMaxY < 0) snapMaxY = 0;
+        if (snapMinY > 0) snapMinY = 0;
+        
+        Debug.Log($"屏幕分辨率: {screenWidth}x{screenHeight}, 视口: {viewportWidth:F0}x{viewportHeight:F0}, 边界: X({minXBound:F0}, {maxXBound:F0}), Y({minYBound:F0}, {maxYBound:F0}), 回弹边距: {snapMargin:F0}");
+    }
+    
+    // 当窗口大小改变时重新计算边界
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            CalculateBounds();
+        }
+    }
+    
+    // 当屏幕方向改变时重新计算边界
+    void OnRectTransformDimensionsChange()
+    {
+        // 延迟一帧执行，确保屏幕尺寸已经更新
+        StartCoroutine(DelayedCalculateBounds());
+    }
+    
+    private IEnumerator DelayedCalculateBounds()
+    {
+        yield return null; // 等待一帧
+        CalculateBounds();
+    }
+    
+    // 添加一个公共方法，供外部调用重新计算边界
+    public void RefreshBounds()
+    {
+        CalculateBounds();
+    }
+    
+    // 初始化地图位置到中心
+    private void InitializeMapPosition()
+    {
+        if (rectTransform != null)
+        {
+            // 将地图居中显示
+            Vector3 centerPosition = Vector3.zero;
+            
+            // 如果地图比屏幕大，则居中显示
+            if (MAP_WIDTH > Screen.width || MAP_HEIGHT > Screen.height)
+            {
+                centerPosition = Vector3.zero; // 默认居中
+            }
+            
+            rectTransform.transform.localPosition = centerPosition;
+        }
+    }
+
+    public void HideLevelInfo()
+    {
+        level1Info.SetActive(false);
+        level2Info.SetActive(false);
+        level3Info.SetActive(false);
+        level4Info.SetActive(false);
+        level5Info.SetActive(false);
+        level6Info.SetActive(false);
+        level7Info.SetActive(false);
+        level8Info.SetActive(false);
+        level9Info.SetActive(false);
+        level10Info.SetActive(false);
+        level11Info.SetActive(false);
+        level12Info.SetActive(false);
+        level13Info.SetActive(false);
+        level14Info.SetActive(false);
+        level15Info.SetActive(false);
+        level16Info.SetActive(false);
+        level17Info.SetActive(false);
+        level18Info.SetActive(false);
+        level19Info.SetActive(false);
+        level20Info.SetActive(false);
+    }
+    
     void Start()
     {
-        initOnStart = loopScrollRect.GetComponent<InitOnStart>();
+        // 计算边界限制
+        CalculateBounds();
+        
+        // 初始化地图位置到中心
+        InitializeMapPosition();
+        
+        //initOnStart = loopScrollRect.GetComponent<InitOnStart>();
         exitButton.onClick.AddListener(() =>
         {
             gameObject.SetActive(false);
@@ -48,21 +344,20 @@ public class GameLevelWindow1 : MonoBehaviour
         });
         breakButton.onClick.AddListener(() =>
         {
-            loopScrollRect.SetActive(false);
+            //loopScrollRect.SetActive(false);
             WindowController.S.Message.SetActive(false);
-            levelInfoRight.gameObject.SetActive(false);
-            levelInfoLeft.gameObject.SetActive(false);
+            HideLevelInfo();
         });
         cancelLeftButton.onClick.AddListener(() =>
         {
-            loopScrollRect.SetActive(false);
+            //loopScrollRect.SetActive(false);
             WindowController.S.Message.SetActive(false);
             levelInfoRight.gameObject.SetActive(false);
             levelInfoLeft.gameObject.SetActive(false);
         });
         cancelRightButton.onClick.AddListener(() =>
         {
-            loopScrollRect.SetActive(false);
+            //loopScrollRect.SetActive(false);
             WindowController.S.Message.SetActive(false);
             levelInfoRight.gameObject.SetActive(false);
             levelInfoLeft.gameObject.SetActive(false);
@@ -87,622 +382,162 @@ public class GameLevelWindow1 : MonoBehaviour
            Debug.Log("点击关卡1");
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 1;
-           loopScrollRect.SetActive(true);
-           Debug.Log(LevelInfoConfig.LevelInfoItem1.DiaoLuoIconList.Count);
-           initOnStart.ReFill(LevelInfoConfig.LevelInfoItem1.DiaoLuoIconList.Count);
-           loopScrollRect.transform.localPosition = LevelInfoConfig.LevelInfoItem1.LoopScrollPos;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem1.LevelType;
-            if (LevelInfoConfig.LevelInfoItem1.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem1.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem1.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem1.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem1.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           HideLevelInfo();
+          level1Info.SetActive(true);
         });
         level2Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡2");
-            WindowController.S.Message.SetActive(false);
-            LevelInfoConfig.CurrentGameLevel = 2;
-            loopScrollRect.SetActive(true);
-            loopScrollRect.transform.localPosition = LevelInfoConfig.LevelInfoItem2.LoopScrollPos;
-           initOnStart.ReFill(LevelInfoConfig.LevelInfoItem2.DiaoLuoIconList.Count);
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem2.LevelType;
-            if (LevelInfoConfig.LevelInfoItem2.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem2.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem2.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem2.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem2.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡2");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 2;
+           HideLevelInfo();
+           level2Info.SetActive(true);
         });
         level3Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡3");
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 3;
-           loopScrollRect.SetActive(true);
-           loopScrollRect.transform.localPosition = LevelInfoConfig.LevelInfoItem3.LoopScrollPos;
-           initOnStart.ReFill(LevelInfoConfig.LevelInfoItem3.DiaoLuoIconList.Count);
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem3.LevelType;
-            if (LevelInfoConfig.LevelInfoItem3.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem3.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem3.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem3.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem3.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           HideLevelInfo();
+           level3Info.SetActive(true);
         });
         level4Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡4");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 4;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem4.LevelType;
-            if (LevelInfoConfig.LevelInfoItem4.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem4.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem4.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem4.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem4.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡4");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 4;
+           HideLevelInfo();
+           level4Info.SetActive(true);
         });
-        
         level5Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡5");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 5;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem5.LevelType;
-            if (LevelInfoConfig.LevelInfoItem5.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem5.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem5.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem5.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem5.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡5");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 5;
+           HideLevelInfo();
+           level5Info.SetActive(true);
         });
-        
         level6Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡6");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 6;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem6.LevelType;
-            if (LevelInfoConfig.LevelInfoItem6.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem6.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem6.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem6.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem6.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡6");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 6;
+           HideLevelInfo();
+           level6Info.SetActive(true);
         });
-        
-        
-        
-        
         level7Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡7");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 7;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem7.LevelType;
-            if (LevelInfoConfig.LevelInfoItem7.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem7.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem7.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem7.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem7.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡7");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 7;
+           HideLevelInfo();
+           level7Info.SetActive(true);
         });
-        
         level8Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡8");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 8;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem8.LevelType;
-            if (LevelInfoConfig.LevelInfoItem8.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem8.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem8.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem8.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem8.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡8");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 8;
+           HideLevelInfo();
+           level8Info.SetActive(true);
         });
-        
         level9Button.onClick.AddListener(() =>
         {
-            Debug.Log("点击关卡9");
-            loopScrollRect.SetActive(true);
-            LevelInfoConfig.CurrentGameLevel = 9;
-            LevelInfoConfig.CurrentGameLevelType = LevelInfoConfig.LevelInfoItem9.LevelType;
-            if (LevelInfoConfig.LevelInfoItem9.LevelInfoDir)
-            {
-                levelInfoRight.SetActive(true);
-                levelInfoRight.transform.localPosition= LevelInfoConfig.LevelInfoItem9.LevelInfoPos;
-                levelInfoLeft.SetActive(false);
-                switch (LevelInfoConfig.LevelInfoItem9.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(false);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterRight1.SetActive(true);
-                        monsterRight2.SetActive(true);
-                        monsterRight3.SetActive(true);
-                        monsterRight4.SetActive(true);
-                        monsterRight5.SetActive(true);
-                        break;
-                }
-            }
-            else
-            {
-                levelInfoRight.SetActive(false);
-                levelInfoLeft.transform.localPosition= LevelInfoConfig.LevelInfoItem9.LevelInfoPos;
-                levelInfoLeft.SetActive(true);
-                switch (LevelInfoConfig.LevelInfoItem9.LevelType)
-                {
-                    case LevelType.Normal:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(false);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Elite:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(false);
-                        break;
-                    case LevelType.Boss:
-                        monsterLeft1.SetActive(true);
-                        monsterLeft2.SetActive(true);
-                        monsterLeft3.SetActive(true);
-                        monsterLeft4.SetActive(true);
-                        monsterLeft5.SetActive(true);
-                        break;
-                }
-            }
+           Debug.Log("点击关卡9");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 9;
+           HideLevelInfo();
+           level9Info.SetActive(true);
         });
+        level10Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡10");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 10;
+           HideLevelInfo();
+           level10Info.SetActive(true);
+        });
+        level11Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡11");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 11;
+           HideLevelInfo();
+           level11Info.SetActive(true);
+        });
+        level12Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡12");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 12;
+           HideLevelInfo();
+           level12Info.SetActive(true);
+        });
+        level13Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡13");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 13;
+           HideLevelInfo();
+           level13Info.SetActive(true);
+        });
+        level14Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡14");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 14;
+           HideLevelInfo();
+           level14Info.SetActive(true);
+        });
+        level15Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡15");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 15;
+           HideLevelInfo();
+           level15Info.SetActive(true);
+        });
+        level16Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡16");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 16;
+           HideLevelInfo();
+           level16Info.SetActive(true);
+        });
+        level17Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡17");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 17;
+           HideLevelInfo();
+           level17Info.SetActive(true);
+        });
+        level18Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡18");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 18;
+           HideLevelInfo();
+           level18Info.SetActive(true);
+        });
+        level19Button.onClick.AddListener(() =>
+        {
+           Debug.Log("点击关卡19");
+           WindowController.S.Message.SetActive(false);
+           LevelInfoConfig.CurrentGameLevel = 19;
+           HideLevelInfo();
+           level19Info.SetActive(true);
+        });
+        level20Button.onClick.AddListener(() =>
+        {
+            Debug.Log("点击关卡20");
+            WindowController.S.Message.SetActive(false);
+            LevelInfoConfig.CurrentGameLevel = 20;
+            HideLevelInfo();
+            level20Info.SetActive(true);
+        });
+        
     }
 
     // Update is called once per frame

@@ -22,6 +22,7 @@ public class CameraContraller : XSingleton<CameraContraller>
         ObserverModuleManager.S.RegisterEvent(ConstKeys.CameraMoveToBoss, OnCameraMoveBegin);
     }
 
+    //创建boss
     public void CreateBoss()
     {
         GameController.S.HaveBoss = true;
@@ -31,15 +32,23 @@ public class CameraContraller : XSingleton<CameraContraller>
              FightBGController.S.TreeManBoss.gameObject.SetActive(true);
              //GameObject treeManBoss=Instantiate(Resources.Load("Prefabs/Monster/TreeManBOSS"), new Vector3(transform.position.x,transform.position.y,-0.1f), Quaternion.identity).GameObject();
              SkeletonAnimation sk=FightBGController.S.TreeManBoss.transform.Find("TreeManSkeleton").GetComponent<SkeletonAnimation>();
+             FightBGController.S.TreeManBoss.IsSkill = true;
              sk.AnimationState.SetAnimation(0,"Exit",false);
              FightBGController.S.TreeManBoss.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
         if (LevelInfoConfig.CurrentGameLevel == 6)
         {
             ObserverModuleManager.S.SendEvent(ConstKeys.Resumemonster,null);
-            HuoShanBoss huoShanBoss = Instantiate(Resources.Load<HuoShanBoss>("Prefabs/Monster/HuoShanBoss"));
+            HuoShanBoss huoShanBoss = Instantiate(Resources.Load<HuoShanBoss>("Prefabs/Monster/Level2/HuoShanBOSS"));
             huoShanBoss.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
             huoShanBoss.transform.Find("SkeletonAnimation").GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0,"walk",true);
+        }
+        if (LevelInfoConfig.CurrentGameLevel == 9)
+        {
+            ObserverModuleManager.S.SendEvent(ConstKeys.Resumemonster,null);
+            StoneBoss stoneboss = Instantiate(Resources.Load<StoneBoss>("Prefabs/Monster/Level3/StoneBOSS"));
+            stoneboss.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            stoneboss.transform.Find("SkeletonAnimation").GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0,"walk",true);
         }
        
     }

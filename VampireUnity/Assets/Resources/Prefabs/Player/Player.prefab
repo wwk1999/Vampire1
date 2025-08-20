@@ -361,9 +361,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15245676, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20.129354
+  m_Radius: 20
 --- !u!1 &1217837118297242970
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +602,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.05445957, y: 0}
   serializedVersion: 2
-  m_Radius: 39.74059
+  m_Radius: 40
 --- !u!1 &3716569397113876968
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,9 +831,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.32176018, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 53.81899
+  m_Radius: 54
 --- !u!114 &1424585945755539753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1411,7 @@ MonoBehaviour:
   hpSlider: {fileID: 7866220094337703238}
   exSlider: {fileID: 4220936483113259277}
   levelText: {fileID: 7409264203421725438}
+  size: 0.28
 --- !u!50 &2162024196908307096
 Rigidbody2D:
   serializedVersion: 4

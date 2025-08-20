@@ -8,11 +8,12 @@ public class EquipAttributePanel : MonoBehaviour
     public Button exitButton;
     public Button installButton;
     public Button sellButton;
-    [NonSerialized]public int CurrentequipId;
+    [NonSerialized]public TableBase tableBase;
+
+    [NonSerialized] public GameObject BagGrid;//背包格子
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log($"EquipAttributePanel.Start: 初始化装备属性面板，装备ID: {CurrentequipId}");
         
         // 退出按钮
         if (exitButton != null)
@@ -57,40 +58,39 @@ public class EquipAttributePanel : MonoBehaviour
             
             installButton.onClick.AddListener(() =>
             {
-                Debug.Log($"EquipAttributePanel: 点击了装备按钮，装备ID: {CurrentequipId}");
-                
                 try
                 {
-                    //获取equipid的第一个数字
-                    int equiptype = CurrentequipId / 10000000;
+                    EquipTable equip = (EquipTable)tableBase;
+                    EquipServer.S.WearPlayerEquipRequest(equip.equip_type_name, equip.equipid);
+                    int equiptype = equip.equip_type_id;
                     switch (equiptype)
                     {
-                        case 4:
+                        case 2:
                             //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerClothAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallCloth(CurrentequipId);
-                            break;
-                        case 5:
-                            //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerShoeAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallShoe(CurrentequipId);
+                            BagController.S.PlayerClothAttribute = equip;
+                            BagController.S.InstallCloth(equip);
                             break;
                         case 6:
                             //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerRingAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallRing(CurrentequipId);
+                            BagController.S.PlayerShoeAttribute = equip;
+                            BagController.S.InstallShoe(equip);
                             break;
-                        case 7:
-                            BagController.S.PlayerNecklaceAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallNecklace(CurrentequipId);
+                        case 5:
+                            //将这个装备的属性传到Bagtroller
+                            BagController.S.PlayerRingAttribute =equip;
+                            BagController.S.InstallRing(equip);
                             break;
-                        case 8:
-                            BagController.S.PlayerHelmetAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallHelmet(CurrentequipId);
+                        case 4:
+                            BagController.S.PlayerNecklaceAttribute = equip;
+                            BagController.S.InstallNecklace(equip);
                             break;
-                        case 9:
-                            BagController.S.PlayerCloakAttribute = BagController.S.EquipidTable[CurrentequipId];
-                            BagController.S.InstallCloak(CurrentequipId);
+                        case 3:
+                            BagController.S.PlayerHelmetAttribute = equip;
+                            BagController.S.InstallHelmet(equip);
+                            break;
+                        case 1:
+                            BagController.S.PlayerCloakAttribute = equip;
+                            BagController.S.InstallCloak(equip);
                             break;
                     }
                     BagController.S.ComputeEquipAttribute();
@@ -107,11 +107,39 @@ public class EquipAttributePanel : MonoBehaviour
                 }
             });
         }
+        sellButton.onClick.AddListener(() =>
+        {
+            BagGrid.transform.Find("EquipGridBG").GetComponent<Image>().color =new Color(1, 1, 1, 0);
+            BagGrid.transform.Find("BagGridImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            BagGrid.transform.Find("Count").GetComponent<Text>().text = null;
+            EquipTable equip = (EquipTable)tableBase;
+            BagController.S.EquipIdList.Remove(equip);
+            switch (equip.Quality)
+            {
+                case 1:
+                    BagController.S.WhiteEquipidTable.Remove(equip);
+                    break;
+                case 2:
+                    BagController.S.GreenEquipidTable.Remove(equip);
+                    break;
+                case 3:
+                    BagController.S.BlueEquipidTable.Remove(equip);
+                    break;
+                case 4:
+                    BagController.S.PurpleEquipidTable.Remove(equip);
+                    break;
+                case 5:
+                    BagController.S.OrangeEquipidTable.Remove(equip);
+                    break;
+            }
+            EquipServer.S.SendRemoveEquipRequest(equip.equipid);
+            Destroy(gameObject);
+        });
         
         // 出售按钮
         if (sellButton != null)
         {
-            // 暂不实现
+            
         }
     }
 

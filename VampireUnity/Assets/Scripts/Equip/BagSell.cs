@@ -65,31 +65,23 @@ public class BagSell : MonoBehaviour
                 return;
             }
             
-            // 收集所有需要删除的装备ID
-            List<int> equipIdsToRemove = new List<int>();
-            
-            // 添加所有要删除的白色装备
-            if (IsSellWhite)
-            {
-                equipIdsToRemove.AddRange(BagController.S.WhiteEquipidTable.Keys);
-            }
-            
-            // 添加所有要删除的绿色装备
-            if (IsSellGreen)
-            {
-                equipIdsToRemove.AddRange(BagController.S.GreenEquipidTable.Keys);
-            }
-            
-            // 添加所有要删除的蓝色装备
-            if (IsSellBlue)
-            {
-                equipIdsToRemove.AddRange(BagController.S.BlueEquipidTable.Keys);
-            }
-            
+            int[] qualitys = new int[10];
+            int index = 0;
+            if (IsSellWhite) qualitys[index++] = 1;
+            if (IsSellGreen) qualitys[index++] = 2;
+            if (IsSellBlue) qualitys[index++] = 3;
             // 使用新方法一次性处理所有装备
-            BagController.S.SellAllSelectedEquips(equipIdsToRemove, IsSellWhite, IsSellGreen, IsSellBlue);
-            
-            BagController.S.EquipSort();
+            if (BagController.S.bag.GetComponent<BagPanel>().currentBagType == 1)
+            {
+                EquipServer.S.BatchRemoveEquipRequest(qualitys);
+                BagController.S.SellAllSelectedEquips(IsSellWhite, IsSellGreen, IsSellBlue);
+            }
+            else if(BagController.S.bag.GetComponent<BagPanel>().currentBagType == 2)
+            {
+                EquipServer.S.BatchRemoveSourceStoneRequest(qualitys);
+                BagController.S.SellAllSelectedSourceStones(IsSellWhite, IsSellGreen, IsSellBlue);
+            }
+            BagController.S.ShowEquip();
         });
     }
 }

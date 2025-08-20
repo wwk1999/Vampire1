@@ -22,7 +22,7 @@ public class GlobalPlayerAttribute
    public static int PlayerCRIT=0;
    public static int PlayerCRITDamage=0;
    public static int PlayerBloodSuck=0;
-   public static int PlayerDenfense=0;
+   public static int PlayerDefense=0;
    public static int PlayerGoodFortune=0;
    
    //装备属性
@@ -33,7 +33,7 @@ public class GlobalPlayerAttribute
    public static int EquipCRIT=0;
    public static int EquipCRITDamage=0;
    public static int EquipBloodSuck=0;
-   public static int EquipDenfense=0;
+   public static int EquipDefense=0;
    public static int EquipGoodFortune=0;
    
    //总属性
@@ -44,6 +44,6 @@ public class GlobalPlayerAttribute
    public static int TotalCRIT => PlayerCRIT + EquipCRIT;
    public static int TotalCRITDamage => PlayerCRITDamage + EquipCRITDamage;
    public static int TotalBloodSuck => PlayerBloodSuck + EquipBloodSuck;
-   public static int TotalDenfense => PlayerDenfense + EquipDenfense;
+   public static int TotalDefense => PlayerDefense + EquipDefense;
    public static int TotalGoodFortune => PlayerGoodFortune + EquipGoodFortune;
 }

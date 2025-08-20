@@ -9,6 +9,16 @@ public class BagPanel : MonoBehaviour
     public GameObject mask;// mask层
     public Button detailedAttributesExitButton;
     
+    public GameObject playerPanel;// 玩家属性面板
+    public GameObject playerCloth;// 玩家属性面板
+    public GameObject playerCloak;// 玩家属性面板
+    public GameObject playerHelmet;// 玩家属性面板
+    public GameObject playerRing;// 玩家属性面板
+    public GameObject playerShoe;// 玩家属性面板
+    public GameObject playerNecklace;// 玩家属性面板
+
+    public GameObject attributePanel;// 玩家属性面板
+    
     //属性面板text
     public Text damageText;// 攻击力文本
     public Text critText;// 暴击率文本
@@ -41,10 +51,40 @@ public class BagPanel : MonoBehaviour
 
     public Button sortButton;
 
+    public GameObject content;
+    
+    
+    public Button equipButton; // 装备按钮
+    public Button sourcestonebutton; // 源石按钮
+    public Button propbutton; // 道具按钮
+    [NonSerialized] public int currentBagType = 1;//1是装备，2是源石，3是道具
+
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        equipButton.onClick.AddListener(() =>
+        {
+            BagController.S.PageNum = 1;
+            currentBagType = 1;
+            BagController.S.ShowEquip();
+        });
+        
+        sourcestonebutton.onClick.AddListener(() =>
+        {
+            BagController.S.PageNum = 1;
+            currentBagType = 2;
+            BagController.S.ShowEquip();
+
+        });
+        
+        propbutton.onClick.AddListener(() =>
+        {
+            BagController.S.PageNum = 1;
+            currentBagType = 3;
+            BagController.S.ShowEquip();
+        });
         
         
         detailedAttributesButton.onClick.AddListener(() =>
@@ -52,7 +92,7 @@ public class BagPanel : MonoBehaviour
             mask.SetActive(true);
             playerDamageAttributeText.text=GlobalPlayerAttribute.TotalDamage.ToString();
             playerHPAttributeText.text=GlobalPlayerAttribute.TotalMaxHp.ToString();
-            playerDefenseAttributeText.text=GlobalPlayerAttribute.TotalDenfense.ToString();
+            playerDefenseAttributeText.text=GlobalPlayerAttribute.TotalDefense.ToString();
             playerCRITAttributeText.text=GlobalPlayerAttribute.TotalCRIT.ToString();
             playerCRITDamageAttributeText.text=GlobalPlayerAttribute.TotalCRITDamage.ToString();
             playerMoveSpeedAttributeText.text=GlobalPlayerAttribute.TotalMoveSpeed.ToString();
@@ -68,7 +108,7 @@ public class BagPanel : MonoBehaviour
             detailedAttributesPanel.SetActive(false);
         });
         
-        pageText = transform.Find("BagPanel/EquipPanel/PageNumText").GetComponent<Text>();
+      //  pageText = transform.Find("Mask/BagBg/BagBG (1)/EquipPanel/PageNumText").GetComponent<Text>();
         leftPageButton.onClick.AddListener(() =>
         {
             BagController.S.PageNum= Mathf.Max(1, BagController.S.PageNum - 1);
@@ -81,21 +121,21 @@ public class BagPanel : MonoBehaviour
             BagController.S.ShowEquip();
             pageText.text = BagController.S.PageNum.ToString();
         });
-        sortButton.onClick.AddListener(() =>
-        {
-            BagController.S.EquipSort();
-        });
-        playerButton.onClick.AddListener(() =>
-        {
-            BagController.S.ShowPlayerPanel();
-        });
+        // sortButton.onClick.AddListener(() =>
+        // {
+        //     BagController.S.EquipSort();
+        // });
+        // playerButton.onClick.AddListener(() =>
+        // {
+        //     BagController.S.ShowPlayerPanel();
+        // });
         attributeButton.onClick.AddListener(() =>
         {
             //BagController.S.ComputeTotalAttribute();
             BagController.S.ShowAttributePanel();
             playerDamageAttributeText.text=GlobalPlayerAttribute.TotalDamage.ToString();
             playerHPAttributeText.text=GlobalPlayerAttribute.TotalMaxHp.ToString();
-            playerDefenseAttributeText.text=GlobalPlayerAttribute.TotalDenfense.ToString();
+            playerDefenseAttributeText.text=GlobalPlayerAttribute.TotalDefense.ToString();
             playerCRITAttributeText.text=GlobalPlayerAttribute.TotalCRIT.ToString();
             playerCRITDamageAttributeText.text=GlobalPlayerAttribute.TotalCRITDamage.ToString();
             playerMoveSpeedAttributeText.text=GlobalPlayerAttribute.TotalMoveSpeed.ToString();

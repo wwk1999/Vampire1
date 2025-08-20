@@ -10,9 +10,13 @@ public class IceBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.CompareTag("Monster")||other.CompareTag("Boss"))&&other.GetComponent<MonsterBase>())
+        if (other.CompareTag("Monster")||other.CompareTag("Boss"))
         {
-            other.GetComponent<MonsterBase>().Hurt(GlobalPlayerAttribute.TotalDamage);
+            MonsterBase monster = other.transform.parent.GetComponent<MonsterBase>();
+            if (monster != null && !monster.IsDead)
+            {
+                monster.Hurt(GlobalPlayerAttribute.TotalDamage);
+            }
         }
     }
 

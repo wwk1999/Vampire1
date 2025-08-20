@@ -4,5 +4,5 @@ public class GlobalUserInfo : MonoBehaviour
 {
     public static int Userid;
     public static string UserName;
-    public static string PassWard;
+    public static string PassWord;
 }
