@@ -26,7 +26,7 @@ public class CameraContraller : XSingleton<CameraContraller>
     public void CreateBoss()
     {
         GameController.S.HaveBoss = true;
-        if (LevelInfoConfig.CurrentGameLevel == 3)
+        if (LevelInfoConfig.CurrentGameLevel == 4)
         {
              FightBGController.S.TreeManBoss.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
              FightBGController.S.TreeManBoss.gameObject.SetActive(true);
@@ -36,14 +36,14 @@ public class CameraContraller : XSingleton<CameraContraller>
              sk.AnimationState.SetAnimation(0,"Exit",false);
              FightBGController.S.TreeManBoss.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
-        if (LevelInfoConfig.CurrentGameLevel == 6)
+        if (LevelInfoConfig.CurrentGameLevel == 8)
         {
             ObserverModuleManager.S.SendEvent(ConstKeys.Resumemonster,null);
             HuoShanBoss huoShanBoss = Instantiate(Resources.Load<HuoShanBoss>("Prefabs/Monster/Level2/HuoShanBOSS"));
             huoShanBoss.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
             huoShanBoss.transform.Find("SkeletonAnimation").GetComponent<SkeletonAnimation>().AnimationState.SetAnimation(0,"walk",true);
         }
-        if (LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 12)
         {
             ObserverModuleManager.S.SendEvent(ConstKeys.Resumemonster,null);
             StoneBoss stoneboss = Instantiate(Resources.Load<StoneBoss>("Prefabs/Monster/Level3/StoneBOSS"));

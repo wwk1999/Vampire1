@@ -95,7 +95,7 @@ public class Entrance : MonoBehaviour
 
         
         //初始化怪物队列
-        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3)
+        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel == 4)
         {
             for (int i = 0; i < 100; i++)
             {
@@ -128,7 +128,7 @@ public class Entrance : MonoBehaviour
             }
         }
         
-        if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel == 5 || LevelInfoConfig.CurrentGameLevel == 6)
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 5 || LevelInfoConfig.CurrentGameLevel == 6|| LevelInfoConfig.CurrentGameLevel == 8)
         {
             for (int i = 0; i < 100; i++)
             {
@@ -168,8 +168,8 @@ public class Entrance : MonoBehaviour
         }
 
 
-        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 ||
-            LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 11 || LevelInfoConfig.CurrentGameLevel == 10 ||
+            LevelInfoConfig.CurrentGameLevel == 9|| LevelInfoConfig.CurrentGameLevel == 12)
         {
             for (int i = 0; i < 100; i++)
             {
@@ -198,7 +198,7 @@ public class Entrance : MonoBehaviour
         
 
         //精英怪队列
-        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3)
+        if (LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel == 4)
         {
             for (int i = 0; i < 15; i++)
             {
@@ -220,7 +220,7 @@ public class Entrance : MonoBehaviour
             }
         }
 
-        if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel == 5|| LevelInfoConfig.CurrentGameLevel == 6)
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8)
         {
             for (int i = 0; i < 15; i++)
             {
@@ -233,8 +233,7 @@ public class Entrance : MonoBehaviour
             }
         }
 
-        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 ||
-            LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 11 || LevelInfoConfig.CurrentGameLevel == 12)
         {
             for (int i = 0; i < 15; i++)
             {

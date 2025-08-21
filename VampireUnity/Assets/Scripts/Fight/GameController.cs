@@ -286,17 +286,17 @@ public class GameController : XSingleton<GameController>
     {
        
         if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 ||
-            LevelInfoConfig.CurrentGameLevel == 3)
+            LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel == 4)
         {
             transform.Find("FightBG(Clone)/Level1").gameObject.SetActive(true);
         }
-        if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel == 5 ||
-            LevelInfoConfig.CurrentGameLevel == 6)
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 5 ||
+            LevelInfoConfig.CurrentGameLevel == 6|| LevelInfoConfig.CurrentGameLevel == 8)
         {
             transform.Find("FightBG(Clone)/Level2").gameObject.SetActive(true);
         }
-        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 ||
-            LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 10 || LevelInfoConfig.CurrentGameLevel == 11 ||
+            LevelInfoConfig.CurrentGameLevel == 9|| LevelInfoConfig.CurrentGameLevel == 12)
         {
             transform.Find("FightBG(Clone)/Level3").gameObject.SetActive(true);
         }
@@ -500,21 +500,18 @@ public class GameController : XSingleton<GameController>
         Transform monsterRandomPoint= null;
         switch (LevelInfoConfig.CurrentGameLevel)
         {
-            case 1:
-            case 2:
             case 3:
+            case 4:
                 monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints1.Length);
                 monsterRandomPoint = MonsterBirthPoints1[monsterRandomIndex];
                 break;
-            case 4:
-            case 5:
-            case 6:
+            case 7:
+            case 8:
                 monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints2.Length);
                 monsterRandomPoint = MonsterBirthPoints2[monsterRandomIndex];
                 break;
-            case 7:
-            case 8:
-            case 9:
+            case 11:
+            case 12:
                 monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints3.Length);
                 monsterRandomPoint = MonsterBirthPoints3[monsterRandomIndex];
                 break;
@@ -524,7 +521,7 @@ public class GameController : XSingleton<GameController>
         // //获取随机选择的子物体    
         // Transform monsterRandomPoint = MonsterBirthPoints1[monsterRandomIndex];
         
-        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3)
+        if ( LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel ==4)
         {
             EliteBeeMonster eliteBeeMonster = EliteBeeMonsterQueue.Dequeue();
             eliteBeeMonster.gameObject.SetActive(true);
@@ -538,7 +535,7 @@ public class GameController : XSingleton<GameController>
             beeMonsterSkillTrigger.BeeMonster = eliteBeeMonster;
             beeMonsterSkillTrigger.gameObject.SetActive(true);
         }
-        if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel ==5 || LevelInfoConfig.CurrentGameLevel ==6)
+        if ( LevelInfoConfig.CurrentGameLevel ==7 || LevelInfoConfig.CurrentGameLevel ==8)
         {
             EliteDaZuiMonster eliteDaZuiMonster = EliteDaZuiMonsterQueue.Dequeue();
             eliteDaZuiMonster.gameObject.SetActive(true);
@@ -558,8 +555,7 @@ public class GameController : XSingleton<GameController>
             daZuiSkillTriggerRight.gameObject.SetActive(true);
         }
 
-        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 ||
-            LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 11 || LevelInfoConfig.CurrentGameLevel == 12 )
         {
             ShiRenHuaMonster shirenhuaMonster = ShiRenHuaMonsterQueue.Dequeue();
             shirenhuaMonster.gameObject.SetActive(true);
@@ -589,7 +585,7 @@ public class GameController : XSingleton<GameController>
         //     eliteBeeMonster.gameObject.SetActive(true);
         //     eliteBeeMonster.transform.position = monsterRandomPoint.position;
         // }
-        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3)
+        if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 || LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel == 4)
         {
             int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints1.Length);
             Transform monsterRandomPoint = MonsterBirthPoints1[monsterRandomIndex];
@@ -627,7 +623,7 @@ public class GameController : XSingleton<GameController>
             }
         }
 
-        if (LevelInfoConfig.CurrentGameLevel == 4 || LevelInfoConfig.CurrentGameLevel == 5 || LevelInfoConfig.CurrentGameLevel == 6)
+        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 5 || LevelInfoConfig.CurrentGameLevel == 6|| LevelInfoConfig.CurrentGameLevel == 8)
         {
             int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints2.Length);
             Transform monsterRandomPoint = MonsterBirthPoints2[monsterRandomIndex];
@@ -662,7 +658,7 @@ public class GameController : XSingleton<GameController>
         }
         
         
-        if (LevelInfoConfig.CurrentGameLevel == 7 || LevelInfoConfig.CurrentGameLevel == 8 || LevelInfoConfig.CurrentGameLevel == 9)
+        if (LevelInfoConfig.CurrentGameLevel == 11 || LevelInfoConfig.CurrentGameLevel == 10 || LevelInfoConfig.CurrentGameLevel == 9|| LevelInfoConfig.CurrentGameLevel == 12)
         {
             int monsterRandomIndex = UnityEngine.Random.Range(1, MonsterBirthPoints3.Length);
             Transform monsterRandomPoint = MonsterBirthPoints3[monsterRandomIndex];
