@@ -300,6 +300,16 @@ public class GameController : XSingleton<GameController>
         {
             transform.Find("FightBG(Clone)/Level3").gameObject.SetActive(true);
         }
+        if (LevelInfoConfig.CurrentGameLevel == 13 || LevelInfoConfig.CurrentGameLevel == 14 ||
+            LevelInfoConfig.CurrentGameLevel == 15|| LevelInfoConfig.CurrentGameLevel == 16)
+        {
+            transform.Find("FightBG(Clone)/Level4").gameObject.SetActive(true);
+        }
+        if (LevelInfoConfig.CurrentGameLevel == 17 || LevelInfoConfig.CurrentGameLevel == 18 ||
+            LevelInfoConfig.CurrentGameLevel == 19|| LevelInfoConfig.CurrentGameLevel == 20)
+        {
+            transform.Find("FightBG(Clone)/Level5").gameObject.SetActive(true);
+        }
         
         
         //赋值

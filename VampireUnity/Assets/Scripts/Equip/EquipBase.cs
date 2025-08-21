@@ -44,6 +44,25 @@ public class EquipBase : BagObjectBase
         rb.velocity = Vector2.zero;
         //设置重力为0
         rb.gravityScale = 0;
+        //开启协程通过transformer让装备上下浮动效果,lerp平滑过渡
+        StartCoroutine(FloatEffect());
+        
+    }
+    
+    private IEnumerator FloatEffect()
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = startPosition + new Vector3(0, 0.2f, 0);
+        float duration = 0.8f; // 浮动持续时间
+
+        while (true)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.PingPong(elapsedTime / duration, 1f);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
     }
 
     private void Update()
