@@ -194,8 +194,10 @@
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\SpiderMonster.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第三关\WenZiMonster.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanSkill2.cs" />
+    <Compile Include="Assets\Scripts\WeaponSourceStone\SourceStoneItem.cs" />
     <Compile Include="Assets\Scripts\Equip\Blue\BlueNecklace.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMove.cs" />
+    <Compile Include="Assets\Scripts\WeaponSourceStone\SourceStoneKong.cs" />
     <Compile Include="Assets\Scripts\Config\FriendConfig.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\EliteDaZuiMonster.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\Division.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Assets\Scripts\Fight\Monster\第三关\ShiRenHuaMonster.cs" />
     <Compile Include="Assets\Scripts\Equip\HuoShanBoss\HuoShanNecklace.cs" />
     <Compile Include="Assets\Scripts\Equip\TreeMan\TreeManHelmet.cs" />
+    <Compile Include="Assets\Scripts\WeaponSourceStone\SourceStoneWindow.cs" />
     <Compile Include="Assets\Scripts\Server\EquipServer.cs" />
     <Compile Include="Assets\Scripts\Gloabl\GlobalUserInfo.cs" />
     <Compile Include="Assets\Scripts\Fight\Player\Player.cs" />

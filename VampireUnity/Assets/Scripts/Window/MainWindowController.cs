@@ -15,6 +15,7 @@ public class MainWindowController : MonoBehaviour
         LevelInfoConfig.init();
         AudioController.S.BGAudioSource.Play(); 
         LevelInfoConfig.InitGameLevel();
+        WeaponSourceConfig.InitWeaponSourceConfig();
     }
 
     // Update is called once per frame

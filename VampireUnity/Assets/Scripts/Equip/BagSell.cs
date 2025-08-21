@@ -78,7 +78,7 @@ public class BagSell : MonoBehaviour
             }
             else if(BagController.S.bag.GetComponent<BagPanel>().currentBagType == 2)
             {
-                EquipServer.S.BatchRemoveSourceStoneRequest(qualitys);
+                SourceStoneServer.S.BatchRemoveSourceStoneRequest(qualitys);
                 BagController.S.SellAllSelectedSourceStones(IsSellWhite, IsSellGreen, IsSellBlue);
             }
             BagController.S.ShowEquip();

@@ -60,6 +60,34 @@ public class ResourcesConfig : MonoBehaviour
     public static Sprite WhitePenetrate;
     public static Sprite WhiteScale;
     
+    public static Sprite GreenDivision;
+    public static Sprite GreenDuration;
+    public static Sprite GreenExplosion;
+    public static Sprite GreenExtremeSpeed;
+    public static Sprite GreenPenetrate;
+    public static Sprite GreenScale;
+    
+    public static Sprite BlueDivision;
+    public static Sprite BlueDuration;
+    public static Sprite BlueExplosion;
+    public static Sprite BlueExtremeSpeed;
+    public static Sprite BluePenetrate;
+    public static Sprite BlueScale;
+    
+    public static Sprite PurpleDivision;
+    public static Sprite PurpleDuration;
+    public static Sprite PurpleExplosion;
+    public static Sprite PurpleExtremeSpeed;
+    public static Sprite PurplePenetrate;
+    public static Sprite PurpleScale;
+    
+    public static Sprite OrangeDivision;
+    public static Sprite OrangeDuration;
+    public static Sprite OrangeExplosion;
+    public static Sprite OrangeExtremeSpeed;
+    public static Sprite OrangePenetrate;
+    public static Sprite OrangeScale;
+    
     //关卡界面怪物icon
     public static Sprite SnotIcon;
     public static Sprite BatIcon;
@@ -73,12 +101,22 @@ public class ResourcesConfig : MonoBehaviour
     public static Sprite BlueBg;
     public static Sprite PurpleBg;
     public static Sprite OrangeBg;
-
+    
+    //武器
+    public static Sprite OneWeapon;
+    public static Sprite TwoWeapon;
+    public static Sprite ThreeWeapon;
+    public static Sprite FourWeapon;
 
 
 
     public static void Init()
     {
+        //武器
+        OneWeapon = Resources.Load<Sprite>("Sprite/Weapon/OneWeapon");
+        TwoWeapon = Resources.Load<Sprite>("Sprite/Weapon/TwoWeapon");
+        ThreeWeapon = Resources.Load<Sprite>("Sprite/Weapon/ThreeWeapon");
+        FourWeapon = Resources.Load<Sprite>("Sprite/Weapon/FourWeapon");
         //颜色背景
         WhiteBg= Resources.Load<Sprite>("Sprite/ColorBg/EquipWhiteBG");
         GreenBg= Resources.Load<Sprite>("Sprite/ColorBg/EquipGreenBG");
@@ -135,12 +173,42 @@ public class ResourcesConfig : MonoBehaviour
         ZhaoZeNecklace = Resources.Load<Sprite>("Sprite/Equip/ZhaoZeNecklace");
         
         //武器源石
-        WhiteDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/Division");
-        WhiteDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/Duration");
-        WhiteExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/Explosion");
-        WhiteExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/ExtremeSpeed");
-        WhitePenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/Penetrate");
-        WhiteScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/Scale");
+        WhiteDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhiteDivision");
+        WhiteDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhiteDuration");
+        WhiteExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhiteExplosion");
+        WhiteExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhiteExtremeSpeed");
+        WhitePenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhitePenetrate");
+        WhiteScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/WhiteScale");
+        
+        // GreenDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenDivision");
+        // GreenDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenDuration");
+        // GreenExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenExplosion");
+        // GreenExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenExtremeSpeed");
+        // GreenPenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenPenetrate");
+        // GreenScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/GreenScale");
+        //
+        // BlueDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BlueDivision");
+        // BlueDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BlueDuration");
+        // BlueExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BlueExplosion");
+        // BlueExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BlueExtremeSpeed");
+        // BluePenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BluePenetrate");
+        // BlueScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/BlueScale");
+        //
+        // PurpleDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurpleDivision");
+        // PurpleDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurpleDuration");
+        // PurpleExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurpleExplosion");
+        // PurpleExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurpleExtremeSpeed");
+        // PurplePenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurplePenetrate");
+        // PurpleScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/PurpleScale");
+        //
+        // OrangeDivision = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangeDivision");
+        // OrangeDuration = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangeDuration");
+        // OrangeExplosion = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangeExplosion");
+        // OrangeExtremeSpeed = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangeExtremeSpeed");
+        // OrangePenetrate = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangePenetrate");
+        // OrangeScale = Resources.Load<Sprite>("Sprite/WeaponSourceStone/OrangeScale");
+        
+        
         
         //关卡界面怪物icon
         SnotIcon = Resources.Load<Sprite>("Sprite/LevelMonsterIcon/Snot");

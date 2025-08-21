@@ -20,10 +20,6 @@ public class BatchRemoveEquipData
     public int[] equipids { get; set; }
 }
 
-public class BatchRemoveSourceStoneData
-{
-    public int[] ids { get; set; }
-}
 
 public class EquipServer : XSingleton<EquipServer>
 {
@@ -186,40 +182,4 @@ public class EquipServer : XSingleton<EquipServer>
         return true;
     }
     
-    
-    public async Task<bool> BatchRemoveSourceStoneRequest(int[] ids)
-    {
-        int count = 0;
-        int[] ids1=new int[100];
-        foreach (var item in ids)
-        {
-            foreach (var t in BagController.S.SourceStoneTable)
-            {
-                if (t.Quality == item)
-                {
-                    ids1[count] = t.SourceStoneId;
-                    count++;
-                }
-            }
-        }
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var BatchRemoveSourceStoneRequest = new GameRequest
-        {
-            type = "usersourcestone",
-            action = "batchDeleteUserSourceStone",
-            data = new BatchRemoveSourceStoneData
-            {
-                ids = ids1
-            },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await ServerConnect.S.SendMessageAsync(BatchRemoveSourceStoneRequest);
-        return true;
-    }
 }
