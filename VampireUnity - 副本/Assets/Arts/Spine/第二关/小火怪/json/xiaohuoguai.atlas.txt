@@ -1,0 +1,13 @@
+xiaohuoguai.png
+size:332,332
+filter:Linear,Linear
+pma:true
+huo
+bounds:70,141,193,189
+tou
+bounds:265,254,76,65
+offsets:1,1,78,67
+rotate:90
+yingzi
+bounds:2,300,146,30
+offsets:1,2,149,33
