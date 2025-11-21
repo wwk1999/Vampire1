@@ -1,0 +1,157 @@
+using System;
+using Mysql;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class EquipAttributePanel : MonoBehaviour
+{
+    public Button exitButton;
+    public Button installButton;
+    public Button sellButton;
+    [NonSerialized]public TableBase tableBase;
+
+    [NonSerialized] public GameObject BagGrid;//背包格子
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+        // 退出按钮
+        if (exitButton != null)
+        {
+            // 移除旧的监听器
+            exitButton.onClick.RemoveAllListeners();
+            
+            exitButton.onClick.AddListener(() =>
+            {
+                Debug.Log("EquipAttributePanel: 点击了退出按钮");
+                
+                try
+                {
+                    // 先销毁蒙层，再销毁自身
+                    if (BagController.S != null)
+                    {
+                        BagController.S.DestroyMaskLayer();
+                    }
+                    else
+                    {
+                        Debug.LogError("EquipAttributePanel: BagController.S为null");
+                    }
+                    
+                    Destroy(gameObject);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError($"EquipAttributePanel: 退出按钮异常: {e.Message}\n{e.StackTrace}");
+                }
+            });
+        }
+        else
+        {
+            Debug.LogError("EquipAttributePanel: exitButton为null");
+        }
+        
+        // 装备按钮
+        if (installButton != null)
+        {
+            // 移除旧的监听器
+            installButton.onClick.RemoveAllListeners();
+            
+            installButton.onClick.AddListener(() =>
+            {
+                try
+                {
+                    EquipTable equip = (EquipTable)tableBase;
+                    EquipServer.S.WearPlayerEquipRequest(equip.equip_type_name, equip.equipid);
+                    int equiptype = equip.equip_type_id;
+                    switch (equiptype)
+                    {
+                        case 2:
+                            //将这个装备的属性传到Bagtroller
+                            BagController.S.PlayerClothAttribute = equip;
+                            BagController.S.InstallCloth(equip);
+                            break;
+                        case 6:
+                            //将这个装备的属性传到Bagtroller
+                            BagController.S.PlayerShoeAttribute = equip;
+                            BagController.S.InstallShoe(equip);
+                            break;
+                        case 5:
+                            //将这个装备的属性传到Bagtroller
+                            BagController.S.PlayerRingAttribute =equip;
+                            BagController.S.InstallRing(equip);
+                            break;
+                        case 4:
+                            BagController.S.PlayerNecklaceAttribute = equip;
+                            BagController.S.InstallNecklace(equip);
+                            break;
+                        case 3:
+                            BagController.S.PlayerHelmetAttribute = equip;
+                            BagController.S.InstallHelmet(equip);
+                            break;
+                        case 1:
+                            BagController.S.PlayerCloakAttribute = equip;
+                            BagController.S.InstallCloak(equip);
+                            break;
+                    }
+                    BagController.S.ComputeEquipAttribute();
+                    //BagController.S.ComputeTotalAttribute();//更新人物和装备属性
+                    BagController.S.DestroyMaskLayer();
+                    Destroy(gameObject);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError($"EquipAttributePanel: 装备按钮异常: {e.Message}\n{e.StackTrace}");
+                    // 确保出错时仍然销毁面板和蒙层
+                    BagController.S.DestroyMaskLayer();
+                    Destroy(gameObject);
+                }
+            });
+        }
+        sellButton.onClick.AddListener(() =>
+        {
+            BagGrid.transform.Find("EquipGridBG").GetComponent<Image>().color =new Color(1, 1, 1, 0);
+            BagGrid.transform.Find("BagGridImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            BagGrid.transform.Find("Count").GetComponent<Text>().text = null;
+            EquipTable equip = (EquipTable)tableBase;
+            BagController.S.EquipIdList.Remove(equip);
+            switch (equip.Quality)
+            {
+                case 1:
+                    BagController.S.WhiteEquipidTable.Remove(equip);
+                    break;
+                case 2:
+                    BagController.S.GreenEquipidTable.Remove(equip);
+                    break;
+                case 3:
+                    BagController.S.BlueEquipidTable.Remove(equip);
+                    break;
+                case 4:
+                    BagController.S.PurpleEquipidTable.Remove(equip);
+                    break;
+                case 5:
+                    BagController.S.OrangeEquipidTable.Remove(equip);
+                    break;
+            }
+            EquipServer.S.SendRemoveEquipRequest(equip.equipid);
+            Destroy(gameObject);
+        });
+        
+        // 出售按钮
+        if (sellButton != null)
+        {
+            
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("EquipAttributePanel.OnDestroy: 装备属性面板被销毁");
+        
+        // 确保在销毁时MaskLayer也被清理
+        if (BagController.S != null && BagController.S.MaskLayer != null)
+        {
+            Debug.Log("EquipAttributePanel.OnDestroy: 检测到MaskLayer未销毁，尝试销毁");
+            BagController.S.DestroyMaskLayer();
+        }
+    }
+}
