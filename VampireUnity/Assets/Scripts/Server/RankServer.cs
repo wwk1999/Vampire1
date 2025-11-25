@@ -36,12 +36,6 @@ public class RankServer : XSingleton<RankServer>
     /// <returns></returns>
     public async Task<bool> GetLevelRankRequest(string rank_type, int limit)
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var GetLevelRankRequest = new GameRequest
         {
             type = "ranking",
@@ -64,11 +58,6 @@ public class RankServer : XSingleton<RankServer>
     /// <returns></returns>
     public async Task<bool> GetUserLevelRankRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var GetUserLevelRankRequest = new GameRequest
         {
@@ -94,12 +83,6 @@ public class RankServer : XSingleton<RankServer>
     
     public async Task<bool> SendMonsterCountRequest(int normal, int elite,int boss)
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var SendMonsterCountRequest = new GameRequest
         {
             type = "killcount",
@@ -123,11 +106,6 @@ public class RankServer : XSingleton<RankServer>
     /// <returns></returns>
     public async Task<bool> GetUserMonsterCountRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var GetUserMonsterCountRequest = new GameRequest
         {
@@ -147,12 +125,6 @@ public class RankServer : XSingleton<RankServer>
     /// <returns></returns>
     public async Task<bool> GetMonsterCountRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var GetMonsterCountRequest = new GameRequest
         {
             type = "killcount",

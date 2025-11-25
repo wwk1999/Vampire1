@@ -466,19 +466,7 @@ public class ServerConnect : XSingleton<ServerConnect>
     }
 
     
-    // 添加线程安全的连接状态检查方法
-    public bool IsWebSocketConnected()
-    {
-        lock (_lockObject)
-        {
-            bool connected = _isConnected && webSocket.State == WebSocketState.Open;
-            if (!connected)
-            {
-                Debug.Log($"连接状态检查失败: _isConnected={_isConnected}, webSocket.State={webSocket.State}");
-            }
-            return connected;
-        }
-    }
+    // 添加线程安全的连接状态检查方
     
     public async Task<bool> ConnectAsync()
     {
@@ -510,12 +498,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     // 发送消息方法
     public async Task SendMessageAsync(GameRequest request)
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return;
-        }
-
         try
         {
             string jsonMessage = JsonConvert.SerializeObject(request);
@@ -718,12 +700,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送登陆请求
     public async Task<bool> SendLoginRequest(string username, string password)
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var loginRequest = new GameRequest
         {
             type = "auth",
@@ -766,12 +742,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送获取玩家信息请求
     public async Task<bool> SendgetPlayerInfoRequest()
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var getPlayerInfoRequest = new GameRequest
         {
             type = "player",
@@ -789,11 +759,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送获取玩家信息请求
     public async Task<bool> SendGetAllEquipRequest()
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var getAllEquipRequest = new GameRequest
         {
@@ -811,12 +776,7 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送获取经验表请求
     public async Task<bool> SendGetExPlayerTableRequest()
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
+       
         var getExPlayerTableRequest = new GameRequest
         {
             type = "experience",
@@ -833,11 +793,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送保存装备请求
     public async Task<bool> SendSaveEquipRequest(EquipTable equip)
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var saveEquipRequest = new GameRequest
         {
@@ -872,11 +827,6 @@ public class ServerConnect : XSingleton<ServerConnect>
     //发送更新人物信息请求
     public async Task<bool> SendUpdatePlayerInfoRequest(int level,int experience,int gamelevel,int bloodenergy)
     {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var UpdatePlayerInfoRequest = new GameRequest
         {
@@ -893,149 +843,6 @@ public class ServerConnect : XSingleton<ServerConnect>
         };
 
         await SendMessageAsync(UpdatePlayerInfoRequest);
-        return true;
-    }
-    
-    
-    //发送添加好友信息请求
-    public async Task<bool> SendAddFriendRequest(int touserid,string message)
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var AddFrnendRequest = new GameRequest
-        {
-            type = "friend",
-            action = "addFriend",
-            data = new AddFriendData
-            {
-                touserid = touserid,
-                message = message
-            },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(AddFrnendRequest);
-        return true;
-    }
-    
-    //发送获取好友申请信息请求
-    public async Task<bool> SendGetFriendApplicationRequest()
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var GetFriendApplicatRequest = new GameRequest
-        {
-            type = "friend",
-            action = "friendRequest",
-            data = new AddFriendData
-            { },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(GetFriendApplicatRequest);
-        return true;
-    }
-    
-    //发送响应好友申请信息请求
-    public async Task<bool> SenResponseFriendApplicationRequest(int fromuserid,bool agree)
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var ResponseFriendApplicatRequest = new GameRequest
-        {
-            type = "friend",
-            action = "friendResponse",
-            data = new ResponseFriendApplication
-            {
-                fromuserid=fromuserid,
-                accept = agree
-            },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(ResponseFriendApplicatRequest);
-        return true;
-    }
-    
-    //发送获取好友列表请求
-    public async Task<bool> SendGetFriendListRequest()
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var GetFriendListtRequest = new GameRequest
-        {
-            type = "friend",
-            action = "getFriends",
-            data = new ResponseFriendApplication
-            { },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(GetFriendListtRequest);
-        return true;
-    }
-    
-    
-    //发送删除好友请求
-    public async Task<bool> SendRemoveFriendRequest(int friend_userid)
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var RemoveFriendtRequest = new GameRequest
-        {
-            type = "friend",
-            action = "removeFriend",
-            data = new RemoveFrienddAData
-            {
-                friend_userid = friend_userid
-            },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(RemoveFriendtRequest);
-        return true;
-    }
-    
-    
-    //发送推荐好友请求
-    public async Task<bool> SendTuiJianFriendRequest()
-    {
-        if (!IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
-        var TuiJianFriendRequest = new GameRequest
-        {
-            type = "friend",
-            action = "getRecommendedFriends",
-            data = new RemoveFrienddAData
-            { },
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        };
-
-        await SendMessageAsync(TuiJianFriendRequest);
         return true;
     }
 

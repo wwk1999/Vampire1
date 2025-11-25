@@ -21,11 +21,6 @@ public class MainWindow1 : MonoBehaviour
       });
       startButton.onClick.AddListener(async () =>
       {
-          if (!IsLogin)
-          {
-              Debug.Log("未登陆，请先登陆");
-              return;
-          }
           Debug.Log("点击进入末世");
           _isgameStart = true;
           gameObject.SetActive(false);

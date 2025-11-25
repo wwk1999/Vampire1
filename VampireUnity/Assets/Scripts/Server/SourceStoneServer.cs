@@ -29,12 +29,6 @@ public class SourceStoneServer : XSingleton<SourceStoneServer>
     /// <returns></returns>
     public async Task<bool> SendGetSourceStoneConfigRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var SourceStoneConfigRequest = new GameRequest
         {
             type = "sourcestone",
@@ -57,12 +51,6 @@ public class SourceStoneServer : XSingleton<SourceStoneServer>
     /// <returns></returns>
     public async Task<bool> SendAddSourceStoneRequest(int sourcestoneid,int count)
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var AddSourceStoneRequest = new GameRequest
         {
             type = "usersourcestone",
@@ -84,11 +72,6 @@ public class SourceStoneServer : XSingleton<SourceStoneServer>
     /// <returns></returns>
     public async Task<bool> GetUserSourceStoneRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var GetUserSourceStoneRequest = new GameRequest
         {
@@ -123,11 +106,6 @@ public class SourceStoneServer : XSingleton<SourceStoneServer>
                     count++;
                 }
             }
-        }
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
         }
 
         var BatchRemoveSourceStoneRequest = new GameRequest

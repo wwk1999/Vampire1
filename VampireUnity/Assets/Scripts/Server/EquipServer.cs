@@ -30,11 +30,6 @@ public class EquipServer : XSingleton<EquipServer>
     /// <returns></returns>
     public async Task<bool> SendRemoveEquipRequest(int equipid)
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var RemoveEquipRequest = new GameRequest
         {
@@ -58,12 +53,6 @@ public class EquipServer : XSingleton<EquipServer>
     /// <returns></returns>
     public async Task<bool> GetPlayerEquipRequest()
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
-
         var GetPlayerEquipRequest = new GameRequest
         {
             type = "userequip",
@@ -85,11 +74,6 @@ public class EquipServer : XSingleton<EquipServer>
     /// <returns></returns>
     public async Task<bool> WearPlayerEquipRequest(string equip_slot,int equipid)
     {
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
-        }
 
         var WearPlayerEquipRequest = new GameRequest
         {
@@ -159,11 +143,6 @@ public class EquipServer : XSingleton<EquipServer>
                     }
                     break;
             }
-        }
-        if (!ServerConnect.S.IsWebSocketConnected())
-        {
-            Debug.LogError("WebSocket 未连接");
-            return false;
         }
 
         var BatchRemoveEquipRequest = new GameRequest
