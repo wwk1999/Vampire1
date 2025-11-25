@@ -21,8 +21,7 @@ public class WindowController : XSingleton<WindowController>
    [NonSerialized] public GameObject FriendList;
    [NonSerialized] public GameObject AddFriendWindow;
    [NonSerialized] public GameObject RankWindow;
-
-
+   
    public void InitPanel()
    {
       //BagWindow=Instantiate(Resources.Load("Prefabs/Window/Bag") as GameObject);

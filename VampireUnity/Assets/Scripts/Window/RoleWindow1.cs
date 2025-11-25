@@ -225,12 +225,11 @@ public class RoleWindow1 : MonoBehaviour
 
     public void ServerInit()
     {
-        ServerConnect.S.SendgetPlayerInfoRequest();
+        StoreController.S.LoadStoreData();
+        
+        
+        
         SourceStoneServer.S.SendGetSourceStoneConfigRequest();
-        RankServer.S.GetLevelRankRequest("level", 0);
-        RankServer.S.GetUserLevelRankRequest();
-        RankServer.S.GetUserMonsterCountRequest();
-        RankServer.S.GetMonsterCountRequest();
         SourceStoneServer.S.GetUserSourceStoneRequest();
         EquipServer.S.GetPlayerEquipRequest();
     }

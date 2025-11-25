@@ -16,28 +16,7 @@ public class PlayerInfo
 }
 public class PlayerInfoController : XSingleton<PlayerInfoController>
 {
-    protected override void Awake()
-    {
-        base.Awake();
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        ObserverModuleManager.S.RegisterEvent("GelPlayerInfoSuccess",GetPlayerInfo);
-    }
-    
-    //获取玩家信息消息处理
-    public void GetPlayerInfo(object[] args)
-    {
-        //将args[0]转换为PlayerInfo
-        var playerData = JsonConvert.DeserializeObject<PlayerInfo>(JsonConvert.SerializeObject(args[0]));
-        GlobalPlayerAttribute.Level = playerData.Level;
-        GlobalPlayerAttribute.Exp = playerData.Experience;
-        GlobalPlayerAttribute.GameLevel = playerData.GameLevel;
-        GlobalPlayerAttribute.BloodEnergy = playerData.BloodEnergy;
-        ObserverModuleManager.S.SendEvent("UpdateRoleWindow");
-    }
+    //获取玩家信息消息处
 
     public void RegisterInit(int userid)
     {

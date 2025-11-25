@@ -5,10 +5,7 @@ public class MainWindowController : MonoBehaviour
 {
     void Start()
     {
-        // 初始化主线程调度器
-        Tool.UnityMainThreadDispatcher.Instance();
-        
-        //PanelManager.S.PushPanel(new MainWindow());
+        StoreController.S.LoadStoreData();
         WindowController.S.InitPanel();
         ResourcesConfig.Init();
         WindowController.S.MainWindow.SetActive(true);

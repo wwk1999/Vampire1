@@ -7,12 +7,12 @@ public class GlobalPlayerAttribute
    public static bool IsGame = false;
    public static int CurrentHp=100;
 
-   public static int BloodEnergy;//元灵数量
+   public static int BloodEnergy=>PlayerData.S.bloodEnergy;//元灵数量
    //等级相关
-   public static int Level=1;
-   public static int Exp=0;
+   public static int Level=>PlayerData.S.level;
+   public static int Exp=>PlayerData.S.exp;
    public static Dictionary<int,int> ExpDic=new Dictionary<int,int>();
-   public static int GameLevel=1; //游戏关卡
+   public static int GameLevel=>PlayerData.S.gameLevel; //游戏关卡
    
    //人物属性,默认属性
    public static int PlayerMaxHp=100;

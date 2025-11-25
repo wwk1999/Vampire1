@@ -13,7 +13,8 @@ public class BloodEnergyController : MonoBehaviour
             isPickUp= true;
         }else if (other.CompareTag("Player"))
         {
-            GlobalPlayerAttribute.BloodEnergy++; // 增加元灵数量
+            PlayerData.S.bloodEnergy++; // 增加元灵数量
+            StoreController.S.SaveStoreData();
             Destroy(gameObject);
         }
     }
