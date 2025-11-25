@@ -37,7 +37,11 @@ public class BagController : XSingleton<BagController>
     [NonSerialized] public Dictionary<string, Sprite>EquipidSpriteConfig = new Dictionary<string, Sprite>(); //装备的Sprite配置
     [NonSerialized] public Dictionary<int, Sprite> EquipidSprite = new Dictionary<int, Sprite>(); //背包里所有的装备的Sprite
     //[NonSerialized] public List<EquipTable> EquipidTable = new List<EquipTable>(); //背包里所有的装备的属性
-    [NonSerialized] public List<EquipTable> EquipIdList = new List<EquipTable>();//翻页,所有的装备
+    public List<EquipTable> EquipIdList
+    {
+        get => EquipIDData.S.equipIds;
+        set => EquipIDData.S.equipIds = value;
+    }
     
     [NonSerialized] public List<EquipTable> WhiteEquipidTable = new List<EquipTable>(); //背包里所有的白色装备
     [NonSerialized] public List<EquipTable> GreenEquipidTable = new List<EquipTable>(); //背包里所有的绿色装备

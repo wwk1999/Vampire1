@@ -7,12 +7,62 @@ public class GlobalPlayerAttribute
    public static bool IsGame = false;
    public static int CurrentHp=100;
 
-   public static int BloodEnergy=>PlayerData.S.bloodEnergy;//元灵数量
+   public static int BloodEnergy
+   {
+       get => PlayerData.S.bloodEnergy;
+       set => PlayerData.S.bloodEnergy = value;
+   }
    //等级相关
-   public static int Level=>PlayerData.S.level;
-   public static int Exp=>PlayerData.S.exp;
-   public static Dictionary<int,int> ExpDic=new Dictionary<int,int>();
-   public static int GameLevel=>PlayerData.S.gameLevel; //游戏关卡
+   public static int Level
+   {
+         get => PlayerData.S.level;
+         set => PlayerData.S.level = value;
+   }
+
+   public static int Exp
+   {
+         get => PlayerData.S.exp;
+         set => PlayerData.S.exp = value;
+   }
+   public static Dictionary<int,int> ExpDic=new Dictionary<int,int>()
+   {
+         {1,100 },
+         {2,200 },
+         {3,300 },
+         {4,400 },
+         {5,500 },
+         {6,600 },
+         {7,700 },
+         {8,800 },
+         {9,900 },
+         {10,1000 },
+         {11,1200 },
+         {12,1400 },
+         {13,1600 },
+         {14,1800 },
+         {15,2000 },
+         {16,2200 },
+         {17,2400 },
+         {18,2600 },
+         {19,2800 },
+         {20,3000 },
+         {21,3200 },
+         {22,3400 },
+         {23,3600 },
+         {24,3800 },
+         {25,4000 },
+         {26,4200 },
+         {27,4400 },
+         {28,46800 },
+         {29,4800 },
+         {30,5000 },
+   };
+
+   public static int GameLevel
+   {
+            get => PlayerData.S.gameLevel;
+            set => PlayerData.S.gameLevel = value;
+   }
    
    //人物属性,默认属性
    public static int PlayerMaxHp=100;

@@ -42,6 +42,36 @@ public class StoreController : XSingleton<StoreController>
         StoreData = JsonConvert.DeserializeObject<StoreDefine.StoreData>(json);
         StoreData.Player.ApplyToRuntime(PlayerData.S);
         StoreData.Equip.ApplyToRuntime(EquipIDData.S);
+        
+        BagController.S.WhiteEquipidTable.Clear();
+        BagController.S.GreenEquipidTable.Clear();
+        BagController.S.BlueEquipidTable.Clear();
+        BagController.S.PurpleEquipidTable.Clear();
+        BagController.S.OrangeEquipidTable.Clear();
+
+        foreach (var equip in BagController.S.EquipIdList)
+        {
+            if (equip.Quality == 1) // 白色装备
+            {
+                BagController.S.WhiteEquipidTable.Add(equip);
+            }
+            else if (equip.Quality == 2) // 绿色装备
+            {
+                BagController.S.GreenEquipidTable.Add(equip);
+            }
+            else if (equip.Quality == 3) // 蓝色装备
+            {
+                BagController.S.BlueEquipidTable.Add( equip);
+            }
+            else if (equip.Quality == 4) // 紫色装备
+            {
+                BagController.S.PurpleEquipidTable.Add(equip);
+            } 
+            else if (equip.Quality == 5) // 金色装备
+            {
+                BagController.S.OrangeEquipidTable.Add(equip);
+            }
+        }
 
         Debug.Log("加载数据完成");
     }

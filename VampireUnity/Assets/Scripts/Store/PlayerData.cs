@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerData : XSingleton<PlayerData>
 {
-    public  int level;
-    public int exp;
-    public int bloodEnergy;
-    public int gameLevel;
+    public  int level=1;
+    public int exp=0;
+    public int bloodEnergy=0;
+    public int gameLevel=1;
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
+    }
 }

@@ -31,12 +31,19 @@ public class RoleWindow1 : MonoBehaviour
     public Button friendButton; // 好友按钮
     public Button rankButton;
 
-    public void UpdateRoleWindow(object[] args)
+    public void UpdateRoleWindow()
     {
         yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
-        GetExperienceFromMysql();
+        levelText.text= GlobalPlayerAttribute.Level.ToString();
+        expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
+        expSlider.value=GlobalPlayerAttribute.Exp ;
     }
-    
+
+    private void OnEnable()
+    {
+        UpdateRoleWindow();
+    }
+
     public void GetSourceStoneConfigSuccess(object[] args)
     {
         if (args[0] == null) return;
@@ -118,8 +125,6 @@ public class RoleWindow1 : MonoBehaviour
     
     private void Start()
     {
-        ObserverModuleManager.S.RegisterEvent("GetExPlayerTableSuccess",OnGetExPlayerTableSuccess);
-        ObserverModuleManager.S.RegisterEvent("UpdateRoleWindow",UpdateRoleWindow);
         ObserverModuleManager.S.RegisterEvent("GetSourceStoneConfigSuccess",GetSourceStoneConfigSuccess);
         ObserverModuleManager.S.RegisterEvent("GetLevelRankSuccess",GetLevelRankSuccess);
         ObserverModuleManager.S.RegisterEvent("GetUserLevelRankSuccess",GetUserLevelRankSuccess);
@@ -127,9 +132,6 @@ public class RoleWindow1 : MonoBehaviour
         ObserverModuleManager.S.RegisterEvent("GetMonsterCountRankSuccess",GetMonsterCountRankSuccess);
         ObserverModuleManager.S.RegisterEvent("GetUserSourceStoneSuccess",GetUserSourceStoneSuccess);
         ObserverModuleManager.S.RegisterEvent("GetPlayerEquipSuccess",GetPlayerEquipSuccess);
-
-        
-        ServerInit();
         // yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
         // //GlobalPlayerAttribute.ExpDic = ExperienceController.S.GetExperienceFromMysql();
         // expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
@@ -221,36 +223,6 @@ public class RoleWindow1 : MonoBehaviour
             gameObject.SetActive(false);
         });
         
-    }
-
-    public void ServerInit()
-    {
-        StoreController.S.LoadStoreData();
-        
-        
-        
-        SourceStoneServer.S.SendGetSourceStoneConfigRequest();
-        SourceStoneServer.S.GetUserSourceStoneRequest();
-        EquipServer.S.GetPlayerEquipRequest();
-    }
-    
-    public void OnGetExPlayerTableSuccess(object[] args)
-    {
-        var extable = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Experience>>(args[0].ToString());
-        //将extable转换为字典GlobalPlayerAttribute.ExpDic
-        foreach (var experience in extable)
-        {
-            GlobalPlayerAttribute.ExpDic.Add(experience.Level, experience.Value);
-        }
-        Debug.Log("获取经验表成功");
-        expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
-        expSlider.value = GlobalPlayerAttribute.Exp;
-        levelText.text = GlobalPlayerAttribute.Level.ToString();
-    }
-    
-    public void GetExperienceFromMysql()
-    {
-        ServerConnect.S.SendGetExPlayerTableRequest();
     }
     
     public void InitEquip()

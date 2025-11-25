@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EquipIDData : XSingleton<EquipIDData>
 {
-    public Dictionary<int, EquipTable> equipIds = new Dictionary<int, EquipTable>();
+    public List<EquipTable> equipIds = new List<EquipTable>();
     public int nextEquipId = 1;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
+    }
     public int GenerateEquipId()
     {
         return nextEquipId++;
@@ -33,6 +38,6 @@ public class EquipIDData : XSingleton<EquipIDData>
             GoodFortune = equip.GoodFortune,
             EquipName = equip.EquipName
         };
-        equipIds.Add(nextEquipId, data);
+        equipIds.Add(data);
     }
 }

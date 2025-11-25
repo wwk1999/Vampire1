@@ -154,11 +154,6 @@ public class ServerConnect : XSingleton<ServerConnect>
         OnGetPlayerInfoResponse+= GetPlayerInfoResponse;
         OnGetAllEquipResponse+= GetAllEquipResponse;
         OnGetExPlayerTableResponse += GetExPlayerTableResponse;
-        OnGetFriendApplicationResponse += GetFriendApplicationResponse;
-        OnGetFriendListResponse+= GetFriendListResponse;
-        OnGetTuiJianFriendResponse += GetTuiJianFriendResponse;
-        OnGetSourceStoneConfigResponse+= GetSourceStoneConfigResponse;
-        OnSaveEquipResponse += SaveEquipResponse;
         OnGetLevelRankResponse += GetLevelRankResponse;
         OnGetUserLevelRankResponse += GetUserLevelRankResponse;
         OnGetUserMonsterCountRankResponse += GetUserMonsterCountRankResponse;
@@ -310,105 +305,17 @@ public class ServerConnect : XSingleton<ServerConnect>
         }
     }
     
-    // 添加保存装备响应处理方法
-    void SaveEquipResponse(GameResponse response)
-    {
-        if (response.success)
-        {
-            Debug.Log("保存装备成功！");
-            if (response.data != null)
-            {
-                try
-                {
-                    ObserverModuleManager.S.SendEvent("SaveEquipSuccess", response.data);
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogError($"发送SaveEquipSuccess事件时发生异常: {ex.Message}");
-                    Debug.LogError($"异常堆栈: {ex.StackTrace}");
-                }
-            }
-            else
-            {
-                Debug.LogError("保存装备成功，但没有返回数据");
-            }
-        }
-        else
-        {
-            Debug.LogError($"保存装备失败: {response.message}");
-        }
-    }
     
     
-    // 添加源石配置响应处理方法
-    void GetSourceStoneConfigResponse(GameResponse response)
-    {
-        if (response.success)
-        {
-            Debug.Log("获取源石配置成功！");
-            if (response.data != null)
-            {
-                ObserverModuleManager.S.SendEvent("GetSourceStoneConfigSuccess", response.data);
-            }
-        }
-        else
-        {
-            Debug.LogError($"获取源石配置失败: {response.message}");
-        }
-    }
-    
-    // 添加获取推荐好友响应处理方法
-    void GetTuiJianFriendResponse(GameResponse response)
-    {
-        if (response.success)
-        {
-            Debug.Log("获取推荐好友列表成功！");
-            if (response.data != null)
-            {
-                ObserverModuleManager.S.SendEvent("GetTuiJianFriendSuccess", response.data);
-            }
-        }
-        else
-        {
-            Debug.LogError($"获取推荐好友列表失败: {response.message}");
-        }
-    }
-    
-    // 添加获取好友申请响应处理方法
-    void GetFriendListResponse(GameResponse response)
-    {
-        if (response.success)
-        {
-            Debug.Log("获取好友列表成功！");
-            if (response.data != null)
-            {
-                ObserverModuleManager.S.SendEvent("GetFriendListSuccess", response.data);
-            }
-        }
-        else
-        {
-            Debug.LogError($"获取好友列表失败: {response.message}");
-        }
-    }
     
     
-    // 添加获取好友申请响应处理方法
-    void GetFriendApplicationResponse(GameResponse response)
-    {
-        if (response.success)
-        {
-            Debug.Log("获取好友申请信息成功！");
-            if (response.data != null)
-            {
-                ObserverModuleManager.S.SendEvent("GetFriendApplicationSuccess", response.data);
-            }
-        }
-        else
-        {
-            Debug.LogError($"获取好友申请信息失败: {response.message}");
-        }
-    }
-
+    
+    
+    
+    
+    
+    
+    
     void GetExPlayerTableResponse(GameResponse response)
     {
         if (response.success)

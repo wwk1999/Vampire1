@@ -5,7 +5,6 @@ public class MainWindowController : MonoBehaviour
 {
     void Start()
     {
-        StoreController.S.LoadStoreData();
         WindowController.S.InitPanel();
         ResourcesConfig.Init();
         WindowController.S.MainWindow.SetActive(true);
@@ -13,6 +12,7 @@ public class MainWindowController : MonoBehaviour
         AudioController.S.BGAudioSource.Play(); 
         LevelInfoConfig.InitGameLevel();
         WeaponSourceConfig.InitWeaponSourceConfig();
+        StoreController.S.LoadStoreData();
     }
 
     // Update is called once per frame
