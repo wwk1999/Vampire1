@@ -40,8 +40,8 @@ namespace Equip
                 if (isSend) return;
                 Debug.Log("名字："+EquipAttributes.EquipName);
                 //将这件装备的属性添加到数据库
-                ServerConnect.S.SendSaveEquipRequest(EquipAttributes);
-                isSend = true;
+                EquipIDData.S.SavaEquip(EquipAttributes);
+                StoreController.S.SaveStoreData();                isSend = true;
                
 
 
