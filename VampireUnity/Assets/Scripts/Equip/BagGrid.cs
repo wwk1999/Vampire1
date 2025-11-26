@@ -16,6 +16,7 @@ public class BagGrid : MonoBehaviour
     [NonSerialized]public EquipType EquipType;
     public Button gridButton;
     [NonSerialized]public Sprite equipAttributeImage;
+    public GameObject E;
 
     private void Awake()
     {

@@ -188,7 +188,7 @@ public class RoleWindow1 : MonoBehaviour
             Debug.Log("调用ShowEquip方法显示装备");
             BagController.S.ShowEquip();
             BagController.S.InitPlayerEquip();
-            
+            BagController.S.SetE();
         
             Debug.Log("ShowBag方法执行完成");
         });

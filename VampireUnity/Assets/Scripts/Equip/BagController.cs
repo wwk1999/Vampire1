@@ -104,6 +104,13 @@ public class BagController : XSingleton<BagController>
     [NonSerialized] public EquipTable PlayerShoeAttribute=new EquipTable();
     [NonSerialized] public EquipTable PlayerHelmetAttribute=new EquipTable();
     
+    
+    [NonSerialized] public BagGrid PlayerClothGrid=new BagGrid();
+    [NonSerialized] public BagGrid PlayerCloakGrid=new BagGrid();
+    [NonSerialized] public BagGrid PlayerRingGrid=new BagGrid();
+    [NonSerialized] public BagGrid PlayerNecklaceGrid=new BagGrid();
+    [NonSerialized] public BagGrid PlayerShoeGrid=new BagGrid();
+    [NonSerialized] public BagGrid PlayerHelmetGrid=new BagGrid();
 
 
 
@@ -442,41 +449,6 @@ public class BagController : XSingleton<BagController>
         // 启动异步任务处理MySQL操作
        // System.Threading.Tasks.Task.Run(() => DeleteWhiteEquipsFromDatabase(equipIdsToRemove));
     }
-    
-    // 异步处理MySQL部分
-    private void DeleteWhiteEquipsFromDatabase(List<int> equipIds)
-    {
-        if (equipIds.Count == 0) return;
-        
-        MySqlTransaction transaction = null;
-        try
-        {
-            // 后台线程执行MySQL操作
-            transaction = ConnectMysql.Connection.BeginTransaction();
-            
-            string sql = "DELETE FROM equip WHERE equipid IN (" + string.Join(", ", equipIds) + ")";
-            MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection, transaction);
-            
-            int rowsAffected = command.ExecuteNonQuery();
-            transaction.Commit();
-            
-            // 使用主线程安全的方式记录日志
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.Log($"{rowsAffected} white equips removed from database.");
-                Debug.Log("Transaction committed successfully.");
-            });
-        }
-        catch (MySqlConnector.MySqlException ex)
-        {
-            if (transaction != null)
-                transaction.Rollback();
-                
-            // 使用主线程安全的方式记录错误
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.LogError($"Error deleting white equips: {ex.Message}. Transaction rolled back.");
-            });
-        }
-    }
 
     
     
@@ -505,41 +477,6 @@ public class BagController : XSingleton<BagController>
         
         // 启动异步任务处理MySQL操作
         //System.Threading.Tasks.Task.Run(() => DeleteGreenEquipsFromDatabase(equipIdsToRemove));
-    }
-    
-    // 异步处理MySQL部分
-    private void DeleteGreenEquipsFromDatabase(List<int> equipIds)
-    {
-        if (equipIds.Count == 0) return;
-        
-        MySqlTransaction transaction = null;
-        try
-        {
-            // 后台线程执行MySQL操作
-            transaction = ConnectMysql.Connection.BeginTransaction();
-            
-            string sql = "DELETE FROM equip WHERE equipid IN (" + string.Join(", ", equipIds) + ")";
-            MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection, transaction);
-            
-            int rowsAffected = command.ExecuteNonQuery();
-            transaction.Commit();
-            
-            // 使用主线程安全的方式记录日志
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.Log($"{rowsAffected} green equips removed from database.");
-                Debug.Log("Transaction committed successfully.");
-            });
-        }
-        catch (MySqlConnector.MySqlException ex)
-        {
-            if (transaction != null)
-                transaction.Rollback();
-                
-            // 使用主线程安全的方式记录错误
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.LogError($"Error deleting green equips: {ex.Message}. Transaction rolled back.");
-            });
-        }
     }
 
     
@@ -570,41 +507,6 @@ public class BagController : XSingleton<BagController>
         //System.Threading.Tasks.Task.Run(() => DeleteBlueEquipsFromDatabase(equipIdsToRemove));
     }
     
-    // 异步处理MySQL部分
-    private void DeleteBlueEquipsFromDatabase(List<int> equipIds)
-    {
-        if (equipIds.Count == 0) return;
-        
-        MySqlTransaction transaction = null;
-        try
-        {
-            // 后台线程执行MySQL操作
-            transaction = ConnectMysql.Connection.BeginTransaction();
-            
-            string sql = "DELETE FROM equip WHERE equipid IN (" + string.Join(", ", equipIds) + ")";
-            MySqlCommand command = new MySqlCommand(sql, ConnectMysql.Connection, transaction);
-            
-            int rowsAffected = command.ExecuteNonQuery();
-            transaction.Commit();
-            
-            // 使用主线程安全的方式记录日志
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.Log($"{rowsAffected} blue equips removed from database.");
-                Debug.Log("Transaction committed successfully.");
-            });
-        }
-        catch (MySqlConnector.MySqlException ex)
-        {
-            if (transaction != null)
-                transaction.Rollback();
-                
-            // 使用主线程安全的方式记录错误
-            Tool.UnityMainThreadDispatcher.Instance().Enqueue(() => {
-                Debug.LogError($"Error deleting blue equips: {ex.Message}. Transaction rolled back.");
-            });
-        }
-    }
-
     
     
     /// <summary>
@@ -748,6 +650,50 @@ public class BagController : XSingleton<BagController>
         Debug.Log("MaskLayer已销毁并置为null");
     }
 
+    public void SetPlayerWearGrid(BagGrid equipGrid)
+    {
+        EquipTable equipTable = equipGrid.tableBase as EquipTable;
+        switch (equipTable.equip_type_id)
+        {
+            case 1:
+                if(PlayerEquipConfig.CloakId== equipTable.equipid)
+                {
+                    PlayerCloakGrid = equipGrid;
+                }
+                break;
+            case 2:
+                if(PlayerEquipConfig.ClothId== equipTable.equipid)
+                {
+                    PlayerClothGrid = equipGrid;
+                }
+                break;
+            case 3:
+                if(PlayerEquipConfig.HelmetId== equipTable.equipid)
+                {
+                    PlayerHelmetGrid = equipGrid;
+                }
+                break;
+            case 4:
+                if(PlayerEquipConfig.NecklaceId== equipTable.equipid)
+                {
+                    PlayerNecklaceGrid= equipGrid;
+                }
+                break;
+            case 5:
+                if(PlayerEquipConfig.RingId== equipTable.equipid)
+                {
+                    PlayerRingGrid = equipGrid;
+                }
+                break;
+            case 6:
+                if(PlayerEquipConfig.ShoeId== equipTable.equipid)
+                {
+                    PlayerShoeGrid = equipGrid;
+                }
+                break;
+        }
+    }
+
 
     /// <summary>
     /// 显示背包的装备，源石和道具
@@ -841,6 +787,7 @@ public class BagController : XSingleton<BagController>
                     countTransform.gameObject.SetActive(false);
 
                     bagGridComponent.tableBase = list[i];
+                    SetPlayerWearGrid(bagGridComponent);
 
                     // 设置装备背景颜色
                     Transform equipGridBGTransform = bagGridins.transform.Find("EquipGridBG");
@@ -965,6 +912,7 @@ public class BagController : XSingleton<BagController>
             Debug.Log("调用ShowEquip方法显示装备");
             ShowEquip();
             InitPlayerEquip();
+            SetE();
         }
         catch (System.Exception e)
         {
@@ -972,6 +920,34 @@ public class BagController : XSingleton<BagController>
         }
         
         Debug.Log("ShowBag方法执行完成");
+    }
+
+    public void SetE()
+    {
+        if (PlayerCloakGrid!=null)
+        {
+            PlayerCloakGrid.E.gameObject.SetActive(true);
+        }
+        if (PlayerClothGrid!=null)
+        {
+            PlayerClothGrid.E.gameObject.SetActive(true);
+        }
+        if (PlayerRingGrid!=null)
+        {
+            PlayerRingGrid.E.gameObject.SetActive(true);
+        }
+        if (PlayerNecklaceGrid!=null)
+        {
+            PlayerNecklaceGrid.E.gameObject.SetActive(true);
+        }
+        if (PlayerShoeGrid!=null)
+        {
+            PlayerShoeGrid.E.gameObject.SetActive(true);
+        }
+        if (PlayerHelmetGrid!=null)
+        {
+            PlayerHelmetGrid.E.gameObject.SetActive(true);
+        }
     }
 
     
@@ -1062,7 +1038,7 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.RingId !=0)
+        if (PlayerEquipConfig.NecklaceId !=0)
         {
             IsInstallNecklace = true;
             playerNecklace.transform.Find("Image").gameObject.SetActive(true);
@@ -1152,7 +1128,7 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.CloakId != 0)
+        if (PlayerEquipConfig.ClothId != 0)
         {
             IsInstallCloth = true;
             playerCloth.transform.Find("Image").gameObject.SetActive(true);
@@ -1432,6 +1408,7 @@ public class BagController : XSingleton<BagController>
             }
             
             equipAttribute.GetComponent<EquipAttributePanel>().tableBase = tablebase;
+            equipAttribute.GetComponent<EquipAttributePanel>().grid = bagGrid.GetComponent<BagGrid>();
             
             // 设置装备ID
             EquipAttributePanel panel = equipAttribute.GetComponent<EquipAttributePanel>();

@@ -9,6 +9,8 @@ public class EquipAttributePanel : MonoBehaviour
     public Button installButton;
     public Button sellButton;
     [NonSerialized]public TableBase tableBase;
+    [NonSerialized]public BagGrid grid;
+
 
     [NonSerialized] public GameObject BagGrid;//背包格子
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,30 +72,61 @@ public class EquipAttributePanel : MonoBehaviour
                             //将这个装备的属性传到Bagtroller
                             BagController.S.PlayerClothAttribute = equip;
                             BagController.S.InstallCloth(equip);
+                            if (BagController.S.PlayerClothGrid != null)
+                            {
+                                BagController.S.PlayerClothGrid.E.gameObject.SetActive(false);
+                            } 
+                            BagController.S.PlayerClothGrid = grid;
                             break;
                         case 6:
                             //将这个装备的属性传到Bagtroller
                             BagController.S.PlayerShoeAttribute = equip;
                             BagController.S.InstallShoe(equip);
+                            if (BagController.S.PlayerShoeGrid != null)
+                            {
+                                BagController.S.PlayerShoeGrid.E.gameObject.SetActive(false);
+                            }
+                            BagController.S.PlayerShoeGrid = grid;
                             break;
                         case 5:
                             //将这个装备的属性传到Bagtroller
                             BagController.S.PlayerRingAttribute =equip;
                             BagController.S.InstallRing(equip);
+                            if (BagController.S.PlayerRingGrid != null)
+                            {
+                                BagController.S.PlayerRingGrid.E.gameObject.SetActive(false);
+                            }
+                            BagController.S.PlayerRingGrid = grid;
                             break;
                         case 4:
                             BagController.S.PlayerNecklaceAttribute = equip;
                             BagController.S.InstallNecklace(equip);
+                            if (BagController.S.PlayerNecklaceGrid != null)
+                            {
+                                BagController.S.PlayerNecklaceGrid.E.gameObject.SetActive(false);
+                            } 
+                            BagController.S.PlayerNecklaceGrid = grid;
                             break;
                         case 3:
                             BagController.S.PlayerHelmetAttribute = equip;
                             BagController.S.InstallHelmet(equip);
+                            if (BagController.S.PlayerHelmetGrid != null)
+                            {
+                                BagController.S.PlayerHelmetGrid.E.gameObject.SetActive(false);
+                            }
+                            BagController.S.PlayerHelmetGrid = grid;
                             break;
                         case 1:
                             BagController.S.PlayerCloakAttribute = equip;
                             BagController.S.InstallCloak(equip);
+                            if (BagController.S.PlayerCloakGrid != null)
+                            {
+                                BagController.S.PlayerCloakGrid.E.gameObject.SetActive(false);
+                            } 
+                            BagController.S.PlayerCloakGrid = grid;
                             break;
                     }
+                    BagController.S.SetE();
                     BagController.S.ComputeEquipAttribute();
                     //BagController.S.ComputeTotalAttribute();//更新人物和装备属性
                     BagController.S.DestroyMaskLayer();
