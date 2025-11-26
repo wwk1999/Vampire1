@@ -61,7 +61,8 @@ public class EquipAttributePanel : MonoBehaviour
                 try
                 {
                     EquipTable equip = (EquipTable)tableBase;
-                    EquipServer.S.WearPlayerEquipRequest(equip.equip_type_name, equip.equipid);
+                    PlayerData.S.SaveWearEquip(equip.equip_type_id, equip.equipid);
+                    StoreController.S.SaveStoreData();
                     int equiptype = equip.equip_type_id;
                     switch (equiptype)
                     {
@@ -113,7 +114,7 @@ public class EquipAttributePanel : MonoBehaviour
             BagGrid.transform.Find("BagGridImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
             BagGrid.transform.Find("Count").GetComponent<Text>().text = null;
             EquipTable equip = (EquipTable)tableBase;
-            BagController.S.EquipIdList.Remove(equip);
+            BagController.S.EquipIdList.Remove(equip.equipid);
             switch (equip.Quality)
             {
                 case 1:

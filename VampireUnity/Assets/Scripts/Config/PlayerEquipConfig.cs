@@ -25,18 +25,12 @@ public class EquipmentItem
     public int type;
 }
 
-[System.Serializable]
-public class PlayerEquipData
-{
-    public EquipmentItem 头盔;
-    public EquipmentItem 戒指;
-    public EquipmentItem 手套;
-    public EquipmentItem 衣服;
-    public EquipmentItem 鞋子;
-    public EquipmentItem 项链;
-}
-
 public class PlayerEquipConfig : MonoBehaviour
 {
-    public static PlayerEquipData playerEquipData=new PlayerEquipData();
+    public static int HelmetId;
+    public static int RingId;
+    public static int CloakId;
+    public static int ClothId;
+    public static int ShoeId;
+    public static int NecklaceId;
 }

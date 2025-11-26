@@ -113,12 +113,7 @@ public class RoleWindow1 : MonoBehaviour
         Debug.Log("获取服务器用户源石成功！");
     }
     
-    public void GetPlayerEquipSuccess(object[] args)
-    {
-        if (args[0] == null) return;
-        PlayerEquipConfig.playerEquipData = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerEquipData>(args[0].ToString());
-        BagController.S.ShowEquip();
-    }
+   
     
    
     
@@ -131,7 +126,6 @@ public class RoleWindow1 : MonoBehaviour
         ObserverModuleManager.S.RegisterEvent("GetUserMonsterCountRankSuccess",GetUserMonsterCountRankSuccess);
         ObserverModuleManager.S.RegisterEvent("GetMonsterCountRankSuccess",GetMonsterCountRankSuccess);
         ObserverModuleManager.S.RegisterEvent("GetUserSourceStoneSuccess",GetUserSourceStoneSuccess);
-        ObserverModuleManager.S.RegisterEvent("GetPlayerEquipSuccess",GetPlayerEquipSuccess);
         // yuanLinText.text = GlobalPlayerAttribute.BloodEnergy.ToString();// 元灵数量text
         // //GlobalPlayerAttribute.ExpDic = ExperienceController.S.GetExperienceFromMysql();
         // expSlider.maxValue=GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level];
@@ -182,7 +176,7 @@ public class RoleWindow1 : MonoBehaviour
             if (BagController.S.EquipIdList == null)
             {
                 Debug.LogWarning("ShowBag警告: EquipIdList为null，初始化为空列表");
-                BagController.S.EquipIdList = new List<EquipTable>();
+                BagController.S.EquipIdList = new Dictionary<int, EquipTable>();
             }
         
             Debug.Log($"暂停游戏，当前EquipIdList中有 {BagController.S.EquipIdList.Count} 件装备");

@@ -51,25 +51,25 @@ public class StoreController : XSingleton<StoreController>
 
         foreach (var equip in BagController.S.EquipIdList)
         {
-            if (equip.Quality == 1) // 白色装备
+            if (equip.Value.Quality == 1) // 白色装备
             {
-                BagController.S.WhiteEquipidTable.Add(equip);
+                BagController.S.WhiteEquipidTable.Add(equip.Value);
             }
-            else if (equip.Quality == 2) // 绿色装备
+            else if (equip.Value.Quality == 2) // 绿色装备
             {
-                BagController.S.GreenEquipidTable.Add(equip);
+                BagController.S.GreenEquipidTable.Add(equip.Value);
             }
-            else if (equip.Quality == 3) // 蓝色装备
+            else if (equip.Value.Quality == 3) // 蓝色装备
             {
-                BagController.S.BlueEquipidTable.Add( equip);
+                BagController.S.BlueEquipidTable.Add( equip.Value);
             }
-            else if (equip.Quality == 4) // 紫色装备
+            else if (equip.Value.Quality == 4) // 紫色装备
             {
-                BagController.S.PurpleEquipidTable.Add(equip);
+                BagController.S.PurpleEquipidTable.Add(equip.Value);
             } 
-            else if (equip.Quality == 5) // 金色装备
+            else if (equip.Value.Quality == 5) // 金色装备
             {
-                BagController.S.OrangeEquipidTable.Add(equip);
+                BagController.S.OrangeEquipidTable.Add(equip.Value);
             }
         }
 

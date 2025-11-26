@@ -31,101 +31,12 @@ namespace Mysql
 
         protected override void Awake()
         {
-            ObserverModuleManager.S.RegisterEvent("GetAllEquipSuccess",GetAllEquipSuccess);
+            
 
             base.Awake();
             DontDestroyOnLoad(gameObject);
         }
         
-        
-
-        public void GetAllEquipSuccess(object[] args)
-        {
-            if (args == null || args.Length == 0)
-            {
-                Debug.LogError("GetAllEquipSuccess: args为空");
-                return;
-            }
-            try
-            {
-        
-                // 将args[0]转换为JSON字符串
-                string jsonData = args[0].ToString();
-                Debug.Log($"接收到的装备数据: {jsonData}");
-        
-                // 直接反序列化为EquipTable列表
-                 equipDatas = Newtonsoft.Json.JsonConvert.DeserializeObject<List<EquipData>>(jsonData);
-                if (equipDatas != null)
-                {
-                    foreach (var equipTable in equipDatas)
-                    {
-                        EquipTable e=new EquipTable();
-                        e.equipid = equipTable.equipid;
-                        e.Quality = equipTable.quality;
-                        e.Damage = equipTable.damage;
-                        e.CRIT = equipTable.crit;
-                        e.CRITDamage = equipTable.critdamage;
-                        e.DamageSpeed = equipTable.damagespeed;
-                        e.BloodSuck = equipTable.bloodsuck;
-                        e.Defense = equipTable.defense;
-                        e.HP = equipTable.hp;
-                        e.MoveSpeed = equipTable.movespeed;
-                        e.EquipName = equipTable.equipname;
-                        e.suitid = equipTable.suitid;
-                        e.suitname = equipTable.suitname;
-                        e.equip_type_id = equipTable.equip_type_id;
-                        e.equip_type_name = equipTable.equip_type_name;
-                        e.Userid = equipTable.userid;
-                        e.GoodFortune = equipTable.goodfortune;
-                        BagController.S.EquipIdList.Add(e);
-                    }
-            
-                    Debug.Log($"成功解析并添加了 {equipDatas.Count} 件装备");
-                    
-                    BagController.S.WhiteEquipidTable.Clear();
-                    BagController.S.GreenEquipidTable.Clear();
-                    BagController.S.BlueEquipidTable.Clear();
-                    BagController.S.PurpleEquipidTable.Clear();
-                    BagController.S.OrangeEquipidTable.Clear();
-
-                    foreach (var equip in BagController.S.EquipIdList)
-                    {
-                        if (equip.Quality == 1) // 白色装备
-                        {
-                            BagController.S.WhiteEquipidTable.Add(equip);
-                        }
-                        else if (equip.Quality == 2) // 绿色装备
-                        {
-                            BagController.S.GreenEquipidTable.Add(equip);
-                        }
-                        else if (equip.Quality == 3) // 蓝色装备
-                        {
-                            BagController.S.BlueEquipidTable.Add( equip);
-                        }
-                        else if (equip.Quality == 4) // 紫色装备
-                        {
-                            BagController.S.PurpleEquipidTable.Add(equip);
-                        } 
-                        else if (equip.Quality == 5) // 金色装备
-                        {
-                            BagController.S.OrangeEquipidTable.Add(equip);
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("解析装备数据失败: equipmentDataList为null");
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"GetAllEquipSuccess处理失败: {ex.Message}");
-                Debug.LogError($"异常堆栈: {ex.StackTrace}");
-            }
-            
-        }
-
-
         public void GetAllEquipFromMysql()
         {
             ServerConnect.S.SendGetAllEquipRequest();//获取所有装备请求

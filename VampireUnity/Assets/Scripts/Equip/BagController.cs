@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gloabl;
 using Mysql;
 using MySqlConnector;
@@ -37,7 +38,7 @@ public class BagController : XSingleton<BagController>
     [NonSerialized] public Dictionary<string, Sprite>EquipidSpriteConfig = new Dictionary<string, Sprite>(); //装备的Sprite配置
     [NonSerialized] public Dictionary<int, Sprite> EquipidSprite = new Dictionary<int, Sprite>(); //背包里所有的装备的Sprite
     //[NonSerialized] public List<EquipTable> EquipidTable = new List<EquipTable>(); //背包里所有的装备的属性
-    public List<EquipTable> EquipIdList
+    public Dictionary<int,EquipTable> EquipIdList
     {
         get => EquipIDData.S.equipIds;
         set => EquipIDData.S.equipIds = value;
@@ -229,7 +230,7 @@ public class BagController : XSingleton<BagController>
         // 检查装备数据是否已初始化
         if (EquipIdList == null)
         {
-            EquipIdList = new List<EquipTable>();
+            EquipIdList = new Dictionary<int, EquipTable>();
         }
         
         if (EquipidSprite == null)
@@ -237,10 +238,7 @@ public class BagController : XSingleton<BagController>
             EquipidSprite = new Dictionary<int, Sprite>();
         }
         
-        if (EquipIdList == null)
-        {
-            EquipIdList = new List<EquipTable>();
-        }
+       
         
     }
 
@@ -434,7 +432,7 @@ public class BagController : XSingleton<BagController>
         // 同步处理Unity部分：清除内存中的数据
         foreach (var equip in WhiteEquipidTable)
         {
-            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+            EquipIdList.Remove(equip.equipid); // 删除 EquipIdList 中的记录
             // EquipidSprite.Remove(equip); // 删除 EquipidSprite 中的记录
         }
 
@@ -498,7 +496,7 @@ public class BagController : XSingleton<BagController>
         // 同步处理Unity部分：清除内存中的数据
         foreach (var equip in GreenEquipidTable)
         {
-            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+            EquipIdList.Remove(equip.equipid); // 删除 EquipIdList 中的记录
            // EquipidSprite.Remove(equipId); // 删除 EquipidSprite 中的记录
         }
 
@@ -561,7 +559,7 @@ public class BagController : XSingleton<BagController>
         // 同步处理Unity部分：清除内存中的数据
         foreach (var equip in BlueEquipidTable)
         {
-            EquipIdList.Remove(equip); // 删除 EquipIdList 中的记录
+            EquipIdList.Remove(equip.equipid); // 删除 EquipIdList 中的记录
             //EquipidSprite.Remove(equip); // 删除 EquipidSprite 中的记录
         }
 
@@ -630,7 +628,7 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=orangeBg;
-            EquipIdList.Add(equip);
+            EquipIdList.Add(equip.equipid,equip);
         }
         
         foreach (var equip in PurpleEquipidTable)
@@ -641,7 +639,7 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=purpleBg;
-            EquipIdList.Add(equip);
+            EquipIdList.Add(equip.equipid,equip);
 
         }
         
@@ -653,7 +651,7 @@ public class BagController : XSingleton<BagController>
            bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=blueBg;
-            EquipIdList.Add(equip);
+            EquipIdList.Add(equip.equipid,equip);
         }
         
         foreach (var equip in GreenEquipidTable)
@@ -664,7 +662,7 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=greenBg;
-            EquipIdList.Add(equip);
+            EquipIdList.Add(equip.equipid,equip);
         }
         
         foreach (var equip in WhiteEquipidTable)
@@ -675,7 +673,7 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=whiteBg;
-            EquipIdList.Add(equip);
+            EquipIdList.Add(equip.equipid,equip);
         }
     }
     
@@ -802,6 +800,7 @@ public class BagController : XSingleton<BagController>
         int startIndex = (PageNum - 1) * 20;
         int endIndex = Mathf.Min(PageNum * 20, EquipIdList.Count);
 
+        List<EquipTable> list = EquipIdList.Values.ToList();
         if (bag.GetComponent<BagPanel>().currentBagType == 1) //如果是显示装备
         {
 
@@ -810,7 +809,7 @@ public class BagController : XSingleton<BagController>
                 try
                 {
                     // 检查当前索引的装备是否为空
-                    if (EquipIdList[i] == null)
+                    if (list[i] == null)
                     {
                         Debug.LogError($"ShowEquip出错: EquipIdList[{i}]为null");
                         continue;
@@ -827,13 +826,13 @@ public class BagController : XSingleton<BagController>
 
                     Button bagGridButton = bagGridImageTransform.GetComponent<Button>();
 
-                    bagGridButton.image.sprite = ResourcesConfig.GetEquipSprite((EquipTable)EquipIdList[i]);
+                    bagGridButton.image.sprite = ResourcesConfig.GetEquipSprite((EquipTable)list[i]);
 
                     // 设置装备属性图标
                     BagGrid bagGridComponent = bagGridins.GetComponent<BagGrid>();
 
                     bagGridComponent.equipAttributeImage =
-                        ResourcesConfig.GetEquipSprite((EquipTable)EquipIdList[i]);
+                        ResourcesConfig.GetEquipSprite((EquipTable)list[i]);
                     bagGridComponent.EquipType = EquipType.Equip;
 
                     // 隐藏数量显示
@@ -841,14 +840,14 @@ public class BagController : XSingleton<BagController>
 
                     countTransform.gameObject.SetActive(false);
 
-                    bagGridComponent.tableBase = EquipIdList[i];
+                    bagGridComponent.tableBase = list[i];
 
                     // 设置装备背景颜色
                     Transform equipGridBGTransform = bagGridins.transform.Find("EquipGridBG");
 
                     Image equipGridBGImage = equipGridBGTransform.GetComponent<Image>();
 
-                    switch (EquipIdList[i].Quality)
+                    switch (list[i].Quality)
                     {
                         case 1:
                             equipGridBGImage.sprite = whiteBg;
@@ -952,7 +951,7 @@ public class BagController : XSingleton<BagController>
         if (EquipIdList == null)
         {
             Debug.LogWarning("ShowBag警告: EquipIdList为null，初始化为空列表");
-            EquipIdList = new List<EquipTable>();
+            EquipIdList = new Dictionary<int, EquipTable>();
         }
         
         Debug.Log($"暂停游戏，当前EquipIdList中有 {EquipIdList.Count} 件装备");
@@ -1002,30 +1001,12 @@ public class BagController : XSingleton<BagController>
         IsInstallHelmet = false;
         
         
-        if (PlayerEquipConfig.playerEquipData.戒指 != null)
+        if (PlayerEquipConfig.RingId != 0)
         {
             IsInstallRing = true;
             playerRing.transform.Find("Image").gameObject.SetActive(true);
             playerRing.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable ringEquip = new EquipTable();
-            ringEquip.suitid= PlayerEquipConfig.playerEquipData.戒指.suitid;
-            ringEquip.Quality= PlayerEquipConfig.playerEquipData.戒指.quality;
-            ringEquip.equip_type_id= PlayerEquipConfig.playerEquipData.戒指.equip_type_id;
-            ringEquip.EquipName= PlayerEquipConfig.playerEquipData.戒指.equipname;
-            ringEquip.equip_type_name= PlayerEquipConfig.playerEquipData.戒指.equip_type_name;
-            ringEquip.equipid= PlayerEquipConfig.playerEquipData.戒指.equipid;
-            ringEquip.suitname= PlayerEquipConfig.playerEquipData.戒指.suitname;
-            ringEquip.Damage= PlayerEquipConfig.playerEquipData.戒指.damage;
-            ringEquip.Defense= PlayerEquipConfig.playerEquipData.戒指.defense;
-            ringEquip.BloodSuck= PlayerEquipConfig.playerEquipData.戒指.bloodsuck;
-            ringEquip.GoodFortune= PlayerEquipConfig.playerEquipData.戒指.goodfortune;
-            ringEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.戒指.movespeed;
-            ringEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.戒指.damagespeed;
-            ringEquip.CRIT= PlayerEquipConfig.playerEquipData.戒指.crit;
-            ringEquip.CRITDamage= PlayerEquipConfig.playerEquipData.戒指.critdamage;
-            ringEquip.HP= PlayerEquipConfig.playerEquipData.戒指.hp;
-
-
+            EquipTable ringEquip = EquipIdList[PlayerEquipConfig.RingId];
             
             playerRing.GetComponent<BagGrid>().tableBase = ringEquip;
             playerRing.GetComponent<BagGrid>().EquipType= EquipType.Equip;
@@ -1052,28 +1033,12 @@ public class BagController : XSingleton<BagController>
         }
         
         
-        if (PlayerEquipConfig.playerEquipData.头盔 != null)
+        if (PlayerEquipConfig.HelmetId != 0)
         {
             IsInstallHelmet = true;
             playerHelmet.transform.Find("Image").gameObject.SetActive(true);
             playerHelmet.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable HelmetEquip = new EquipTable();
-            HelmetEquip.suitid= PlayerEquipConfig.playerEquipData.头盔.suitid;
-            HelmetEquip.Quality= PlayerEquipConfig.playerEquipData.头盔.quality;
-            HelmetEquip.equip_type_id= PlayerEquipConfig.playerEquipData.头盔.equip_type_id;
-            HelmetEquip.EquipName= PlayerEquipConfig.playerEquipData.头盔.equipname;
-            HelmetEquip.equip_type_name= PlayerEquipConfig.playerEquipData.头盔.equip_type_name;
-            HelmetEquip.equipid= PlayerEquipConfig.playerEquipData.头盔.equipid;
-            HelmetEquip.suitname= PlayerEquipConfig.playerEquipData.头盔.suitname;
-            HelmetEquip.Damage= PlayerEquipConfig.playerEquipData.头盔.damage;
-            HelmetEquip.Defense= PlayerEquipConfig.playerEquipData.头盔.defense;
-            HelmetEquip.BloodSuck= PlayerEquipConfig.playerEquipData.头盔.bloodsuck;
-            HelmetEquip.GoodFortune= PlayerEquipConfig.playerEquipData.头盔.goodfortune;
-            HelmetEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.头盔.movespeed;
-            HelmetEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.头盔.damagespeed;
-            HelmetEquip.CRIT= PlayerEquipConfig.playerEquipData.头盔.crit;
-            HelmetEquip.CRITDamage= PlayerEquipConfig.playerEquipData.头盔.critdamage;
-            HelmetEquip.HP= PlayerEquipConfig.playerEquipData.头盔.hp;
+            EquipTable HelmetEquip = EquipIdList[PlayerEquipConfig.HelmetId];
             playerHelmet.GetComponent<BagGrid>().tableBase = HelmetEquip;
             playerHelmet.GetComponent<BagGrid>().EquipType= EquipType.Equip;
             playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(HelmetEquip);
@@ -1097,28 +1062,13 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.playerEquipData.项链 != null)
+        if (PlayerEquipConfig.RingId !=0)
         {
             IsInstallNecklace = true;
             playerNecklace.transform.Find("Image").gameObject.SetActive(true);
             playerNecklace.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable NecklaceEquip = new EquipTable();
-            NecklaceEquip.suitid= PlayerEquipConfig.playerEquipData.项链.suitid;
-            NecklaceEquip.Quality= PlayerEquipConfig.playerEquipData.项链.quality;
-            NecklaceEquip.equip_type_id= PlayerEquipConfig.playerEquipData.项链.equip_type_id;
-            NecklaceEquip.EquipName= PlayerEquipConfig.playerEquipData.项链.equipname;
-            NecklaceEquip.equip_type_name= PlayerEquipConfig.playerEquipData.项链.equip_type_name;
-            NecklaceEquip.equipid= PlayerEquipConfig.playerEquipData.项链.equipid;
-            NecklaceEquip.suitname= PlayerEquipConfig.playerEquipData.项链.suitname;
-            NecklaceEquip.Damage= PlayerEquipConfig.playerEquipData.项链.damage;
-            NecklaceEquip.Defense= PlayerEquipConfig.playerEquipData.项链.defense;
-            NecklaceEquip.BloodSuck= PlayerEquipConfig.playerEquipData.项链.bloodsuck;
-            NecklaceEquip.GoodFortune= PlayerEquipConfig.playerEquipData.项链.goodfortune;
-            NecklaceEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.项链.movespeed;
-            NecklaceEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.项链.damagespeed;
-            NecklaceEquip.CRIT= PlayerEquipConfig.playerEquipData.项链.crit;
-            NecklaceEquip.CRITDamage= PlayerEquipConfig.playerEquipData.项链.critdamage;
-            NecklaceEquip.HP= PlayerEquipConfig.playerEquipData.项链.hp;
+            EquipTable NecklaceEquip = EquipIdList[PlayerEquipConfig.RingId];
+            
             playerNecklace.GetComponent<BagGrid>().tableBase = NecklaceEquip;
             playerNecklace.GetComponent<BagGrid>().EquipType= EquipType.Equip;
             playerNecklace.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(NecklaceEquip);
@@ -1142,28 +1092,13 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.playerEquipData.鞋子 != null)
+        if (PlayerEquipConfig.ShoeId != 0)
         {
             IsInstallShoe = true;
             playerShoe.transform.Find("Image").gameObject.SetActive(true);
             playerShoe.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable ShoeEquip = new EquipTable();
-            ShoeEquip.suitid= PlayerEquipConfig.playerEquipData.鞋子.suitid;
-            ShoeEquip.Quality= PlayerEquipConfig.playerEquipData.鞋子.quality;
-            ShoeEquip.equip_type_id= PlayerEquipConfig.playerEquipData.鞋子.equip_type_id;
-            ShoeEquip.EquipName= PlayerEquipConfig.playerEquipData.鞋子.equipname;
-            ShoeEquip.equip_type_name= PlayerEquipConfig.playerEquipData.鞋子.equip_type_name;
-            ShoeEquip.equipid= PlayerEquipConfig.playerEquipData.鞋子.equipid;
-            ShoeEquip.suitname= PlayerEquipConfig.playerEquipData.鞋子.suitname;
-            ShoeEquip.Damage= PlayerEquipConfig.playerEquipData.鞋子.damage;
-            ShoeEquip.Defense= PlayerEquipConfig.playerEquipData.鞋子.defense;
-            ShoeEquip.BloodSuck= PlayerEquipConfig.playerEquipData.鞋子.bloodsuck;
-            ShoeEquip.GoodFortune= PlayerEquipConfig.playerEquipData.鞋子.goodfortune;
-            ShoeEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.鞋子.movespeed;
-            ShoeEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.鞋子.damagespeed;
-            ShoeEquip.CRIT= PlayerEquipConfig.playerEquipData.鞋子.crit;
-            ShoeEquip.CRITDamage= PlayerEquipConfig.playerEquipData.鞋子.critdamage;
-            ShoeEquip.HP= PlayerEquipConfig.playerEquipData.鞋子.hp;
+            EquipTable ShoeEquip = EquipIdList[PlayerEquipConfig.ShoeId];
+            
             playerShoe.GetComponent<BagGrid>().tableBase = ShoeEquip;
             playerShoe.GetComponent<BagGrid>().EquipType= EquipType.Equip;
             playerShoe.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(ShoeEquip);
@@ -1187,28 +1122,13 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.playerEquipData.手套 != null)
+        if (PlayerEquipConfig.CloakId != 0)
         {
             IsInstallCloak = true;
             playerCloak.transform.Find("Image").gameObject.SetActive(true);
             playerCloak.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable CloakEquip = new EquipTable();
-            CloakEquip.suitid= PlayerEquipConfig.playerEquipData.手套.suitid;
-            CloakEquip.Quality= PlayerEquipConfig.playerEquipData.手套.quality;
-            CloakEquip.equip_type_id= PlayerEquipConfig.playerEquipData.手套.equip_type_id;
-            CloakEquip.EquipName= PlayerEquipConfig.playerEquipData.手套.equipname;
-            CloakEquip.equip_type_name= PlayerEquipConfig.playerEquipData.手套.equip_type_name;
-            CloakEquip.equipid= PlayerEquipConfig.playerEquipData.手套.equipid;
-            CloakEquip.suitname= PlayerEquipConfig.playerEquipData.手套.suitname;
-            CloakEquip.Damage= PlayerEquipConfig.playerEquipData.手套.damage;
-            CloakEquip.Defense= PlayerEquipConfig.playerEquipData.手套.defense;
-            CloakEquip.BloodSuck= PlayerEquipConfig.playerEquipData.手套.bloodsuck;
-            CloakEquip.GoodFortune= PlayerEquipConfig.playerEquipData.手套.goodfortune;
-            CloakEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.手套.movespeed;
-            CloakEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.手套.damagespeed;
-            CloakEquip.CRIT= PlayerEquipConfig.playerEquipData.手套.crit;
-            CloakEquip.CRITDamage= PlayerEquipConfig.playerEquipData.手套.critdamage;
-            CloakEquip.HP= PlayerEquipConfig.playerEquipData.手套.hp;
+            EquipTable CloakEquip = EquipIdList[PlayerEquipConfig.CloakId];
+           
             playerCloak.GetComponent<BagGrid>().tableBase = CloakEquip;
             playerCloak.GetComponent<BagGrid>().EquipType= EquipType.Equip;
             playerCloak.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(CloakEquip);
@@ -1232,28 +1152,13 @@ public class BagController : XSingleton<BagController>
             }
         }
         
-        if (PlayerEquipConfig.playerEquipData.衣服 != null)
+        if (PlayerEquipConfig.CloakId != 0)
         {
             IsInstallCloth = true;
             playerCloth.transform.Find("Image").gameObject.SetActive(true);
             playerCloth.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable ClothEquip = new EquipTable();
-            ClothEquip.suitid= PlayerEquipConfig.playerEquipData.衣服.suitid;
-            ClothEquip.Quality= PlayerEquipConfig.playerEquipData.衣服.quality;
-            ClothEquip.equip_type_id= PlayerEquipConfig.playerEquipData.衣服.equip_type_id;
-            ClothEquip.EquipName= PlayerEquipConfig.playerEquipData.衣服.equipname;
-            ClothEquip.equip_type_name= PlayerEquipConfig.playerEquipData.衣服.equip_type_name;
-            ClothEquip.equipid= PlayerEquipConfig.playerEquipData.衣服.equipid;
-            ClothEquip.suitname= PlayerEquipConfig.playerEquipData.衣服.suitname;
-            ClothEquip.Damage= PlayerEquipConfig.playerEquipData.衣服.damage;
-            ClothEquip.Defense= PlayerEquipConfig.playerEquipData.衣服.defense;
-            ClothEquip.BloodSuck= PlayerEquipConfig.playerEquipData.衣服.bloodsuck;
-            ClothEquip.GoodFortune= PlayerEquipConfig.playerEquipData.衣服.goodfortune;
-            ClothEquip.MoveSpeed= PlayerEquipConfig.playerEquipData.衣服.movespeed;
-            ClothEquip.DamageSpeed= PlayerEquipConfig.playerEquipData.衣服.damagespeed;
-            ClothEquip.CRIT= PlayerEquipConfig.playerEquipData.衣服.crit;
-            ClothEquip.CRITDamage= PlayerEquipConfig.playerEquipData.衣服.critdamage;
-            ClothEquip.HP= PlayerEquipConfig.playerEquipData.衣服.hp;
+            EquipTable ClothEquip = EquipIdList[PlayerEquipConfig.CloakId];
+           
             playerCloth.GetComponent<BagGrid>().tableBase = ClothEquip;
             playerCloth.GetComponent<BagGrid>().EquipType= EquipType.Equip;
             playerCloth.transform.Find("Image").GetComponent<Button>().image.sprite = ResourcesConfig.GetEquipSprite(ClothEquip);
@@ -1301,6 +1206,8 @@ public class BagController : XSingleton<BagController>
         IsInstallCloth = true;
         playerCloth.transform.Find("Image").gameObject.SetActive(true);
         playerCloth.transform.Find("ImageBG").gameObject.SetActive(true);
+        playerCloth.transform.Find("Image").GetComponent<Button>().image.sprite =ResourcesConfig.GetEquipSprite(equiptable);
+
         switch (equiptable.Quality)
         {
             case 1:
@@ -1858,7 +1765,7 @@ public class BagController : XSingleton<BagController>
             // 从内存中移除白色装备
             foreach (var item in WhiteEquipidTable)
             {
-                EquipIdList.Remove(item);
+                EquipIdList.Remove(item.equipid);
             }
             Debug.Log("已从内存中移除白色装备。");
             WhiteEquipidTable.Clear();
@@ -1869,7 +1776,7 @@ public class BagController : XSingleton<BagController>
             // 从内存中移除绿色装备
             foreach (var item in GreenEquipidTable)
             {
-                EquipIdList.Remove(item);
+                EquipIdList.Remove(item.equipid);
             }
             Debug.Log("已从内存中移除绿色装备。");
             GreenEquipidTable.Clear();
@@ -1880,7 +1787,7 @@ public class BagController : XSingleton<BagController>
             // 从内存中移除蓝色装备
             foreach (var item in BlueEquipidTable)
             {
-                EquipIdList.Remove(item);
+                EquipIdList.Remove(item.equipid);
             }
             Debug.Log("已从内存中移除蓝色装备。");
             BlueEquipidTable.Clear();

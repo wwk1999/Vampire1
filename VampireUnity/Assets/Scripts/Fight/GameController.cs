@@ -244,8 +244,8 @@ public class GameController : XSingleton<GameController>
         equipTable.Userid = savaEquipData.Userid;
         equipTable.Defense = savaEquipData.Defense;
         equipTable.GoodFortune = savaEquipData.Goodfortune;
-        BagController.S.EquipIdList.Add(equipTable);
-        BagController.S.EquipIdList.Add(equipTable);
+        BagController.S.EquipIdList.Add(equipTable.equipid,equipTable);
+        BagController.S.EquipIdList.Add(equipTable.equipid,equipTable);
         switch (equipTable.Quality)
         {
             case 1:

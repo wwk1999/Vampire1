@@ -14,7 +14,7 @@ public class StoreDefine : XSingleton<StoreDefine>
     [System.Serializable]
     public class EquipData
     {
-        public List<EquipTable> equipIds = new List<EquipTable>();
+        public Dictionary<int,EquipTable> equipIds = new Dictionary<int, EquipTable>();
         public int nextEquipId;
 
         public void CopyFromRuntime(EquipIDData runtime)
@@ -25,7 +25,7 @@ public class StoreDefine : XSingleton<StoreDefine>
             equipIds.Clear();
             foreach (var pair in runtime.equipIds)
             {
-                equipIds.Add(pair);
+                equipIds.Add(pair.Key,pair.Value);
             }
         }
 
@@ -37,7 +37,7 @@ public class StoreDefine : XSingleton<StoreDefine>
             runtime.equipIds.Clear();
             foreach (var pair in equipIds)
             {
-                runtime.equipIds.Add(pair);
+                runtime.equipIds.Add(pair.Key,pair.Value);
             }
         }
     }
@@ -49,6 +49,13 @@ public class StoreDefine : XSingleton<StoreDefine>
         public int exp;
         public int bloodEnergy;
         public int gameLevel;
+        
+        public int clothid;
+        public int cloakid;
+        public int helmetid;
+        public int ringid;
+        public int shoeid;
+        public int necklaceid;
 
         public void CopyFromRuntime(PlayerData runtime)
         {
@@ -56,6 +63,13 @@ public class StoreDefine : XSingleton<StoreDefine>
             exp = runtime.exp;
             bloodEnergy = runtime.bloodEnergy;
             gameLevel = runtime.gameLevel;
+            
+            clothid = runtime.clothid;
+            cloakid = runtime.cloakid;
+            helmetid = runtime.helmetid;
+            ringid = runtime.ringid;
+            shoeid = runtime.shoeid;
+            necklaceid = runtime.necklaceid;
         }
 
         public void ApplyToRuntime(PlayerData runtime)
@@ -64,6 +78,12 @@ public class StoreDefine : XSingleton<StoreDefine>
             runtime.exp = exp;
             runtime.bloodEnergy = bloodEnergy;
             runtime.gameLevel = gameLevel;
+            runtime.clothid = clothid;
+            runtime.cloakid = cloakid;
+            runtime.helmetid = helmetid;
+            runtime.ringid = ringid;
+            runtime.shoeid = shoeid;
+            runtime.necklaceid = necklaceid;
         }
     }
 }

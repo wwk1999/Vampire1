@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EquipIDData : XSingleton<EquipIDData>
 {
-    public List<EquipTable> equipIds = new List<EquipTable>();
+    public Dictionary<int,EquipTable> equipIds = new Dictionary<int, EquipTable>();
     public int nextEquipId = 1;
 
     protected override void Awake()
@@ -38,6 +38,6 @@ public class EquipIDData : XSingleton<EquipIDData>
             GoodFortune = equip.GoodFortune,
             EquipName = equip.EquipName
         };
-        equipIds.Add(data);
+        equipIds.Add(data.equipid,data);
     }
 }

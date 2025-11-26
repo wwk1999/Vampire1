@@ -1919,6 +1919,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6628916638761179401}
     m_Modifications:
+    - target: {fileID: 819192948298989723, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1746285220558187927, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_Type
       value: 0
@@ -2002,6 +2006,10 @@ PrefabInstance:
     - target: {fileID: 7341760397116883296, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341760397116883296, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7341760397116883296, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_AnchoredPosition.y

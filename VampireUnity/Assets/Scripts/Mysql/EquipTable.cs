@@ -37,7 +37,7 @@ public class EquipTable:TableBase
         int equip_type_id = 0,
         string equip_type_name = null)
     {
-        equipid = equipid;
+        this.equipid = equipid;
         EquipName = equipName;
         Quality = quality;
         Damage = damage;

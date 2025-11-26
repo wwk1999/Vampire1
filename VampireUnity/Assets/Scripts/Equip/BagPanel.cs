@@ -7,6 +7,7 @@ public class BagPanel : MonoBehaviour
     public Button detailedAttributesButton;// 详细属性按钮
     public GameObject detailedAttributesPanel;// 详细属性面板
     public GameObject mask;// mask层
+    public GameObject detailedAttributesPanelmask;//详细属性面板的mask
     public Button detailedAttributesExitButton;
     
     public GameObject playerPanel;// 玩家属性面板
@@ -31,7 +32,7 @@ public class BagPanel : MonoBehaviour
     public Text hpText;// 生命值文本
     
     public Button playerButton;
-    public Button attributeButton;
+    //public Button attributeButton;
     
     //属性面板的各个属性的文本
     public Text playerDamageAttributeText;
@@ -104,7 +105,7 @@ public class BagPanel : MonoBehaviour
         });
         detailedAttributesExitButton.onClick.AddListener(() =>
         {
-            mask.SetActive(false);
+            detailedAttributesPanelmask.SetActive(false);
             detailedAttributesPanel.SetActive(false);
         });
         
@@ -129,20 +130,6 @@ public class BagPanel : MonoBehaviour
         // {
         //     BagController.S.ShowPlayerPanel();
         // });
-        attributeButton.onClick.AddListener(() =>
-        {
-            //BagController.S.ComputeTotalAttribute();
-            BagController.S.ShowAttributePanel();
-            playerDamageAttributeText.text=GlobalPlayerAttribute.TotalDamage.ToString();
-            playerHPAttributeText.text=GlobalPlayerAttribute.TotalMaxHp.ToString();
-            playerDefenseAttributeText.text=GlobalPlayerAttribute.TotalDefense.ToString();
-            playerCRITAttributeText.text=GlobalPlayerAttribute.TotalCRIT.ToString();
-            playerCRITDamageAttributeText.text=GlobalPlayerAttribute.TotalCRITDamage.ToString();
-            playerMoveSpeedAttributeText.text=GlobalPlayerAttribute.TotalMoveSpeed.ToString();
-            playerAttackSpeedAttributeText.text=GlobalPlayerAttribute.TotalAttackSpeed.ToString();
-            playerGoodfortuneAttributeText.text=GlobalPlayerAttribute.TotalGoodFortune.ToString();
-            playerBloodSuckAttributeText.text=GlobalPlayerAttribute.TotalBloodSuck.ToString();
-        });
     }
     
 }

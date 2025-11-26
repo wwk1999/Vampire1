@@ -5429,6 +5429,7 @@ MonoBehaviour:
   detailedAttributesButton: {fileID: 8791486365761631228}
   detailedAttributesPanel: {fileID: 9062698169768842512}
   mask: {fileID: 2152635725938289021}
+  detailedAttributesPanelmask: {fileID: 4867195331480986719}
   detailedAttributesExitButton: {fileID: 7575490055043114448}
   playerPanel: {fileID: 2279568712562598187}
   playerCloth: {fileID: 1141891917042081210}
