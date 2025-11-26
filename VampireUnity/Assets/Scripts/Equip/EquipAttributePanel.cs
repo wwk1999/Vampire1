@@ -161,7 +161,7 @@ public class EquipAttributePanel : MonoBehaviour
                             if (BagController.S.PlayerClothGrid != null)
                             {
                                 BagController.S.PlayerClothGrid.E.gameObject.SetActive(false);
-                            } 
+                            }
                             BagController.S.PlayerClothGrid = grid;
                             break;
                         case 6:
@@ -248,15 +248,11 @@ public class EquipAttributePanel : MonoBehaviour
                     BagController.S.OrangeEquipidTable.Remove(equip);
                     break;
             }
-            EquipServer.S.SendRemoveEquipRequest(equip.equipid);
+            BagController.S.EquipIdList.Remove(equip.equipid);
+            StoreController.S.SaveStoreData();
             Destroy(gameObject);
         });
-        
-        // 出售按钮
-        if (sellButton != null)
-        {
-            
-        }
+       
     }
 
     private void OnDestroy()

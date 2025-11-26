@@ -73,12 +73,10 @@ public class BagSell : MonoBehaviour
             // 使用新方法一次性处理所有装备
             if (BagController.S.bag.GetComponent<BagPanel>().currentBagType == 1)
             {
-                EquipServer.S.BatchRemoveEquipRequest(qualitys);
                 BagController.S.SellAllSelectedEquips(IsSellWhite, IsSellGreen, IsSellBlue);
             }
             else if(BagController.S.bag.GetComponent<BagPanel>().currentBagType == 2)
             {
-                SourceStoneServer.S.BatchRemoveSourceStoneRequest(qualitys);
                 BagController.S.SellAllSelectedSourceStones(IsSellWhite, IsSellGreen, IsSellBlue);
             }
             BagController.S.ShowEquip();
