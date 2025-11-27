@@ -23,10 +23,6 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
     public GameObject monsterRight5;
     public Button exitButton;
     public Button breakButton;
-    public Button cancelLeftButton;
-    public Button cancelRightButton;
-    public Button gameLevelFightLeftButton;//左挑战按钮
-    public Button gameLevelFightRightButton;//右挑战按钮
 
     public Button level1Button;
     public Button level2Button;
@@ -348,33 +344,6 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
             WindowController.S.Message.SetActive(false);
             HideLevelInfo();
         });
-        cancelLeftButton.onClick.AddListener(() =>
-        {
-            //loopScrollRect.SetActive(false);
-            WindowController.S.Message.SetActive(false);
-            levelInfoRight.gameObject.SetActive(false);
-            levelInfoLeft.gameObject.SetActive(false);
-        });
-        cancelRightButton.onClick.AddListener(() =>
-        {
-            //loopScrollRect.SetActive(false);
-            WindowController.S.Message.SetActive(false);
-            levelInfoRight.gameObject.SetActive(false);
-            levelInfoLeft.gameObject.SetActive(false);
-        });
-        gameLevelFightLeftButton.onClick.AddListener(() =>
-        {
-            gameObject.SetActive(false);
-            WindowController.S.Message.SetActive(false);
-            WindowController.S.SceneLoadingWindow.SetActive(true);
-        });
-        gameLevelFightRightButton.onClick.AddListener(() =>
-        {
-            gameObject.SetActive(false);
-            WindowController.S.Message.SetActive(false);
-            WindowController.S.SceneLoadingWindow.SetActive(true);
-        });
-        
         
         
         level1Button.onClick.AddListener(() =>
