@@ -65,14 +65,24 @@ public class GlobalPlayerAttribute
    }
    
    //人物属性,默认属性
-   public static int PlayerMaxHp=100;
-   public static int PlayerDamage=10;
+   public static int PlayerMaxHp
+   {
+       get => PlayerInfoConfig.GetPlayerMaxHp();
+   }
+
+   public static int PlayerDamage
+   {
+       get => PlayerInfoConfig.GetPlayerAttack();
+   }
    public static int PlayerMoveSpeed=3;
    public static int PlayerAttackSpeed=0;
    public static int PlayerCRIT=0;
    public static int PlayerCRITDamage=0;
    public static int PlayerBloodSuck=0;
-   public static int PlayerDefense=0;
+   public static int PlayerDefense
+   {
+       get => PlayerInfoConfig.GetPlayerDenfence();
+   }
    public static int PlayerGoodFortune=0;
    
    //装备属性

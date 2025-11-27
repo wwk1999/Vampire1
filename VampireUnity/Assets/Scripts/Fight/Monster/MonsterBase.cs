@@ -397,6 +397,7 @@ public abstract class MonsterBase : MonoBehaviour
         if(GlobalPlayerAttribute.Exp>GlobalPlayerAttribute.ExpDic[GlobalPlayerAttribute.Level])
         {
             //升级
+            ObserverModuleManager.S.SendEvent(ConstKeys.LevelUpAnim);
             playerLevelText = GameController.S.gamePlayer.levelText;
             GameController.S.gamePlayer.transform.Find("LevelUp").gameObject.SetActive(true);
             GameController.S.gamePlayer.transform.Find("LevelUp").GetComponent<ParticleSystem>().Play();

@@ -21,7 +21,7 @@ public class ConstKeys
     public const string Resumemonster = "Resumemonster";
 
 
-
+    public const string LevelUpAnim = "LevelUpAnim";
 
     #endregion
 }

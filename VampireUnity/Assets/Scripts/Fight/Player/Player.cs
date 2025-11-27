@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -43,13 +44,33 @@ public class Player : MonoBehaviour
     public float size = 0.28f;
     [NonSerialized] public bool IsWuDi = false;//红闪的时候无敌
 
+    public Animation levelUpAnim;
+    public TextMeshProUGUI attackText;
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI denfenseText;
+
+
 
 
     private void Awake()
     {
         currentGun = Instantiate(Resources.Load<GameObject>("Prefabs/Gun/Pistol").GetComponent<GunBase>(),transform);
         playerSkeleton.AnimationState.Complete += OnAnimationComplete;
+        ObserverModuleManager.S.RegisterEvent(ConstKeys.LevelUpAnim, PlayLevelUpAnim);
+    }
 
+    private void OnDestroy()
+    {
+        ObserverModuleManager.S.UnRegisterEvent(ConstKeys.LevelUpAnim, PlayLevelUpAnim);
+    }
+
+    public void PlayLevelUpAnim(object obj)
+    {
+        levelUpAnim.gameObject.SetActive(true);
+        attackText.text=PlayerInfoConfig.AttackDic[GlobalPlayerAttribute.Level].ToString();
+        hpText.text=PlayerInfoConfig.HpDic[GlobalPlayerAttribute.Level].ToString();
+        denfenseText.text=PlayerInfoConfig.DenfenseDic[GlobalPlayerAttribute.Level].ToString();
+        levelUpAnim.Play("LevelUpTextAnim");
     }
     
     public void TempChangePlayerMoveSpeed(int speed,float time)
@@ -57,7 +78,6 @@ public class Player : MonoBehaviour
         int t = GlobalPlayerAttribute.PlayerMoveSpeed;
         GlobalPlayerAttribute.PlayerMoveSpeed = speed;
         StartCoroutine(ResumeSpeed(time,t));
-
     }
     //携程等待1s
     private IEnumerator ResumeSpeed(float seconds,int speed)
