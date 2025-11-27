@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
         //打印调用这个方法的脚本name
         Debug.Log("PlayerHurt被调用，来自脚本：" + new System.Diagnostics.StackTrace().GetFrame(1).GetMethod().DeclaringType.Name);
         AudioController.S.PlayPlayerHurt();
-        CameraContraller.S.CameraShake(0.2f, 0.01f);
+        CameraContraller.S.CameraShake(0.1f, 0.005f);
         var playerhit = FightBGController.S.PlayerHitQueue.Dequeue();
         playerhit.gameObject.SetActive(true);
         playerSkeleton.AnimationState.SetAnimation(0, "hit", false);
