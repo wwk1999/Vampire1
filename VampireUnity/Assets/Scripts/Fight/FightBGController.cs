@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mysql;
+using Spine.Unity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,12 +79,21 @@ public class FightBGController : XSingleton<FightBGController>
     public void PlaySuccessAnim()
     {
         var success= Instantiate(Resources.Load<GameObject>("Prefabs/Success/Success"),transform);
-        success.transform.Find("Canvas/Image").GetComponent<Animator>().Play("Success");
+        SkeletonGraphic skeletonGraphic= success.transform.Find("Canvas/Content").GetComponent<SkeletonGraphic>();
+        skeletonGraphic.AnimationState.SetAnimation(0, "bui_9_1", false);
+        StartCoroutine(DelayPlaySuccessAnim(skeletonGraphic));
         if (LevelInfoConfig.CurrentGameLevel + 1 > LevelInfoConfig.MaxGameLevel)
         {
             LevelInfoConfig.MaxGameLevel= LevelInfoConfig.CurrentGameLevel + 1;
             StoreController.S.SaveStoreData();
         }
+
+        StartCoroutine(DelayDisableDiLie(success));
+    }
+    IEnumerator DelayPlaySuccessAnim(SkeletonGraphic skeletonGraphic)
+    {
+        yield return new WaitForSeconds(1.67f);
+        skeletonGraphic.AnimationState.SetAnimation(0, "bui_9_2", false);
     }
     
     IEnumerator DelayDisableDiLie(GameObject obj)

@@ -1,0 +1,24 @@
+bui_10.png
+	size: 541, 541
+	filter: Linear, Linear
+	pma: true
+beiguang
+	bounds: 2, 336, 416, 203
+	offsets: 14, 9, 444, 225
+chaoshi
+	bounds: 2, 2, 267, 78
+	offsets: 2, 2, 271, 83
+chibang1
+	bounds: 2, 166, 366, 168
+guang2
+	bounds: 460, 217, 118, 59
+	offsets: 3, 1, 124, 63
+	rotate: 90
+shibai
+	bounds: 2, 82, 271, 82
+shu
+	bounds: 420, 337, 202, 88
+	rotate: 90
+shuye1
+	bounds: 370, 153, 181, 88
+	rotate: 90

@@ -1,0 +1,97 @@
+bui_9.png
+	size: 968, 968
+	filter: Linear, Linear
+	pma: true
+beiguang
+	bounds: 2, 757, 444, 209
+	offsets: 0, 0, 444, 225
+bgggg
+	bounds: 2, 465, 290, 290
+	offsets: 0, 5, 300, 300
+chibang1
+	bounds: 294, 499, 256, 133
+	rotate: 90
+chibang2
+	bounds: 339, 144, 124, 88
+	rotate: 90
+chibang3
+	bounds: 2, 20, 44, 73
+	rotate: 90
+gq1
+	bounds: 2, 209, 256, 254
+	offsets: 2, 2, 258, 258
+guang2
+	bounds: 898, 476, 100, 63
+	offsets: 3, 2, 106, 68
+	rotate: 90
+shengli
+	bounds: 260, 197, 266, 77
+	offsets: 2, 2, 270, 82
+	rotate: 90
+shu
+	bounds: 654, 13, 192, 81
+	offsets: 2, 3, 196, 86
+shuye1
+	bounds: 741, 578, 183, 89
+xian4
+	bounds: 448, 901, 494, 65
+xing
+	bounds: 307, 16, 37, 36
+	offsets: 1, 1, 39, 38
+xx/bsg0001
+	bounds: 307, 54, 106, 88
+	offsets: 87, 18, 299, 119
+xx/bsg0002
+	bounds: 873, 130, 181, 85
+	offsets: 58, 17, 299, 119
+	rotate: 90
+xx/bsg0003
+	bounds: 339, 270, 227, 88
+	offsets: 35, 17, 299, 119
+	rotate: 90
+xx/bsg0004
+	bounds: 429, 451, 276, 103
+	offsets: 10, 11, 299, 119
+xx/bsg0005
+	bounds: 429, 556, 283, 101
+	offsets: 7, 12, 299, 119
+xx/bsg0006
+	bounds: 448, 659, 291, 97
+	offsets: 3, 17, 299, 119
+xx/xxxx0001
+	bounds: 714, 457, 182, 119
+	offsets: 34, 14, 250, 158
+xx/xxxx0002
+	bounds: 668, 184, 202, 127
+	offsets: 24, 14, 250, 158
+xx/xxxx0003
+	bounds: 667, 313, 220, 136
+	offsets: 16, 12, 250, 158
+xx/xxxx0004
+	bounds: 800, 669, 230, 139
+	offsets: 10, 11, 250, 158
+	rotate: 90
+xx/xxxx0005
+	bounds: 2, 66, 235, 141
+	offsets: 7, 10, 250, 158
+xx/xxxx0006
+	bounds: 429, 310, 236, 139
+	offsets: 5, 8, 250, 158
+xx/xxxx0007
+	bounds: 429, 171, 237, 137
+	offsets: 7, 6, 250, 158
+xx/xxxx0008
+	bounds: 429, 33, 223, 136
+	offsets: 20, 6, 250, 158
+xx/xxxx0009
+	bounds: 668, 96, 203, 86
+	offsets: 24, 33, 250, 158
+xx/xxxx0010
+	bounds: 239, 2, 193, 66
+	offsets: 29, 46, 250, 158
+	rotate: 90
+xx/xxxx0011
+	bounds: 707, 549, 5, 5
+	offsets: 170, 62, 250, 158
+yunguang
+	bounds: 448, 758, 350, 141

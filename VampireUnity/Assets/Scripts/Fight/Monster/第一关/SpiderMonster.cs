@@ -64,7 +64,7 @@ public class SpiderMonster : MonsterBase
         currentTime+= Time.deltaTime;
         if(currentTime>= attackTime)
         {
-            Skill();
+           // Skill();
             currentTime = 0f;
         }
         if (!IsDead)
