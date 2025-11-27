@@ -827,6 +827,7 @@ public class BagController : XSingleton<BagController>
                     Debug.LogError($"ShowEquip异常: 处理索引 {i} 的装备时出错: {e.Message}\n{e.StackTrace}");
                 }
             }
+            SetE();
         }else if (bag.GetComponent<BagPanel>().currentBagType == 2)//如果是显示源石
         {
             foreach (var item in SourceStoneTable)
@@ -1051,7 +1052,7 @@ public class BagController : XSingleton<BagController>
             IsInstallNecklace = true;
             playerNecklace.transform.Find("Image").gameObject.SetActive(true);
             playerNecklace.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable NecklaceEquip = EquipIdList[PlayerEquipConfig.RingId];
+            EquipTable NecklaceEquip = EquipIdList[PlayerEquipConfig.NecklaceId];
             
             playerNecklace.GetComponent<BagGrid>().tableBase = NecklaceEquip;
             playerNecklace.GetComponent<BagGrid>().EquipType= EquipType.Equip;
@@ -1141,7 +1142,7 @@ public class BagController : XSingleton<BagController>
             IsInstallCloth = true;
             playerCloth.transform.Find("Image").gameObject.SetActive(true);
             playerCloth.transform.Find("ImageBG").gameObject.SetActive(true);
-            EquipTable ClothEquip = EquipIdList[PlayerEquipConfig.CloakId];
+            EquipTable ClothEquip = EquipIdList[PlayerEquipConfig.ClothId];
            
             playerCloth.GetComponent<BagGrid>().tableBase = ClothEquip;
             playerCloth.GetComponent<BagGrid>().EquipType= EquipType.Equip;
@@ -1829,47 +1830,53 @@ public class BagController : XSingleton<BagController>
         if(isWhite)
         {
             // 从内存中移除白色装备
-            foreach (var item in WhiteEquipidTable)
+            WhiteEquipidTable.RemoveAll(item =>
             {
-                if (item.equipid != PlayerEquipConfig.CloakId && item.equipid != PlayerEquipConfig.ClothId &&
-                    item.equipid != PlayerEquipConfig.NecklaceId && item.equipid != PlayerEquipConfig.RingId &&
-                    item.equipid != PlayerEquipConfig.HelmetId && item.equipid != PlayerEquipConfig.ShoeId)
+                if (item.equipid == PlayerEquipConfig.CloakId || item.equipid == PlayerEquipConfig.ClothId ||
+                    item.equipid == PlayerEquipConfig.NecklaceId || item.equipid == PlayerEquipConfig.RingId ||
+                    item.equipid == PlayerEquipConfig.HelmetId || item.equipid == PlayerEquipConfig.ShoeId)
                 {
-                    EquipIdList.Remove(item.equipid);
-                    WhiteEquipidTable.Remove(item);
+                    return false;
                 }
-            }
+                
+                EquipIdList.Remove(item.equipid);
+                return true;
+            });
             Debug.Log("已从内存中移除白色装备。");
         }
         
         if(isGreen)
         {
             // 从内存中移除绿色装备
-            foreach (var item in GreenEquipidTable)
+            GreenEquipidTable.RemoveAll(item =>
             {
-                if (item.equipid != PlayerEquipConfig.CloakId && item.equipid != PlayerEquipConfig.ClothId &&
-                    item.equipid != PlayerEquipConfig.NecklaceId && item.equipid != PlayerEquipConfig.RingId &&
-                    item.equipid != PlayerEquipConfig.HelmetId && item.equipid != PlayerEquipConfig.ShoeId)
+                if (item.equipid == PlayerEquipConfig.CloakId || item.equipid == PlayerEquipConfig.ClothId ||
+                    item.equipid == PlayerEquipConfig.NecklaceId || item.equipid == PlayerEquipConfig.RingId ||
+                    item.equipid == PlayerEquipConfig.HelmetId || item.equipid == PlayerEquipConfig.ShoeId)
                 {
-                    EquipIdList.Remove(item.equipid);
-                    GreenEquipidTable.Remove(item);
+                    return false;
                 }
-            }
+                
+                EquipIdList.Remove(item.equipid);
+                return true;
+            });
             Debug.Log("已从内存中移除绿色装备。");
         }
         if(isBlue)
         {
             // 从内存中移除蓝色装备
-            foreach (var item in BlueEquipidTable)
+            BlueEquipidTable.RemoveAll(item =>
             {
-                if (item.equipid != PlayerEquipConfig.CloakId && item.equipid != PlayerEquipConfig.ClothId &&
-                    item.equipid != PlayerEquipConfig.NecklaceId && item.equipid != PlayerEquipConfig.RingId &&
-                    item.equipid != PlayerEquipConfig.HelmetId && item.equipid != PlayerEquipConfig.ShoeId)
+                if (item.equipid == PlayerEquipConfig.CloakId || item.equipid == PlayerEquipConfig.ClothId ||
+                    item.equipid == PlayerEquipConfig.NecklaceId || item.equipid == PlayerEquipConfig.RingId ||
+                    item.equipid == PlayerEquipConfig.HelmetId || item.equipid == PlayerEquipConfig.ShoeId)
                 {
-                    EquipIdList.Remove(item.equipid);
-                    BlueEquipidTable.Remove(item);
+                    return false;
                 }
-            }
+                
+                EquipIdList.Remove(item.equipid);
+                return true;
+            });
             Debug.Log("已从内存中移除蓝色装备。");
         }
         StoreController.S.SaveStoreData();
