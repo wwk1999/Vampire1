@@ -62,7 +62,7 @@ public class StoreDefine : XSingleton<StoreDefine>
             level = runtime.level;
             exp = runtime.exp;
             bloodEnergy = runtime.bloodEnergy;
-            gameLevel = runtime.gameLevel;
+            gameLevel = runtime.maxGameLevel;
             
             clothid = runtime.clothid;
             cloakid = runtime.cloakid;
@@ -77,7 +77,7 @@ public class StoreDefine : XSingleton<StoreDefine>
             runtime.level = level;
             runtime.exp = exp;
             runtime.bloodEnergy = bloodEnergy;
-            runtime.gameLevel = gameLevel;
+            runtime.maxGameLevel = gameLevel;
             runtime.clothid = clothid;
             runtime.cloakid = cloakid;
             runtime.helmetid = helmetid;

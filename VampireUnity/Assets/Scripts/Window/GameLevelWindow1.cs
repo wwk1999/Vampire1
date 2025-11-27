@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Demo;
@@ -9,18 +10,6 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
 {
     //public GameObject loopScrollRect;
     private InitOnStart initOnStart;
-    public GameObject levelInfoRight;
-    public GameObject levelInfoLeft;
-    public GameObject monsterLeft1;
-    public GameObject monsterLeft2;
-    public GameObject monsterLeft3;
-    public GameObject monsterLeft4;
-    public GameObject monsterLeft5;
-    public GameObject monsterRight1;
-    public GameObject monsterRight2;
-    public GameObject monsterRight3;
-    public GameObject monsterRight4;
-    public GameObject monsterRight5;
     public Button exitButton;
     public Button breakButton;
 
@@ -66,6 +55,50 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
     public GameObject level18Info;
     public GameObject level19Info;
     public GameObject level20Info;
+    
+    
+    public GameObject level1TanHao;
+    public GameObject level2TanHao;
+    public GameObject level3TanHao;
+    public GameObject level4TanHao;
+    public GameObject level5TanHao;
+    public GameObject level6TanHao;
+    public GameObject level7TanHao;
+    public GameObject level8TanHao;
+    public GameObject level9TanHao;
+    public GameObject level10TanHao;
+    public GameObject level11TanHao;
+    public GameObject level12TanHao;
+    public GameObject level13TanHao;
+    public GameObject level14TanHao;
+    public GameObject level15TanHao;
+    public GameObject level16TanHao;
+    public GameObject level17TanHao;
+    public GameObject level18TanHao;
+    public GameObject level19TanHao;
+    public GameObject level20TanHao;
+    
+    
+    public Animation level1Content;
+    public Animation level2Content;
+    public Animation level3Content;
+    public Animation level4Content;
+    public Animation level5Content;
+    public Animation level6Content;
+    public Animation level7Content;
+    public Animation level8Content;
+    public Animation level9Content;
+    public Animation level10Content;
+    public Animation level11Content;
+    public Animation level12Content;
+    public Animation level13Content;
+    public Animation level14Content;
+    public Animation level15Content;
+    public Animation level16Content;
+    public Animation level17Content;
+    public Animation level18Content;
+    public Animation level19Content;
+    public Animation level20Content;
 
     
     public RectTransform rectTransform; // 当前UI的RectTransform
@@ -86,6 +119,122 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
     private float snapMinX;
     private float snapMaxY;
     private float snapMinY;
+
+
+    public void SetTanHao()
+    {
+        level1TanHao.SetActive(LevelInfoConfig.MaxGameLevel==1);
+        level2TanHao.SetActive(LevelInfoConfig.MaxGameLevel==2);
+        level3TanHao.SetActive(LevelInfoConfig.MaxGameLevel==3);
+        level4TanHao.SetActive(LevelInfoConfig.MaxGameLevel==4);
+        level5TanHao.SetActive(LevelInfoConfig.MaxGameLevel==5);
+        level6TanHao.SetActive(LevelInfoConfig.MaxGameLevel==6);
+        level7TanHao.SetActive(LevelInfoConfig.MaxGameLevel==7);
+        level8TanHao.SetActive(LevelInfoConfig.MaxGameLevel==8);
+        level9TanHao.SetActive(LevelInfoConfig.MaxGameLevel==9);
+        level10TanHao.SetActive(LevelInfoConfig.MaxGameLevel==10);
+        level11TanHao.SetActive(LevelInfoConfig.MaxGameLevel==11);
+        level12TanHao.SetActive(LevelInfoConfig.MaxGameLevel==12);
+        level13TanHao.SetActive(LevelInfoConfig.MaxGameLevel==13);
+        level14TanHao.SetActive(LevelInfoConfig.MaxGameLevel==14);
+        level15TanHao.SetActive(LevelInfoConfig.MaxGameLevel==15);
+        level16TanHao.SetActive(LevelInfoConfig.MaxGameLevel==16);
+        //level17TanHao.SetActive(LevelInfoConfig.MaxGameLevel==17);
+        //level18TanHao.SetActive(LevelInfoConfig.MaxGameLevel==18);
+        //level19TanHao.SetActive(LevelInfoConfig.MaxGameLevel==19);
+        //level20TanHao.SetActive(LevelInfoConfig.MaxGameLevel==20);
+    }
+
+    public void ShowGameLevelButton()
+    {
+        level1Button.gameObject.SetActive(true);
+        level2Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=2);
+        level3Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=3);
+        level4Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=4);
+        level5Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=5);
+        level6Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=6);
+        level7Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=7);
+        level8Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=8);
+        level9Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=9);
+        level10Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=10);
+        level11Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=11);
+        level12Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=12);
+        level13Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=13);
+        level14Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=14);
+        level15Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=15);
+        level16Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=16);
+        //level17Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=17);
+        //level18Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=18);
+        //level19Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=19);
+        //level20Button.gameObject.SetActive(LevelInfoConfig.MaxGameLevel>=20);
+    }
+
+    public void PlayGameLevelAnim()
+    {
+        switch (LevelInfoConfig.MaxGameLevel)
+        {
+            case 1:
+                level1Content.Play("GameLevel");
+                break;
+            case 2:
+                level2Content.Play("GameLevel");
+                break;
+            case 3:
+                level3Content.Play("GameLevel");
+                break;
+            case 4:
+                level4Content.Play("GameLevel");
+                break;
+            case 5:
+                level5Content.Play("GameLevel");
+                break;
+            case 6:
+                level6Content.Play("GameLevel");
+                break;
+            case 7:
+                level7Content.Play("GameLevel");
+                break;
+            case 8:
+                level8Content.Play("GameLevel");
+                break;
+            case 9:
+                level9Content.Play("GameLevel");
+                break;
+            case 10:
+                level10Content.Play("GameLevel");
+                break;
+            case 11:
+                level11Content.Play("GameLevel");
+                break;
+            case 12:
+                level12Content.Play("GameLevel");
+                break;
+            case 13:
+                level13Content.Play("GameLevel");
+                break;
+            case 14:
+                level14Content.Play("GameLevel");
+                break;
+            case 15:
+                level15Content.Play("GameLevel");
+                break;
+            case 16:
+                level16Content.Play("GameLevel");
+                break;
+            case 17:
+                level17Content.Play("GameLevel");
+                break;
+            case 18:
+                level18Content.Play("GameLevel");
+                break;
+            case 19:
+                level19Content.Play("GameLevel");
+                break;
+            case 20:
+                level20Content.Play("GameLevel");
+                break;
+        }
+    }
     
     // 开始拖动时
     public void OnBeginDrag(PointerEventData eventData)
@@ -322,7 +471,14 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level19Info.SetActive(false);
         level20Info.SetActive(false);
     }
-    
+
+    private void OnEnable()
+    {
+        SetTanHao();
+        ShowGameLevelButton();
+        PlayGameLevelAnim();
+    }
+
     void Start()
     {
         // 计算边界限制

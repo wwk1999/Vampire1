@@ -79,6 +79,11 @@ public class FightBGController : XSingleton<FightBGController>
     {
         var success= Instantiate(Resources.Load<GameObject>("Prefabs/Success/Success"),transform);
         success.transform.Find("Canvas/Image").GetComponent<Animator>().Play("Success");
+        if (LevelInfoConfig.CurrentGameLevel + 1 > LevelInfoConfig.MaxGameLevel)
+        {
+            LevelInfoConfig.MaxGameLevel= LevelInfoConfig.CurrentGameLevel + 1;
+            StoreController.S.SaveStoreData();
+        }
     }
     
     IEnumerator DelayDisableDiLie(GameObject obj)

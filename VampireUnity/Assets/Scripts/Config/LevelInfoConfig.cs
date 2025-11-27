@@ -6,6 +6,12 @@ public class LevelInfoConfig
 {
     public static bool IsOneGame = true; //第一次游戏
     public static int CurrentGameLevel = 1; // 当前游戏关卡
+
+    public static int MaxGameLevel
+    {
+        get=>PlayerData.S.maxGameLevel;
+        set=>PlayerData.S.maxGameLevel=value;
+    }
     public static LevelType CurrentGameLevelType = LevelType.Normal;
     public static List<Sprite> LevelDiaoLuo1 = new List<Sprite>();//关卡1掉落列表
     public static List<Sprite> LevelDiaoLuo2 = new List<Sprite>();//关卡2掉落列表

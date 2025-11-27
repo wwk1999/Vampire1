@@ -60,8 +60,8 @@ public class GlobalPlayerAttribute
 
    public static int GameLevel
    {
-            get => PlayerData.S.gameLevel;
-            set => PlayerData.S.gameLevel = value;
+            get => PlayerData.S.maxGameLevel;
+            set => PlayerData.S.maxGameLevel = value;
    }
    
    //人物属性,默认属性

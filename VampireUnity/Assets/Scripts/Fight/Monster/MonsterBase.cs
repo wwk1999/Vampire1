@@ -458,13 +458,20 @@ public abstract class MonsterBase : MonoBehaviour
         }
 
         GameController.S.KillMonsterCount++;
-        Debug.LogError("击杀怪物数量："+GameController.S.KillMonsterCount);
-        Debug.LogError("怪物数量："+LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] +
-                       LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10);
-        if (GameController.S.KillMonsterCount >= LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] +
-            LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10&&LevelInfoConfig.CurrentGameLevelType!= LevelType.Boss)
+        switch (LevelInfoConfig.CurrentGameLevelType)
         {
-            FightBGController.S.PlaySuccessAnim();
+            case LevelType.Elite:
+                if (GameController.S.KillMonsterCount >= LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] + LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10)
+                {
+                    FightBGController.S.PlaySuccessAnim();
+                }
+                break;
+            case LevelType.Normal:
+                if (GameController.S.KillMonsterCount >= LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel])
+                {
+                    FightBGController.S.PlaySuccessAnim();
+                }
+                break;
         }
         
         if (monsterSkeletonAnimation.timeScale == 0)
