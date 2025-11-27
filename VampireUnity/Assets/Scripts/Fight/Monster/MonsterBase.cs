@@ -224,7 +224,44 @@ public abstract class MonsterBase : MonoBehaviour
         }
         if (trackEntry.Animation.Name == "die")
         {
-            //第一关怪物死亡
+           
+        }
+        if (trackEntry.Animation.Name == "Exit")
+        {
+            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+            MonsterState= State.Move;
+            FightBGController.S.TreeManBoss.IsSkill = false;
+            CameraContraller.CameraStatus= CameraStatus.MoveToPlayer;
+        }
+        if (trackEntry.Animation.Name == "skill_01")
+        {
+            MonsterState= State.Move;
+            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+        }
+        if (trackEntry.Animation.Name == "skill_02")
+        {
+            MonsterState= State.Move;
+            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+        }
+        if (trackEntry.Animation.Name == "skill_03")
+        {
+            MonsterState= State.Move;
+            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+        }
+
+        if (trackEntry.Animation.Name == "zhiwnag")
+        {
+            SpiderWeb spiderWeb = FightBGController.S.SpiderWebQueue.Dequeue();
+            spiderWeb.transform.position = transform.position;
+            spiderWeb.gameObject.SetActive(true);
+            IsSkill= false;
+        }
+    }
+    
+    IEnumerator DelayDestroy()
+    {
+        yield return new WaitForSeconds(1f);
+         //第一关怪物死亡
             if (GetComponent<SnotMonster>())
             {
                 gameObject.SetActive(false);
@@ -290,37 +327,6 @@ public abstract class MonsterBase : MonoBehaviour
                 gameObject.SetActive(false);
                 GameController.S.ShiRenHuaMonsterQueue.Enqueue(GetComponent<ShiRenHuaMonster>());
             }
-        }
-        if (trackEntry.Animation.Name == "Exit")
-        {
-            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
-            MonsterState= State.Move;
-            FightBGController.S.TreeManBoss.IsSkill = false;
-            CameraContraller.CameraStatus= CameraStatus.MoveToPlayer;
-        }
-        if (trackEntry.Animation.Name == "skill_01")
-        {
-            MonsterState= State.Move;
-            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
-        }
-        if (trackEntry.Animation.Name == "skill_02")
-        {
-            MonsterState= State.Move;
-            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
-        }
-        if (trackEntry.Animation.Name == "skill_03")
-        {
-            MonsterState= State.Move;
-            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
-        }
-
-        if (trackEntry.Animation.Name == "zhiwnag")
-        {
-            SpiderWeb spiderWeb = FightBGController.S.SpiderWebQueue.Dequeue();
-            spiderWeb.transform.position = transform.position;
-            spiderWeb.gameObject.SetActive(true);
-            IsSkill= false;
-        }
     }
 
     public void MonsterMove()
@@ -452,6 +458,9 @@ public abstract class MonsterBase : MonoBehaviour
         }
 
         GameController.S.KillMonsterCount++;
+        Debug.LogError("击杀怪物数量："+GameController.S.KillMonsterCount);
+        Debug.LogError("怪物数量："+LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] +
+                       LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10);
         if (GameController.S.KillMonsterCount >= LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] +
             LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10&&LevelInfoConfig.CurrentGameLevelType!= LevelType.Boss)
         {
@@ -463,8 +472,13 @@ public abstract class MonsterBase : MonoBehaviour
         if (GetComponent<TreeManBoss>())
         {
             monsterSkeletonAnimation.AnimationState.SetAnimation(0, "die_02", false);
-        }else
+        }
+        else
+        {
              monsterSkeletonAnimation.AnimationState.SetAnimation(0, "die", false);
+             StartCoroutine(DelayDestroy());
+        }
+            
         // 从所有探测器列表中移除自己
         // 立即从所有探测器列表中移除自己
         if (GameController.S != null)
