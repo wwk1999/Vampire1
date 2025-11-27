@@ -113,159 +113,17 @@ public class GameController : XSingleton<GameController>
     //武器源石列表
     [NonSerialized]public List<SourceStoneTable> WeaponSourceStoneList = new List<SourceStoneTable>();
     
+    //杀死怪物数量
+    [NonSerialized]public int KillMonsterCount=0;
+
+    
     public void RegisterEvent()
     {
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossEnergy,BossEnergy);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossWarning, ShowBossWarning);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.ResumePlayerCamera, ResumePlayerCamera);
-        ObserverModuleManager.S.RegisterEvent("SaveEquipSuccess",SaveEquipSuccess);
-        ObserverModuleManager.S.RegisterEvent("AddUserSourceStoneSuccess",AddUserSourceStoneSuccess);
     }
     
-    public void AddUserSourceStoneSuccess(object[] args)
-    {
-        if (args[0] == null) return;
-        Debug.Log("添加源石成功！");
-        AddUserSourceStoneData addUserSourceStoneData = Newtonsoft.Json.JsonConvert.DeserializeObject<AddUserSourceStoneData>(args[0].ToString());
-        SourceStoneTable sourceStoneTable = new SourceStoneTable();
-        sourceStoneTable.SourceStoneId = addUserSourceStoneData.sourcestoneid;
-        sourceStoneTable.SourceStoneName = WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestonename;
-        sourceStoneTable.SourceStoneDesc = WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestoneeffect;
-        sourceStoneTable.Count = addUserSourceStoneData.sourcestonecount;
-        sourceStoneTable.Quality =
-            WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).quality;
-        sourceStoneTable.SourceStoneType =WeaponSourceConfig.GetSourceStoneConfigById(addUserSourceStoneData.sourcestoneid).sourcestonetype;
-        bool exists = false;
-        foreach (var item in BagController.S.SourceStoneTable)
-        {
-            if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-            {
-                exists = true;
-                item.Count = addUserSourceStoneData.sourcestonecount;
-                break;
-            }
-        }
-        if(!exists) BagController.S.SourceStoneTable.Add(sourceStoneTable);
-        switch (sourceStoneTable.Quality)
-        {
-            case 1:
-                bool whiteExists = false;
-                foreach (var item in BagController.S.WhiteWeaponSourceStoneTable)
-                {
-                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-                    {
-                        whiteExists = true;
-                        item.Count = addUserSourceStoneData.sourcestonecount;
-                        break;
-                    }
-                }
-                if(!whiteExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
-                break;
-            case 2:
-                bool greenExists = false;
-                foreach (var item in BagController.S.GreenWeaponSourceStoneTable)
-                {
-                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-                    {
-                        greenExists = true;
-                        item.Count = addUserSourceStoneData.sourcestonecount;
-                        break;
-                    }
-                }
-                if(!greenExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
-                break;
-            case 3:
-                bool blueExists = false;
-                foreach (var item in BagController.S.BlueWeaponSourceStoneTable)
-                {
-                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-                    {
-                        blueExists = true;
-                        item.Count = addUserSourceStoneData.sourcestonecount;
-                        break;
-                    }
-                }
-                if(!blueExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
-                break;
-            case 4:
-                bool purpleExists = false;
-                foreach (var item in BagController.S.PurpleWeaponSourceStoneTable)
-                {
-                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-                    {
-                        purpleExists = true;
-                        item.Count = addUserSourceStoneData.sourcestonecount;
-                        break;
-                    }
-                }
-                if(!purpleExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
-                break;
-            case 5:
-                bool orangeExists = false;
-                foreach (var item in BagController.S.OrangeWeaponSourceStoneTable)
-                {
-                    if (item.SourceStoneId == addUserSourceStoneData.sourcestoneid)
-                    {
-                        orangeExists = true;
-                        item.Count = addUserSourceStoneData.sourcestonecount;
-                        break;
-                    }
-                }
-                if(!orangeExists) BagController.S.WhiteWeaponSourceStoneTable.Add(sourceStoneTable);
-                break;
-        }
-    }
-    
-    
-     public void SaveEquipSuccess(object[] args)
-    {
-        Debug.Log("装备保存回调执行");
-        if (args[0] == null)
-        {
-            Debug.LogError("SaveEquipSuccess出错: args[0]为null");       
-            return;
-        }
-        SavaEquipData savaEquipData = Newtonsoft.Json.JsonConvert.DeserializeObject<SavaEquipData>(args[0].ToString());
-        EquipTable equipTable = new EquipTable();
-        equipTable.equipid = savaEquipData.Equipid;
-        equipTable.Quality = savaEquipData.Quality;
-        equipTable.Damage = savaEquipData.Damage;
-        equipTable.CRIT = savaEquipData.Crit;
-        equipTable.CRITDamage = savaEquipData.Critdamage;
-        equipTable.DamageSpeed = savaEquipData.Damagespeed;
-        equipTable.BloodSuck = savaEquipData.Bloodsuck;
-        equipTable.HP = savaEquipData.Hp;
-        equipTable.MoveSpeed = savaEquipData.Movespeed;
-        equipTable.EquipName = savaEquipData.Equipname;
-        equipTable.suitid = savaEquipData.Suitid;
-        equipTable.suitname = savaEquipData.Suitname;
-        equipTable.equip_type_id = savaEquipData.Equip_type_id;
-        equipTable.equip_type_name = savaEquipData.Equip_type_name;
-        equipTable.Userid = savaEquipData.Userid;
-        equipTable.Defense = savaEquipData.Defense;
-        equipTable.GoodFortune = savaEquipData.Goodfortune;
-        BagController.S.EquipIdList.Add(equipTable.equipid,equipTable);
-        BagController.S.EquipIdList.Add(equipTable.equipid,equipTable);
-        switch (equipTable.Quality)
-        {
-            case 1:
-                BagController.S.WhiteEquipidTable.Add(equipTable);
-                break;
-            case 2:
-                BagController.S.GreenEquipidTable.Add(equipTable);
-                break;
-            case 3:
-                BagController.S.BlueEquipidTable.Add(equipTable);
-                break;
-            case 4:
-                BagController.S.PurpleEquipidTable.Add(equipTable);
-                break;
-            case 5:
-                BagController.S.OrangeEquipidTable.Add(equipTable);
-                break;
-        }
-        
-    }
     private void Awake()
     {
         RegisterEvent();
@@ -284,7 +142,7 @@ public class GameController : XSingleton<GameController>
 
     private void Start()
     {
-       
+        KillMonsterCount = 0;
         if (LevelInfoConfig.CurrentGameLevel == 1 || LevelInfoConfig.CurrentGameLevel == 2 ||
             LevelInfoConfig.CurrentGameLevel == 3|| LevelInfoConfig.CurrentGameLevel == 4)
         {
@@ -313,22 +171,22 @@ public class GameController : XSingleton<GameController>
         
         
         //赋值
-        FightBGController.S.SaveButton = GameController.S.fightBG.GetComponent<FightBg>().saveButton;
-        FightBGController.S.WeaponButton= GameController.S.fightBG.GetComponent<FightBg>().weaponButton;
-        FightBGController.S.joystick=GameController.S.fightBG.GetComponent<FightBg>().joystick;
-        FightBGController.S.normalAttackButton=GameController.S.fightBG.GetComponent<FightBg>().normalAttackButton;
-        FightBGController.S.FightStopButton=GameController.S.fightBG.GetComponent<FightBg>().fightStopButton;
-        FightBGController.S.dashButton=GameController.S.fightBG.GetComponent<FightBg>().dashButton;
-        FightBGController.S.rageButton=GameController.S.fightBG.GetComponent<FightBg>().rageButton;
-        FightBGController.S.shieldButton=GameController.S.fightBG.GetComponent<FightBg>().shieldButton;
-        FightBGController.S.iceArrowButton=GameController.S.fightBG.GetComponent<FightBg>().iceArrowButton;
-        FightBGController.S.iceExButton=GameController.S.fightBG.GetComponent<FightBg>().iceExButton;
-        FightBGController.S.iceBallButton=GameController.S.fightBG.GetComponent<FightBg>().iceBallButton;
-        FightBGController.S.IceExYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceExYellowCd;
-        FightBGController.S.IceBallYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceBallYellowCd;
-        FightBGController.S.IceArrowYellowCd=GameController.S.fightBG.GetComponent<FightBg>().iceArrowYellowCd;
-        FightBGController.S.BossEnergySlider=GameController.S.fightBG.GetComponent<FightBg>().bossEnergySlider;
-        GameController.S.fightTimeText = GameController.S.fightBG.GetComponent<FightBg>().fightTimeText;
+        FightBGController.S.SaveButton = fightBG.GetComponent<FightBg>().saveButton;
+        FightBGController.S.WeaponButton= fightBG.GetComponent<FightBg>().weaponButton;
+        FightBGController.S.joystick=fightBG.GetComponent<FightBg>().joystick;
+        FightBGController.S.normalAttackButton=fightBG.GetComponent<FightBg>().normalAttackButton;
+        FightBGController.S.FightStopButton=fightBG.GetComponent<FightBg>().fightStopButton;
+        FightBGController.S.dashButton=fightBG.GetComponent<FightBg>().dashButton;
+        FightBGController.S.rageButton=fightBG.GetComponent<FightBg>().rageButton;
+        FightBGController.S.shieldButton=fightBG.GetComponent<FightBg>().shieldButton;
+        FightBGController.S.iceArrowButton=fightBG.GetComponent<FightBg>().iceArrowButton;
+        FightBGController.S.iceExButton=fightBG.GetComponent<FightBg>().iceExButton;
+        FightBGController.S.iceBallButton=fightBG.GetComponent<FightBg>().iceBallButton;
+        FightBGController.S.IceExYellowCd=fightBG.GetComponent<FightBg>().iceExYellowCd;
+        FightBGController.S.IceBallYellowCd=fightBG.GetComponent<FightBg>().iceBallYellowCd;
+        FightBGController.S.IceArrowYellowCd=fightBG.GetComponent<FightBg>().iceArrowYellowCd;
+        FightBGController.S.BossEnergySlider=fightBG.GetComponent<FightBg>().bossEnergySlider;
+        fightTimeText = fightBG.GetComponent<FightBg>().fightTimeText;
 
         
         //战斗暂停按钮点击事件
@@ -339,11 +197,7 @@ public class GameController : XSingleton<GameController>
         });
         
          // EquipController.S.GetMaxEquipId();
-        
-        FightBGController.S.SaveButton.onClick.AddListener(() =>
-        {
-            //EquipController.S.BatchInsertEquipsWithTransaction(BagController.S.EquipIdList);
-        });
+         
         FightBGController.S.WeaponButton.onClick.AddListener(() =>
         {
             Time.timeScale = 0;
@@ -722,16 +576,6 @@ public class GameController : XSingleton<GameController>
     {
         if (GlobalPlayerAttribute.IsGame == false)
             return;
-        // //出现BOSS
-        // if (BossEnergy > 10 && HaveBoss==false)
-        // {
-        //     ObserverModuleManager.S.SendEvent(ConstKeys.CameraMoveToBoss);
-        //     // HaveBoss = true;
-        //     // CurrentBoss=Instantiate(Resources.Load<MonsterBase>("Prefabs/Monster/VacantEye"), transform);
-        //     // CurrentBoss.transform.position = new Vector3(0, 0, 0f);
-        //     // GameObject BossHp=Instantiate(Resources.Load<GameObject>("Prefabs/Tool/BOSSHP"), transform);
-        //     // Slider BossHPSlider = BossHp.transform.Find("Canvas/Slider").GetComponent<Slider>();
-        // }
         //更新战斗时间,以秒为单位
         fightTime += Time.deltaTime;
         var minute=(int)fightTime/60;

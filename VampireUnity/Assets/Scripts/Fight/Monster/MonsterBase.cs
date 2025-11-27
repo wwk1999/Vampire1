@@ -450,8 +450,13 @@ public abstract class MonsterBase : MonoBehaviour
                 GameController.S.BossCount++;
                 break;
         }
-        
-        
+
+        GameController.S.KillMonsterCount++;
+        if (GameController.S.KillMonsterCount >= LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] +
+            LevelInfoConfig.LevelMonsterCount[LevelInfoConfig.CurrentGameLevel] / 10&&LevelInfoConfig.CurrentGameLevelType!= LevelType.Boss)
+        {
+            FightBGController.S.PlaySuccessAnim();
+        }
         
         if (monsterSkeletonAnimation.timeScale == 0)
             monsterSkeletonAnimation.timeScale = 1;

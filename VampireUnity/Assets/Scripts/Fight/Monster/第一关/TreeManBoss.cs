@@ -135,6 +135,7 @@ public class TreeManBoss : MonsterBase
         CreateEquip();
         CreateWeaponSourceStone();
         TreeManBossDie();
+        FightBGController.S.PlaySuccessAnim();
     }
 
     public void TreeManBossDie()

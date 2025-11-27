@@ -742,6 +742,14 @@ public class BagController : XSingleton<BagController>
             Debug.LogError("ShowEquip出错: bagGrid预制体为null");
             return;
         }
+
+        if (equipContent != null)
+        {
+            foreach (Transform item in equipContent.transform)
+            {
+                Destroy(item.gameObject);
+            }
+        }
         // 计算显示的装备范围
         int startIndex = (PageNum - 1) * 20;
         int endIndex = Mathf.Min(PageNum * 20, EquipIdList.Count);

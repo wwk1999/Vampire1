@@ -225,6 +225,8 @@ public class EquipAttributePanel : MonoBehaviour
         }
         sellButton.onClick.AddListener(() =>
         {
+            
+            
             BagGrid.transform.Find("EquipGridBG").GetComponent<Image>().color =new Color(1, 1, 1, 0);
             BagGrid.transform.Find("BagGridImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
             BagGrid.transform.Find("Count").GetComponent<Text>().text = null;

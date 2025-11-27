@@ -12,7 +12,7 @@ public class ReturnButton : MonoBehaviour
    [NonSerialized]Button returnbutton;
     void Start()
     {
-        returnbutton = GameController.S.transform.Find("FightBG(Clone)/Canvas/ReturnButton").GetComponent<Button>();
+        returnbutton = GameController.S.transform.Find("FightBG(Clone)/Canvas/Mask/ReturnButton").GetComponent<Button>();
         returnbutton.onClick.AddListener(() =>
         {
             Debug.Log("返回按钮退出游戏");

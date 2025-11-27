@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mysql;
 using Unity.VisualScripting;
@@ -72,6 +73,18 @@ public class FightBGController : XSingleton<FightBGController>
         DiLie.transform.Find("DiLie").GetComponent<ParticleSystem>().Play();
         DiLie.transform.Find("GroundFissure/qitiao").GetComponent<ParticleSystem>().Play();
         DiLie.transform.Find("GroundFissure/baozha").GetComponent<ParticleSystem>().Play();
+    }
+
+    public void PlaySuccessAnim()
+    {
+        var success= Instantiate(Resources.Load<GameObject>("Prefabs/Success/Success"),transform);
+        success.transform.Find("Canvas/Image").GetComponent<Animator>().Play("Success");
+    }
+    
+    IEnumerator DelayDisableDiLie(GameObject obj)
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(obj);
     }
     
 }

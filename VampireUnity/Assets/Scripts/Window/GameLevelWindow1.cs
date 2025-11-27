@@ -349,6 +349,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level1Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡1");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 1;
            HideLevelInfo();
@@ -357,6 +358,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level2Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡2");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 2;
            HideLevelInfo();
@@ -365,6 +367,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level3Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡3");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Elite;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 3;
            HideLevelInfo();
@@ -373,6 +376,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level4Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡4");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Boss;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 4;
            HideLevelInfo();
@@ -381,6 +385,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level5Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡5");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 5;
            HideLevelInfo();
@@ -389,6 +394,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level6Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡6");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 6;
            HideLevelInfo();
@@ -397,6 +403,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level7Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡7");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Elite;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 7;
            HideLevelInfo();
@@ -405,6 +412,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level8Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡8");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Boss;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 8;
            HideLevelInfo();
@@ -413,6 +421,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level9Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡9");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 9;
            HideLevelInfo();
@@ -421,6 +430,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level10Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡10");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 10;
            HideLevelInfo();
@@ -429,6 +439,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level11Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡11");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Elite;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 11;
            HideLevelInfo();
@@ -437,6 +448,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level12Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡12");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Boss;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 12;
            HideLevelInfo();
@@ -445,6 +457,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level13Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡13");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 13;
            HideLevelInfo();
@@ -453,6 +466,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level14Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡14");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 14;
            HideLevelInfo();
@@ -461,6 +475,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level15Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡15");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Elite;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 15;
            HideLevelInfo();
@@ -469,6 +484,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level16Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡16");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Boss;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 16;
            HideLevelInfo();
@@ -477,6 +493,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level17Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡17");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 17;
            HideLevelInfo();
@@ -485,6 +502,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level18Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡18");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Normal;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 18;
            HideLevelInfo();
@@ -493,6 +511,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level19Button.onClick.AddListener(() =>
         {
            Debug.Log("点击关卡19");
+           LevelInfoConfig.CurrentGameLevelType = LevelType.Elite;
            WindowController.S.Message.SetActive(false);
            LevelInfoConfig.CurrentGameLevel = 19;
            HideLevelInfo();
@@ -501,6 +520,7 @@ public class GameLevelWindow1 : MonoBehaviour,IBeginDragHandler, IDragHandler, I
         level20Button.onClick.AddListener(() =>
         {
             Debug.Log("点击关卡20");
+            LevelInfoConfig.CurrentGameLevelType = LevelType.Boss;
             WindowController.S.Message.SetActive(false);
             LevelInfoConfig.CurrentGameLevel = 20;
             HideLevelInfo();
