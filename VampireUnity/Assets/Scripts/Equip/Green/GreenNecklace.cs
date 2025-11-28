@@ -20,7 +20,7 @@ public class GreenNecklace : EquipBase
             // //添加生命值，随机10-20
             // EquipAttributes.Attributes.Add(EquipAttribute.HP, random.Next(10, 20));
             EquipAttributes.EquipName = "GreenNecklace";
-            EquipAttributes.suitid = 0;
+            EquipAttributes.suitid = 2;
             EquipAttributes.suitname = "None";
             EquipAttributes.equip_type_id = 4;
             EquipAttributes.equip_type_name = "项链";
@@ -30,25 +30,5 @@ public class GreenNecklace : EquipBase
             EquipAttributes.BloodSuck=random.Next(5,10);
             
         }
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("PickUp"))
-            {
-                isPickUp= true;
-            }else if (other.CompareTag("Player"))
-            {
-                if (isSend) return;
-                Debug.Log("名字："+EquipAttributes.EquipName);
-                //将这件装备的属性添加到数据库
-                EquipIDData.S.SavaEquip(EquipAttributes);
-                StoreController.S.SaveStoreData();
-                isSend = true;
-               
-                ObserverModuleManager.S.SendEvent(ConstKeys.ShowToast,EquipAttributes);
-
-
-                //如果被拾取，销毁装备
-                gameObject.SetActive(false);
-                GameController.S.GreenNecklaceQueue.Enqueue(gameObject);            }
-        }
+        
 }

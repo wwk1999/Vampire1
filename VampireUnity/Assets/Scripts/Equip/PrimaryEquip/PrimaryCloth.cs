@@ -19,7 +19,7 @@ namespace Equip
             // //添加生命值，随机10-20
             // EquipAttributes.Attributes.Add(EquipAttribute.HP, random.Next(10, 20));
             EquipAttributes.EquipName = "PrimaryCloth";
-            EquipAttributes.suitid = 0;
+            EquipAttributes.suitid = 1;
             EquipAttributes.suitname = "None";
             EquipAttributes.equip_type_id = 2;
             EquipAttributes.equip_type_name = "衣服";
@@ -29,26 +29,6 @@ namespace Equip
             EquipAttributes.HP=random.Next(10,20);
             
         }
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("PickUp"))
-            {
-                isPickUp= true;
-            }else if (other.CompareTag("Player"))
-            {
-                if (isSend) return;
-                Debug.Log("名字："+EquipAttributes.EquipName);
-                //将这件装备的属性添加到数据库
-                EquipIDData.S.SavaEquip(EquipAttributes);
-                StoreController.S.SaveStoreData();                isSend = true;
-                
-                ObserverModuleManager.S.SendEvent(ConstKeys.ShowToast,EquipAttributes);
-
-
-                //如果被拾取，销毁装备
-                gameObject.SetActive(false);
-                GameController.S.PrimaryClothQueue.Enqueue(gameObject);
-            }
-        }
+       
     }
 }
