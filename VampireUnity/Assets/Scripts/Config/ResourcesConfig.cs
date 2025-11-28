@@ -102,6 +102,13 @@ public class ResourcesConfig : MonoBehaviour
     public static Sprite PurpleBg;
     public static Sprite OrangeBg;
     
+    //颜色背景
+    public static Material WhiteMaterial;
+    public static Material GreenMaterial;
+    public static Material BlueMaterial;
+    public static Material PurpleMaterial;
+    public static Material OrangeMaterial;
+    
     //武器
     public static Sprite OneWeapon;
     public static Sprite TwoWeapon;
@@ -123,6 +130,13 @@ public class ResourcesConfig : MonoBehaviour
         BlueBg= Resources.Load<Sprite>("Sprite/ColorBg/EquipBlueBG");
         PurpleBg= Resources.Load<Sprite>("Sprite/ColorBg/EquipPurpleBG");
         OrangeBg= Resources.Load<Sprite>("Sprite/ColorBg/EquipOrangeBG");
+        
+        WhiteMaterial= Resources.Load<Material>("Material/EquipOutline/WhiteEquipOutline");
+        GreenMaterial= Resources.Load<Material>("Material/EquipOutline/GreenEquipOutline");
+        BlueMaterial= Resources.Load<Material>("Material/EquipOutline/BlueEquipOutline");
+        PurpleMaterial= Resources.Load<Material>("Material/EquipOutline/PurpleEquipOutline");
+        OrangeMaterial= Resources.Load<Material>("Material/EquipOutline/OrangeEquipOutline");
+        
         
         //新手套装
         PrimaryCloth= Resources.Load<Sprite>("Sprite/Equip/PrimaryCloth");

@@ -94,6 +94,13 @@ public class BagController : XSingleton<BagController>
     public Sprite blueBg;
     public Sprite purpleBg;
     public Sprite orangeBg;
+    
+    //装备颜色背景的material
+    public Material whiteMaterial;
+    public Material greenMaterial;
+    public Material blueMaterial;
+    public Material purpleMaterial;
+    public Material orangeMaterial;
 
     
     //player穿的装备的属性
@@ -140,6 +147,13 @@ public class BagController : XSingleton<BagController>
         blueBg =ResourcesConfig.BlueBg;
         purpleBg = ResourcesConfig.PurpleBg;
         orangeBg = ResourcesConfig.OrangeBg;
+        
+        whiteMaterial= ResourcesConfig.WhiteMaterial;
+        greenMaterial= ResourcesConfig.GreenMaterial;
+        blueMaterial= ResourcesConfig.BlueMaterial;
+        purpleMaterial= ResourcesConfig.PurpleMaterial;
+        orangeMaterial= ResourcesConfig.OrangeMaterial;
+        
         
         // 检查装备背景图是否加载成功
         if (whiteBg == null || greenBg == null || blueBg == null || purpleBg == null || orangeBg == null)
@@ -530,6 +544,8 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=orangeBg;
+            bagGridins.transform.Find("BagGridImage").GetComponent<Image>().material = orangeMaterial;
+
             EquipIdList.Add(equip.equipid,equip);
         }
         
@@ -541,6 +557,8 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=purpleBg;
+            bagGridins.transform.Find("BagGridImage").GetComponent<Image>().material = purpleMaterial;
+
             EquipIdList.Add(equip.equipid,equip);
 
         }
@@ -553,6 +571,8 @@ public class BagController : XSingleton<BagController>
            bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=blueBg;
+            bagGridins.transform.Find("BagGridImage").GetComponent<Image>().material = blueMaterial;
+
             EquipIdList.Add(equip.equipid,equip);
         }
         
@@ -564,6 +584,8 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage =ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=greenBg;
+            bagGridins.transform.Find("BagGridImage").GetComponent<Image>().material = greenMaterial;
+
             EquipIdList.Add(equip.equipid,equip);
         }
         
@@ -575,6 +597,8 @@ public class BagController : XSingleton<BagController>
             bagGridins.GetComponent<BagGrid>().tableBase = equip;
             bagGridins.GetComponent<BagGrid>().equipAttributeImage = ResourcesConfig.GetEquipSprite(equip);
             bagGridins.transform.Find("EquipGridBG").GetComponent<Image>().sprite=whiteBg;
+            bagGridins.transform.Find("BagGridImage").GetComponent<Image>().material = whiteMaterial;
+
             EquipIdList.Add(equip.equipid,equip);
         }
     }
@@ -806,18 +830,23 @@ public class BagController : XSingleton<BagController>
                     {
                         case 1:
                             equipGridBGImage.sprite = whiteBg;
+                            bagGridButton.image.material = whiteMaterial;
                             break;
                         case 2:
                             equipGridBGImage.sprite = greenBg;
+                            bagGridButton.image.material = greenMaterial;
                             break;
                         case 3:
                             equipGridBGImage.sprite = blueBg;
+                            bagGridButton.image.material = blueMaterial;
                             break;
                         case 4:
                             equipGridBGImage.sprite = purpleBg;
+                            bagGridButton.image.material = purpleMaterial;
                             break;
                         case 5:
                             equipGridBGImage.sprite = orangeBg;
+                            bagGridButton.image.material = orangeMaterial;
                             break;
 
                     }
@@ -864,18 +893,23 @@ public class BagController : XSingleton<BagController>
                 {
                     case 1:
                         equipGridBGImage.sprite = whiteBg;
+                        bagGridButton.image.material = whiteMaterial;
                         break;
                     case 2:
                         equipGridBGImage.sprite = greenBg;
+                        bagGridButton.image.material = greenMaterial;
                         break;
                     case 3:
                         equipGridBGImage.sprite = blueBg;
+                        bagGridButton.image.material = blueMaterial;
                         break;
                     case 4:
                         equipGridBGImage.sprite = purpleBg;
+                        bagGridButton.image.material = purpleMaterial;
                         break;
                     case 5:
                         equipGridBGImage.sprite = orangeBg;
+                        bagGridButton.image.material = orangeMaterial;
                         break;
                 }
             }
@@ -1001,18 +1035,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1031,18 +1071,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1061,18 +1107,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1091,18 +1143,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1121,18 +1179,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1151,18 +1215,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1201,18 +1271,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerCloak.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerCloak.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1236,18 +1312,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerCloth.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerCloth.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1270,18 +1352,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerShoe.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerShoe.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1304,18 +1392,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerHelmet.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerHelmet.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1338,18 +1432,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerNecklace.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerNecklace.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
@@ -1372,18 +1472,24 @@ public class BagController : XSingleton<BagController>
             {
                 case 1:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = whiteBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = whiteMaterial;
                     break;
                 case 2:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = greenBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = greenMaterial;
                     break;
                 case 3:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = blueBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = blueMaterial;
+
                     break;
                 case 4:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = purpleBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = purpleMaterial;
                     break;
                 case 5:
                     playerRing.transform.Find("ImageBG").GetComponent<Image>().sprite = orangeBg;
+                    playerRing.transform.Find("Image").GetComponent<Image>().material = orangeMaterial;
                     break;
             }
         }
