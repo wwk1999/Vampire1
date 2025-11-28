@@ -43,7 +43,8 @@ public class GreenCloak : EquipBase
             StoreController.S.SaveStoreData();
             isSend = true;
 
-         
+            ObserverModuleManager.S.SendEvent(ConstKeys.ShowToast,EquipAttributes);
+
 
 
             //如果被拾取，销毁装备

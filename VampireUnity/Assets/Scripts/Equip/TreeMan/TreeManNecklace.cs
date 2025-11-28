@@ -40,6 +40,7 @@ public class TreeManNecklace : EquipBase
             EquipIDData.S.SavaEquip(EquipAttributes);
             StoreController.S.SaveStoreData();            isSend = true;
           
+            ObserverModuleManager.S.SendEvent(ConstKeys.ShowToast,EquipAttributes);
 
 
             //如果被拾取，销毁装备
