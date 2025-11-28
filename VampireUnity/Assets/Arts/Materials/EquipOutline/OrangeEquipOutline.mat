@@ -7,12 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
-  m_Shader: {fileID: 4800000, guid: d54e9dd88747546b5b56899ac57e9b7e, type: 3}
+  m_Name: OrangeEquipOutline
+  m_Shader: {fileID: 4800000, guid: 1333c86e5d65d974ab2b2b022f7b3cdd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USETEXTUREALPHA_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -28,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 818f147599809414b94ee355ba75efc6, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -39,29 +40,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OutlineDistortTex:
-        m_Texture: {fileID: 2800000, guid: 3efab5eb47ea3b147bdf5eb8b8662a9a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OutlineTex:
-        m_Texture: {fileID: 2800000, guid: 3efab5eb47ea3b147bdf5eb8b8662a9a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
     - _OutlineAlpha: 1
-    - _OutlineDistortAmount: 0.44
-    - _OutlineDistortTexXSpeed: 0
-    - _OutlineDistortTexYSpeed: -2
-    - _OutlineFadeEnd: 1
-    - _OutlineFadeStart: 0.3
-    - _OutlinePixelWidth: 1
-    - _OutlineTexXSpeed: 5
-    - _OutlineTexYSpeed: 5
+    - _OutlineWidth: 0.01
+    - _UseTextureAlpha: 1
+    - _UseVertexColor: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0.18017934, b: 0, a: 1}
+    - _OutlineColor: {r: 1.9999999, g: 1.9999999, b: 1.9999999, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
