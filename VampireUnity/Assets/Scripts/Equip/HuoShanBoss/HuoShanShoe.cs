@@ -45,7 +45,7 @@ public class HuoShanShoe : EquipBase
 
 
             //如果被拾取，销毁装备
-            Destroy(gameObject);
-        }
+            gameObject.SetActive(false);
+            GameController.S.HuoShanShoeQueue.Enqueue(gameObject);        }
     }
 }

@@ -91,8 +91,8 @@ public class BatMonster : MonsterBase
 
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 100));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 100));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Primary, 100));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Primary, 100));
     }
 
     public override void AddMonsterSourceStone()

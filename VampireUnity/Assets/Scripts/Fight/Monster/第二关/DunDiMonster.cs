@@ -23,11 +23,12 @@ public class DunDiMonster : MonsterBase
     }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 10));
-        
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenRingFight", 5));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenNecklaceFight", 5));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Green, 10));
     }
     
     public override void Hurt(int damage)

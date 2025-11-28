@@ -84,19 +84,19 @@ public class HuoShanBoss : MonsterBase
     public override void Skill() { }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenClothFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenRingFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenCloakFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenShoeFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenNecklaceFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Green/GreenHelmetFight", 15));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Green, 10));
         
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanCloakFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanNecklaceFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("HuoShan/HuoShanHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.HuoShan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.HuoShan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.HuoShan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.HuoShan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.HuoShan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.HuoShan, 10));
     }
     
     public override void AddMonsterSourceStone()

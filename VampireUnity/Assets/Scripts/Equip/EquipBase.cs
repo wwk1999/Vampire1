@@ -26,7 +26,7 @@ public class EquipBase : BagObjectBase
         this.suitType = suitType;
         this.EquipAttributes = equipAttribute;
     }
-    void Start()
+    void OnEnable()
     {
         bagObjectType = BagObjectType.Equip;
         equipRb=GetComponent<Rigidbody2D>();

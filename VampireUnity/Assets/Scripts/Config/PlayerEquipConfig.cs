@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class PlayerEquipConfig : MonoBehaviour
 {
+    public  enum EquipType
+    {
+        Helmet ,
+        Ring ,
+        Cloak ,
+        Cloth,
+        Shoe ,
+        Necklace
+    }
+    
+    public  enum EquipLevel
+    {
+        Primary ,
+        Green ,
+        Blue ,
+        TreeMan,
+        HuoShan ,
+        ZhaoZe
+    }
     public static int HelmetId
     {
         get => PlayerData.S.helmetid;

@@ -25,19 +25,12 @@ public class EliteDaZuiMonster : MonsterBase
     }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryClothFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryCloakFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryShoeFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 15));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryHelmetFight", 15));
-        
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManCloakFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManNecklaceFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Green, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Green, 10));
     }
     
     public override void Hurt(int damage)

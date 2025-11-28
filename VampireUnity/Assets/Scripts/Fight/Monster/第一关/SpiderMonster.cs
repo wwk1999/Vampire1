@@ -75,8 +75,8 @@ public class SpiderMonster : MonsterBase
     }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Primary, 10));
     }
     
     public override void AddMonsterSourceStone()

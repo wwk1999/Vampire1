@@ -45,37 +45,7 @@ public class SnotMonster : MonsterBase
         //生成随机数
         int randomDelay = UnityEngine.Random.Range(0, 10);
         GameController.S.StartCoroutine(RandomDelayDie(randomDelay));
-        // if (IsOriginal)
-        // {
-        //     GeneralDie();
-        //     Debug.Log("分裂");
-        //     GameObject obj1 = Instantiate(gameObject,
-        //         new Vector3(transform.position.x + 0.3f, transform.position.y, transform.position.z),
-        //         Quaternion.identity);
-        //     GameObject obj2 = Instantiate(gameObject,
-        //         new Vector3(transform.position.x - 0.3f, transform.position.y, transform.position.z),
-        //         Quaternion.identity);
-        //     obj1.transform.localScale = new Vector3(transform.localScale.x * 0.7f, transform.localScale.y * 0.7f,
-        //         transform.localScale.z * 0.7f);
-        //     obj2.transform.localScale = new Vector3(transform.localScale.x * 0.7f, transform.localScale.y * 0.7f,
-        //         transform.localScale.z * 0.7f);
-        //     obj1.GetComponent<SnotMonster>().IsOriginal = false;
-        //     obj2.GetComponent<SnotMonster>().IsOriginal = false;
-        //     obj1.GetComponent<BoxCollider2D>().enabled = true;
-        //     obj2.GetComponent<BoxCollider2D>().enabled = true;
-        //     
-        //     gameObject.SetActive(false);
-        //     GameController.S.SnotMonsterQueue.Enqueue(this);
-        //     //Destroy(gameObject);
-        // }
-        // else
-        // {
-        //     GeneralDie();
-        //     GetEx();
-        //     ObserverModuleManager.S.SendEvent(ConstKeys.BossEnergy);
-        //     CreateBloodEnergy();
-        //     CreateEquip();
-        // }
+        
     }
 
     // Update is called once per frame
@@ -89,28 +59,6 @@ public class SnotMonster : MonsterBase
             MonsterMove();
             SpriteFlipX(true);
         }
-        // else if (IsDead && IsOriginal)
-        // {
-        //     Debug.Log("分裂");
-        //     GameObject obj1 = Instantiate(gameObject,
-        //         new Vector3(transform.position.x + 0.3f, transform.position.y, transform.position.z),
-        //         Quaternion.identity);
-        //     GameObject obj2 = Instantiate(gameObject,
-        //         new Vector3(transform.position.x - 0.3f, transform.position.y, transform.position.z),
-        //         Quaternion.identity);
-        //     obj1.transform.localScale = new Vector3(transform.localScale.x * 0.7f, transform.localScale.y * 0.7f,
-        //         transform.localScale.z * 0.7f);
-        //     obj2.transform.localScale = new Vector3(transform.localScale.x * 0.7f, transform.localScale.y * 0.7f,
-        //         transform.localScale.z * 0.7f);
-        //     obj1.GetComponent<SnotMonster>().IsOriginal = false;
-        //     obj2.GetComponent<SnotMonster>().IsOriginal = false;
-        //     obj1.GetComponent<BoxCollider2D>().enabled = true;
-        //     obj2.GetComponent<BoxCollider2D>().enabled = true;
-        //     // var equipRb1 = obj1.GetComponent<Rigidbody2D>();
-        //     // equipRb1.linearVelocity = new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(3f, 5f));
-        //     // var equipRb2 = obj2.GetComponent<Rigidbody2D>();
-        //     // equipRb2.linearVelocity = new Vector2(UnityEngine.Random.Range(-2f, 2f), UnityEngine.Random.Range(3f, 5f));
-        // }
     }
 
     public override void Skill()
@@ -129,8 +77,8 @@ public class SnotMonster : MonsterBase
 
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryCloakFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Primary, 10));
     }
     
     public override void AddMonsterSourceStone()

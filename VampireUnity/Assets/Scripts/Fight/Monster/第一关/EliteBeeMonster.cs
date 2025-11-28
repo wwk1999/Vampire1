@@ -17,12 +17,12 @@ public class EliteBeeMonster : MonsterBase
     public EliteBeeMonster() : base(MonsterType.Elite, "EliteBeeMonster", 1, 1000, 0.3f, 20, 5, 50, 100, 10) { }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryCloakFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Primary, 10));
     }
     
     public override void AddMonsterSourceStone()

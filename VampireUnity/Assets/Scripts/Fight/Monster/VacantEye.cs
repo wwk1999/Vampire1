@@ -24,19 +24,12 @@ public class VacantEye : MonsterBase
      }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryClothFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryCloakFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryShoeFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryHelmetFight", 2));
-        
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManClothFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManRingFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManCloakFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManShoeFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManNecklaceFight", 2));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManHelmetFight", 2));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Blue, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Blue, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Blue, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Blue, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Blue, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Blue, 10));
     }
     
     public override void AddMonsterSourceStone()

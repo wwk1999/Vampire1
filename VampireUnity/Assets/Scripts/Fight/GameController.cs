@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Equip;
 using Mysql;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -71,7 +72,42 @@ public class GameController : XSingleton<GameController>
     //怪物伤害文本对象池队列
     [NonReorderable]public Queue<GameObject>MonsterHurtTextQueue = new Queue<GameObject>();
 
+    //装备对象池
+    [NonReorderable]public Queue<GameObject>PrimaryCloakQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>PrimaryClothQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>PrimaryRingQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>PrimaryHelmetQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>PrimaryNecklaceQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>PrimaryShoeQueue = new Queue<GameObject>();
     
+    [NonReorderable]public Queue<GameObject>GreenCloakQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>GreenClothQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>GreenRingQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>GreenHelmetQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>GreenNecklaceQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>GreenShoeQueue = new Queue<GameObject>();
+    
+    [NonReorderable]public Queue<GameObject>BlueCloakQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>BlueClothQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>BlueRingQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>BlueHelmetQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>BlueNecklaceQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>BlueShoeQueue = new Queue<GameObject>();
+    
+    [NonReorderable]public Queue<GameObject>TreeManCloakQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>TreeManClothQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>TreeManRingQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>TreeManHelmetQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>TreeManNecklaceQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>TreeManShoeQueue = new Queue<GameObject>();
+    
+    [NonReorderable]public Queue<GameObject>HuoShanCloakQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>HuoShanClothQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>HuoShanRingQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>HuoShanHelmetQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>HuoShanNecklaceQueue = new Queue<GameObject>();
+    [NonReorderable]public Queue<GameObject>HuoShanShoeQueue = new Queue<GameObject>();
+
 
 
    
@@ -128,6 +164,102 @@ public class GameController : XSingleton<GameController>
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossEnergy,BossEnergy);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.BossWarning, ShowBossWarning);
         ObserverModuleManager.S.RegisterEvent(ConstKeys.ResumePlayerCamera, ResumePlayerCamera);
+    }
+    
+    
+    public GameObject GetEquip(MonsterEquip monsterEquip)
+    {
+        GameObject equip = null;
+        switch (monsterEquip.EquipLevel)
+        {
+            case PlayerEquipConfig.EquipLevel.Primary:
+                switch (monsterEquip.EquipType)
+                {
+                    case PlayerEquipConfig.EquipType.Cloak:
+                        return PrimaryCloakQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Cloth:
+                        return PrimaryClothQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Ring:
+                        return PrimaryRingQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Shoe:
+                        return PrimaryShoeQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Helmet:
+                        return PrimaryHelmetQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Necklace:
+                        return PrimaryNecklaceQueue.Dequeue();
+                }
+                break;
+            case PlayerEquipConfig.EquipLevel.Green:
+                switch (monsterEquip.EquipType)
+                {
+                    case PlayerEquipConfig.EquipType.Cloak:
+                        return GreenCloakQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Cloth:
+                        return GreenClothQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Ring:
+                        return GreenRingQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Shoe:
+                        return GreenShoeQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Helmet:
+                        return GreenHelmetQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Necklace:
+                        return GreenNecklaceQueue.Dequeue();
+                }
+                break;
+            case PlayerEquipConfig.EquipLevel.Blue:
+                switch (monsterEquip.EquipType)
+                {
+                    case PlayerEquipConfig.EquipType.Cloak:
+                        return BlueCloakQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Cloth:
+                        return BlueClothQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Ring:
+                        return BlueRingQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Shoe:
+                        return BlueShoeQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Helmet:
+                        return BlueHelmetQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Necklace:
+                        return BlueNecklaceQueue.Dequeue();
+                }
+                break;
+            case PlayerEquipConfig.EquipLevel.TreeMan:
+                switch (monsterEquip.EquipType)
+                {
+                    case PlayerEquipConfig.EquipType.Cloak:
+                        return TreeManCloakQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Cloth:
+                        return TreeManClothQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Ring:
+                        return TreeManRingQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Shoe:
+                        return TreeManShoeQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Helmet:
+                        return TreeManHelmetQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Necklace:
+                        return TreeManNecklaceQueue.Dequeue();
+                }
+                break;
+           case PlayerEquipConfig.EquipLevel.HuoShan:
+                switch (monsterEquip.EquipType)
+                {
+                    case PlayerEquipConfig.EquipType.Cloak:
+                        return HuoShanCloakQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Cloth:
+                        return HuoShanClothQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Ring:
+                        return HuoShanRingQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Shoe:
+                        return HuoShanShoeQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Helmet:
+                        return HuoShanHelmetQueue.Dequeue();
+                    case PlayerEquipConfig.EquipType.Necklace:
+                        return HuoShanNecklaceQueue.Dequeue();
+                }
+               break;
+        }
+
+        return equip;
     }
     
     private void Awake()

@@ -581,8 +581,8 @@ public abstract class MonsterBase : MonoBehaviour
             if (random <= monsterEquip.Probability)
             {
                 //生成装备
-                Debug.Log("生成装备："+monsterEquip.Name);
-                GameObject equip = Instantiate(Resources.Load<GameObject>("Prefabs/Equip/" + monsterEquip.Name));
+                GameObject equip = GameController.S.GetEquip(monsterEquip);
+                equip.gameObject.SetActive(true);
                 //设置装备位置为怪物位置
                 equip.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             }

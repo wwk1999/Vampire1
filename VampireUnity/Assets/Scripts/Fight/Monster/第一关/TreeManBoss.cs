@@ -265,19 +265,19 @@ public class TreeManBoss : MonsterBase
     public override void Skill() { }
     public override void AddMonsterEquip()
     {
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryCloakFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryNecklaceFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("Primary/PrimaryHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.Primary, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.Primary, 10));
         
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManClothFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManRingFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManCloakFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManShoeFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManNecklaceFight", 10));
-        MonsterEquipList.Add(new MonsterEquip("TreeMan/TreeManHelmetFight", 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Ring,PlayerEquipConfig.EquipLevel.TreeMan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Necklace,PlayerEquipConfig.EquipLevel.TreeMan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloak,PlayerEquipConfig.EquipLevel.TreeMan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Cloth,PlayerEquipConfig.EquipLevel.TreeMan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Shoe,PlayerEquipConfig.EquipLevel.TreeMan, 10));
+        MonsterEquipList.Add(new MonsterEquip(PlayerEquipConfig.EquipType.Helmet,PlayerEquipConfig.EquipLevel.TreeMan, 10));
     }
 
     // public override void Hurt(int damage)

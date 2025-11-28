@@ -46,7 +46,7 @@ public class BlueHelmet : EquipBase
 
 
             //如果被拾取，销毁装备
-            Destroy(gameObject);
-        }
+            gameObject.SetActive(false);
+            GameController.S.BlueHelmetQueue.Enqueue(gameObject);        }
     }
 }
