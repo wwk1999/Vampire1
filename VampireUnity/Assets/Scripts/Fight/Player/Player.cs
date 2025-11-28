@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
         if (trackEntry.Animation.Name == "attack")
         {
             isAttack = false;
+            SkillController.S.ShotBulletInvoke();
             GameController.S.gamePlayer.playerState= PlayerState.None;
         }
         if (trackEntry.Animation.Name == "hit")

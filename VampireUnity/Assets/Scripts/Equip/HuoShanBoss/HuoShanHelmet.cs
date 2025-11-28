@@ -7,18 +7,18 @@ public class HuoShanHelmet : EquipBase
 {
     private bool isSend = false; //是否发送消息
 
-    public HuoShanHelmet() : base( "HuoshanHelmetFight", SuitType.HuoShan,new EquipTable()){}
+    public HuoShanHelmet() : base( "HuoShanHelmetFight", SuitType.HuoShan,new EquipTable()){}
 
     private void Awake()
     {
-        SpriteRenderer = transform.Find("HuoshanHelmetSprite").GetComponent<SpriteRenderer>();
+        SpriteRenderer = transform.Find("HuoShanHelmetSprite").GetComponent<SpriteRenderer>();
         // EquipAttributes.EquipQuality = EquipQuality.Blue;
         // //添加防御，随机10-20
         Random random = new Random();
         // EquipAttributes.Attributes.Add(EquipAttribute.Denfense, random.Next(1, 4));
         // //添加生命值，随机10-20
         // EquipAttributes.Attributes.Add(EquipAttribute.HP, random.Next(10, 20));
-        EquipAttributes.EquipName = "HuoshanHelmet";
+        EquipAttributes.EquipName = "HuoShanHelmet";
         EquipAttributes.suitid = 102;
         EquipAttributes.suitname = "火山套装";
         EquipAttributes.equip_type_id = 3;

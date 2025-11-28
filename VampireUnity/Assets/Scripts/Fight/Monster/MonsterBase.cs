@@ -333,6 +333,20 @@ public abstract class MonsterBase : MonoBehaviour
 
     public void MonsterMove()
     {
+        float dis= Vector2.Distance(transform.position, GameController.S.gamePlayer.transform.position);
+        if (dis < GameController.S.gamePlayer.size + size)
+        {
+            if (monsterSkeletonAnimation.AnimationState.GetCurrent(0).Animation.Name != "attack")
+            {
+                monsterSkeletonAnimation.AnimationState.SetAnimation(0, "attack", true);
+            }
+            return;
+        }
+        
+        if (monsterSkeletonAnimation.AnimationState.GetCurrent(0).Animation.Name != "walk")
+        {
+            monsterSkeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+        }
         //朝着主角以speed的速度前进
         Vector3 direction = GameController.S.gamePlayer.transform.position - transform.position;
         //刚体移动

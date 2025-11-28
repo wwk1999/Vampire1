@@ -24,7 +24,6 @@ public class SkillController : XSingleton<SkillController>
     [NonSerialized]public int IceBallSpeed = 5;
     [NonSerialized]public GameObject IceBallGameObject;
     //技能冷却时间
-    [NonSerialized]public float NormalAttacktime = 1f;
     [NonSerialized]public float IceArrowtime = 3f;
     [NonSerialized]public float IceExplosiontime = 10f;
     [NonSerialized]public float IceBalltime = 10f;
@@ -167,14 +166,11 @@ public class SkillController : XSingleton<SkillController>
         
        
         //按空格键射击
-        if (Input.GetKey(KeyCode.Space)&&NormalAttackCoolingtime >= NormalAttacktime)
+        if (Input.GetKey(KeyCode.Space))
         {
-            NormalAttackCoolingtime = 0;
             if (GameController.S.gamePlayer.playerState != PlayerState.Attack)
             {
-                Invoke("ShotBulletInvoke",0.3f);
                 GameController.S.gamePlayer.playerSkeleton.AnimationState.SetAnimation(0, "attack", false);
-               // GameController.S.gamePlayer.playerSkeleton.timeScale= 2f;
             }
             GameController.S.gamePlayer.isAttack = true;
             GameController.S.gamePlayer.playerState= PlayerState.Attack;

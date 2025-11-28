@@ -344,17 +344,12 @@ public class GameController : XSingleton<GameController>
         //普通攻击按钮
         FightBGController.S.normalAttackButton.onClick.AddListener(() =>
         {
-            if (SkillController.S.NormalAttackCoolingtime >SkillController.S.NormalAttacktime)
-            {
-                SkillController.S.NormalAttackCoolingtime = 0;
-                if (GameController.S.gamePlayer.playerState != PlayerState.Attack)
+                if (gamePlayer.playerState != PlayerState.Attack)
                 {
-                    Invoke("ShotBulletInvoke",0.3f);
-                    GameController.S.gamePlayer.playerSkeleton.AnimationState.SetAnimation(0, "attack", false);
+                    gamePlayer.playerSkeleton.AnimationState.SetAnimation(0, "attack", false);
                 }
-                GameController.S.gamePlayer.isAttack = true;
-                GameController.S.gamePlayer.playerState= PlayerState.Attack;
-            }
+                gamePlayer.isAttack = true;
+                gamePlayer.playerState= PlayerState.Attack;
         });
         //冲击技能
         FightBGController.S.dashButton.onClick.AddListener(() =>
@@ -364,12 +359,12 @@ public class GameController : XSingleton<GameController>
         //怒气技能
         FightBGController.S.rageButton.onClick.AddListener(() =>
         {
-            GameController.S.gamePlayer.transform.Find("Rage").gameObject.SetActive(true);
+            gamePlayer.transform.Find("Rage").gameObject.SetActive(true);
         });
         //护盾技能
         FightBGController.S.shieldButton.onClick.AddListener(() =>
         {
-            GameController.S.gamePlayer.transform.Find("Shield").gameObject.SetActive(true);
+            gamePlayer.transform.Find("Shield").gameObject.SetActive(true);
         });
         //按钮冰箭技能
         FightBGController.S.iceArrowButton.onClick.AddListener(() =>
