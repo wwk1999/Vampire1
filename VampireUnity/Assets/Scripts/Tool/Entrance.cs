@@ -24,6 +24,23 @@ public class Entrance : MonoBehaviour
 
     //实例化
         //FightBGController
+        
+        
+
+        for (int i = 0; i < 200; i++)
+        {
+            GameObject bloodEnergy = Instantiate(Resources.Load<GameObject>("Prefabs/Prop/BloodEnergy"));
+            bloodEnergy.gameObject.SetActive(false);
+            GameController.S.BloodEnergyQueue.Enqueue(bloodEnergy);
+        }
+        
+        for (int i = 0; i < 1000; i++)
+        {
+            GameObject monsterHurtText = Instantiate(Resources.Load<GameObject>("Prefabs/Tool/MonsterHurtText"));
+            monsterHurtText.gameObject.SetActive(false);
+            GameController.S.MonsterHurtTextQueue.Enqueue(monsterHurtText);
+        }
+        
         for (int i = 0; i < 10; i++)
         {
             var circleAttack = Instantiate(Resources.Load("Prefabs/Tool/CircleAttack"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;

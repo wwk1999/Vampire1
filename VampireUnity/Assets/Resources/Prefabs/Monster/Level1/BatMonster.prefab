@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff531de8755324a27a7a3e4307cb77ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 0
   monsterSkeletonAnimation: {fileID: 3511246800086974078}
   hpSlider: {fileID: 9135119495851481690}
 --- !u!1001 &814621646714894940
@@ -490,11 +491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5127415065019169445, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_SizeDelta.x
@@ -504,6 +505,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.8700104
       objectReference: {fileID: 0}
+    - target: {fileID: 5431484175259911950, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6905762847697611726, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_SizeDelta.x
       value: -15.73
@@ -511,6 +516,18 @@ PrefabInstance:
     - target: {fileID: 6905762847697611726, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -9.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906525585655440945, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906525585655440945, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906525585655440945, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7394250949711020886, guid: 4beb553d22c614bc88cb6477ca532ff4, type: 3}
       propertyPath: m_LocalScale.x

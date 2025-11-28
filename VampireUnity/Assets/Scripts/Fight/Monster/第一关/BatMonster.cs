@@ -78,7 +78,7 @@ public class BatMonster : MonsterBase
     public override void Die()
     {
         //生成随机数
-         int randomDelay = UnityEngine.Random.Range(0, 3);
+         int randomDelay = UnityEngine.Random.Range(0, 10);
          GameController.S.StartCoroutine(RandomDelayDie(randomDelay));
          // gameObject.SetActive(false);
          // GameController.S.BatMonsterQueue.Enqueue(this);

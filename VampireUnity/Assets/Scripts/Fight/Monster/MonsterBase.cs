@@ -49,7 +49,6 @@ public abstract class MonsterBase : MonoBehaviour
     public SkeletonAnimation monsterSkeletonAnimation;
     //public SpriteRenderer monsterSpriteRenderer;
     //public Animator monsterAnimator;
-    [NonSerialized]public GameObject monsterHurtText;
     public Slider hpSlider;
     [NonSerialized]public List<MonsterEquip> MonsterEquipList=new List<MonsterEquip>() ;//怪物装备列表
     [NonSerialized]public List<MonsterWeaponSource> MonsterWeaponSourceStoneList=new List<MonsterWeaponSource>() ;//怪物源石列表
@@ -79,9 +78,12 @@ public abstract class MonsterBase : MonoBehaviour
     public void Awake()
     {
         ObserverModuleManager.S.RegisterEvent(ConstKeys.Resumemonster,Resumemonster);
-        monsterHurtText=Resources.Load<GameObject>("Prefabs/Tool/MonsterHurtText");
         monsterSkeletonAnimation.AnimationState.Complete += OnAnimationComplete;
         CurrentHp = MaxHp;
+        if (MonsterType != MonsterType.Boss)
+        {
+            hpSlider.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
@@ -433,7 +435,8 @@ public abstract class MonsterBase : MonoBehaviour
     public void CreateBloodEnergy()
     {
         //生成血能
-        GameObject bloodEnergy = Instantiate(Resources.Load<GameObject>("Prefabs/Prop/BloodEnergy"));
+        GameObject bloodEnergy = GameController.S.BloodEnergyQueue.Dequeue();
+        bloodEnergy.SetActive(true);
         //设置血能位置为怪物位置
         bloodEnergy.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
@@ -512,7 +515,12 @@ public abstract class MonsterBase : MonoBehaviour
         if (IsDead) return;
         if (MonsterType != MonsterType.Boss)
         {
-            GameObject monsterHpGameObject = Instantiate(monsterHurtText);
+            if (hpSlider.gameObject.activeSelf == false)
+            {
+                hpSlider.gameObject.SetActive(true);
+            }
+            GameObject monsterHpGameObject = GameController.S.MonsterHurtTextQueue.Dequeue();
+            monsterHpGameObject.gameObject.SetActive(true);
             monsterHpGameObject.transform.position = transform.position;
             //在monsterHpGameObject子类中查找Canvas的紫累HPText
             Text monsterHpText = monsterHpGameObject.transform.Find("Canvas/HPText").GetComponent<Text>();

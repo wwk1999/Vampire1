@@ -57,7 +57,7 @@ public class StoneBoss : MonsterBase
     {
 
         //生成随机数
-        int randomDelay = UnityEngine.Random.Range(0, 3);
+        int randomDelay = UnityEngine.Random.Range(0, 10);
         StartCoroutine(RandomDelayDie(randomDelay));
     }
 

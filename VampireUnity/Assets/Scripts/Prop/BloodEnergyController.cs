@@ -15,7 +15,8 @@ public class BloodEnergyController : MonoBehaviour
         {
             GlobalPlayerAttribute.BloodEnergy++; // 增加元灵数量
             StoreController.S.SaveStoreData();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            GameController.S.BloodEnergyQueue.Enqueue(gameObject);
         }
     }
 

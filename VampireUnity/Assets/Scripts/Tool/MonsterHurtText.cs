@@ -10,7 +10,7 @@ public class MonsterHurtText : MonoBehaviour
     //     Destroy(gameObject);
     // }
 
-    private void Awake()
+    private void OnEnable()
     {
         Rigidbody2D equipRb=GetComponent<Rigidbody2D>();
         transform.rotation = Quaternion.Euler(new Vector3(0,0,UnityEngine.Random.Range(-30f, 30f)));
@@ -25,6 +25,7 @@ public class MonsterHurtText : MonoBehaviour
         rb.velocity = Vector2.zero;
         //设置重力为0
         rb.gravityScale = 0;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        GameController.S.MonsterHurtTextQueue.Enqueue(gameObject);
     }
 }

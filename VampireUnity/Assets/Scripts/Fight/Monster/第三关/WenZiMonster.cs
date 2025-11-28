@@ -48,7 +48,7 @@ public class WenZiMonster : MonsterBase
     {
         
         //生成随机数
-        int randomDelay = UnityEngine.Random.Range(0, 3);
+        int randomDelay = UnityEngine.Random.Range(0, 10);
         GameController.S.StartCoroutine(RandomDelayDie(randomDelay));
     }
     
