@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6357746429251724712}
   - component: {fileID: 7297354907683523835}
   - component: {fileID: 2509347835087662232}
-  - component: {fileID: 7375280107897126864}
+  - component: {fileID: 8126113704193884487}
   m_Layer: 7
   m_Name: HuoShanClothFight
   m_TagString: Equip
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7375280107897126864
+--- !u!114 &8126113704193884487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1479376255535130612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee673239e0ce488ab86725fb619e652, type: 3}
+  m_Script: {fileID: 11500000, guid: 88cad9335dce94388a15b66fb6deec90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4280221534729915386

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6547510098833982503}
   - component: {fileID: 7967109081134093729}
   - component: {fileID: 6505579385801108457}
-  - component: {fileID: 6537827274888170467}
+  - component: {fileID: 9078715849671631695}
   m_Layer: 7
   m_Name: HuoShanHelmetFight
   m_TagString: Equip
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6537827274888170467
+--- !u!114 &9078715849671631695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2908298177979766595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce1e26e02d9f5427b971603b39365240, type: 3}
+  m_Script: {fileID: 11500000, guid: e1d25076837094d8fb3ae19b9d49e3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4811123878574800902

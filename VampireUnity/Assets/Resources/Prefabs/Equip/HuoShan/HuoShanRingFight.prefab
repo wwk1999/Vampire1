@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5134978914647249259}
   - component: {fileID: 4844906357410726053}
   - component: {fileID: 8972229439759267089}
-  - component: {fileID: 6459238511448639092}
+  - component: {fileID: 3412586327376890104}
   m_Layer: 7
   m_Name: HuoShanRingFight
   m_TagString: Equip
@@ -192,7 +192,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6459238511448639092
+--- !u!114 &3412586327376890104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8034032790128896832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee24424c40b1a49fc86e4fe3f2113776, type: 3}
+  m_Script: {fileID: 11500000, guid: 262bfe04982b8441eb4179bfd9d858d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7799000107747736381
