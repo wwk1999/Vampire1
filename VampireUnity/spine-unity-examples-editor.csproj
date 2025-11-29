@@ -323,9 +323,6 @@
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>E:\Vampire\VampireUnity\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>E:\Vampire\VampireUnity\Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>E:\Vampire\VampireUnity\Library\PackageCache\com.unity.ext.nunit@2.0.3\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
@@ -752,18 +749,6 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>D:\2022.3.53f1c1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="spine-unity.csproj">
@@ -777,6 +762,22 @@
     <ProjectReference Include="spine-csharp.csproj">
       <Project>{cc05bfbf-c4ed-11dc-b3e7-ec0fd4797500}</Project>
       <Name>spine-csharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{4f644e03-7368-e12d-2ddc-c69bdcecb7b1}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{8dcca48a-f77b-a0f4-914e-5840f961f0ff}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.TestRunner.csproj">
+      <Project>{559ec434-9296-6274-64da-d3d8742a08d9}</Project>
+      <Name>UnityEditor.TestRunner</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{c3867d42-ddae-1a1e-0919-bc05e2abfee0}</Project>
+      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.U2D.Animation;
 using UnityEngine.UI;
 
 public class MonsterBook : MonoBehaviour

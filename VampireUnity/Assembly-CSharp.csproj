@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Gun\GunBase.cs" />
     <Compile Include="Assets\Scripts\Equip\Blue\BlueHelmet.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\VariousTranslateMove.cs" />
-    <Compile Include="Assets\Scripts\Friend\FriendApplication.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第三关\QingWaMonster.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\VacantEye.cs" />
     <Compile Include="Assets\Scripts\Equip\Blue\BlueRing.cs" />
@@ -73,31 +72,38 @@
     <Compile Include="Assets\Scripts\Tool\MonsterHurtText.cs" />
     <Compile Include="Assets\External Resources\ARPG Effects\Demo\Scripts\ARPGFXCycler.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\UIType.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\FightWeaponSourceStoneBase.cs" />
     <Compile Include="Assets\Scripts\Window\ServerErrorWindow.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Window\MainWindowController.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryRing.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\ExtremeSpeed.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanSkillTrigger.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\BatMonster.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\Equip\Green\GreenNecklace.cs" />
     <Compile Include="Assets\Scripts\Fight\FightBGController.cs" />
     <Compile Include="Assets\Scripts\Window\GameLevelWindow1.cs" />
     <Compile Include="Assets\Scripts\Skill\ThreeNormalAttack.cs" />
     <Compile Include="Assets\Scripts\Window\LoginWindow1.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryShoe.cs" />
-    <Compile Include="Assets\Scripts\Friend\SureDelFriend.cs" />
     <Compile Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Scripts\Window\FightBg.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\DunDiMonster.cs" />
     <Compile Include="Assets\Scripts\Tool\ConstKeys.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Server\ServerConnect.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\ChongZiMonster.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\Equip\HuoShanBoss\HuoShanShoe.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ChangeSizeColor.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanBoss.cs" />
     <Compile Include="Assets\Scripts\Config\ResourcesConfig.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\TreeManJumpTrigger.cs" />
     <Compile Include="Assets\Scripts\Skill\FourNormalAttack.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\InitOnStartMulti.cs" />
@@ -106,9 +112,10 @@
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\TreeManBoss.cs" />
     <Compile Include="Assets\Scripts\Window\WeaponWindowRole1.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\Duration.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Mysql\PlayerInfoController.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Equip\BagExitButton.cs" />
-    <Compile Include="Assets\Scripts\Friend\FriendListItem.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\LookAtTarget.cs" />
     <Compile Include="Assets\Scripts\Config\RankConfig.cs" />
     <Compile Include="Assets\Scripts\Fight\Player\PickUpController.cs" />
@@ -117,6 +124,9 @@
     <Compile Include="Assets\Scripts\Fight\CameraContraller.cs" />
     <Compile Include="Assets\Scripts\UIFrameWork\UITool.cs" />
     <Compile Include="Assets\Scripts\Equip\Green\GreenCloth.cs" />
+    <Compile Include="Assets\Scripts\Store\EquipIDData.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Mysql\UserController.cs" />
     <Compile Include="Assets\Scripts\Skill\NormalAttack.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\DaZuiSkillTriggerLeft.cs" />
@@ -124,7 +134,7 @@
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\SpiderWeb.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\VacantEyeBullet.cs" />
-    <Compile Include="Assets\Scripts\Friend\FriendApplicationItem.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryNecklace.cs" />
     <Compile Include="Assets\Scripts\Equip\EquipBase.cs" />
     <Compile Include="Assets\Scripts\Equip\HuoShanBoss\HuoShanCloth.cs" />
@@ -150,6 +160,7 @@
     <Compile Include="Assets\Scripts\Skill\DashShadow.cs" />
     <Compile Include="Assets\Scripts\Fight\UI\BagButtonFight.cs" />
     <Compile Include="Assets\Scripts\Equip\BagSell.cs" />
+    <Compile Include="Assets\Scripts\Store\StoreController.cs" />
     <Compile Include="Assets\Scripts\Tool\ButtonInteractionHandler.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\Scale.cs" />
@@ -157,9 +168,11 @@
     <Compile Include="Assets\Scripts\Equip\Green\GreenShoe.cs" />
     <Compile Include="Assets\Scripts\Equip\MonsterWeaponSource.cs" />
     <Compile Include="Assets\External Resources\ARPG Effects\Scripts\ARPGFXLightFlicker.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Tool\ClickFx.cs" />
     <Compile Include="Assets\Scripts\Skill\FireTrigger.cs" />
     <Compile Include="Assets\Scripts\Tool\CircleAttack.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\External Resources\ARPG Effects\Scripts\ARPGFXPortalScript.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\EliteBeeMonster.cs" />
     <Compile Include="Assets\Scripts\Equip\FightEquipAttribute.cs" />
@@ -189,6 +202,7 @@
     <Compile Include="Assets\Scripts\Equip\BagController.cs" />
     <Compile Include="Assets\Scripts\Tool\InitOnStart.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\VariousRotateObject.cs" />
+    <Compile Include="Assets\Scripts\Tool\ClearSaveTool.cs" />
     <Compile Include="Assets\Arts\Shaders\LcL\FadeController.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanSkill3.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\SpiderMonster.cs" />
@@ -207,21 +221,30 @@
     <Compile Include="Assets\Scripts\Equip\Blue\BlueCloth.cs" />
     <Compile Include="Assets\Scripts\Equip\Green\GreenRing.cs" />
     <Compile Include="Assets\Scripts\Tool\ImageAnimation.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\SnotMonster.cs" />
     <Compile Include="Assets\Scripts\Singleton\SingletonNameAttribute.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\MonsterBase.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ScaleFactorApplyToMaterial.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\Scripts\Equip\BagGrid.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\SizeHelper.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Examples\JoystickSetterExample.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryCloak.cs" />
     <Compile Include="Assets\Scripts\Config\MonsterBookConfig.cs" />
+    <Compile Include="Assets\Scripts\Store\StoreDefine.cs" />
     <Compile Include="Assets\External Resources\ARPG Effects\Scripts\ARPGFXLightFade.cs" />
+    <Compile Include="Assets\Scripts\Tool\ToastInfo.cs" />
     <Compile Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\DaZuiSkillTriggerRight.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\DaZuiFire.cs" />
     <Compile Include="Assets\Scripts\Singleton\NeedDestroyAttribute.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\Equip\EquipAttribute.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\BatMonsterWarning.cs" />
     <Compile Include="Assets\Scripts\Tool\UnityMainThreadDispatcher.cs" />
@@ -229,6 +252,7 @@
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\_ObjectsMakeBase.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\LoopListBankBase.cs" />
     <Compile Include="Assets\Scripts\Tool\ReturnButton.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Gun\PistolBullet.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\UI_ControlData.cs" />
     <Compile Include="Assets\Scripts\Equip\HuoShanBoss\HuoShanHelmet.cs" />
@@ -241,40 +265,49 @@
     <Compile Include="Assets\Scripts\Equip\TreeMan\TreeManHelmet.cs" />
     <Compile Include="Assets\Scripts\WeaponSourceStone\SourceStoneWindow.cs" />
     <Compile Include="Assets\Scripts\Server\EquipServer.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Scripts\Gloabl\GlobalUserInfo.cs" />
     <Compile Include="Assets\Scripts\Fight\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Equip\Blue\BlueShoe.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Window\GameLevelInfo.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Prefabs\test.cs" />
     <Compile Include="Assets\Scripts\Gun\BulletBase.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMoveDestroy.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryHelmet.cs" />
     <Compile Include="Assets\Scripts\Skill\TwoNormalAttack.cs" />
     <Compile Include="Assets\Scripts\Window\MainWindow1.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第三关\StoneBoss.cs" />
     <Compile Include="Assets\External Resources\Joystick Pack\Scripts\Base\Joystick.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanSkilll1.cs" />
     <Compile Include="Assets\Scripts\Gloabl\GlobalPlayerAttribute.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Window\RoleWindow1.cs" />
     <Compile Include="Assets\Scripts\Window\WeaponWindow.cs" />
     <Compile Include="Assets\Scripts\Fight\Player\MonsterDetetor4.cs" />
-    <Compile Include="Assets\Scripts\Friend\FriendList.cs" />
     <Compile Include="Assets\Scripts\Equip\TreeMan\TreeManRing.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\ScrollIndexCallback_Custom.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\ShieldActivate.cs" />
     <Compile Include="Assets\Scripts\Equip\Blue\BlueCloak.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\Scripts\Fight\GameController.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\ForEffects\MultipleObjectsMake.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\FightWeaponSourceStone\Explosion.cs" />
     <Compile Include="Assets\Scripts\Fight\Player\MonsterDetetor1.cs" />
     <Compile Include="Assets\Scripts\Skill\SkillController.cs" />
     <Compile Include="Assets\Scripts\Server\SourceStoneServer.cs" />
     <Compile Include="Assets\Scripts\Gun\Pistol.cs" />
     <Compile Include="Assets\Scripts\Skill\TwoNormalAttackTrigger.cs" />
+    <Compile Include="Assets\Scripts\Config\PlayerInfoConfig.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第三关\JiaChongMonster.cs" />
     <Compile Include="Assets\Scripts\Equip\TreeMan\TreeManShoe.cs" />
     <Compile Include="Assets\Scripts\Config\LevelInfoItem.cs" />
-    <Compile Include="Assets\Scripts\Friend\AddFriendWindow.cs" />
     <Compile Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Demo scenes\DemoShooting.cs" />
     <Compile Include="Assets\Scripts\Equip\PrimaryEquip\PrimaryCloth.cs" />
     <Compile Include="Assets\Scripts\Equip\HuoShanBoss\HuoShanRing.cs" />
@@ -283,6 +316,7 @@
     <Compile Include="Assets\Scripts\Server\RankServer.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\VariousEffectsScene.cs" />
     <Compile Include="Assets\Scripts\Mysql\UserTable.cs" />
+    <Compile Include="Assets\Scripts\Store\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Skill\IceArrow.cs" />
     <Compile Include="Assets\Scripts\Fight\Monster\第一关\BossDiLieTrigger.cs" />
     <Compile Include="Assets\Scripts\Config\WeaponSourceConfig.cs" />
@@ -292,120 +326,228 @@
     <Compile Include="Assets\Scripts\Fight\Monster\第二关\HuoShanSkill1Bullet.cs" />
     <Compile Include="Assets\Samples\LoopScrollRect\1.1.3\Demo\Scripts\ScrollIndexCallbackBase.cs" />
     <Compile Include="Assets\Scripts\Tool\EquipName.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\External Resources\SpecialSkillsEffectsPack\Scripts\NewMaterialChange.cs" />
     <Compile Include="Assets\Scripts\Mysql\EquipController.cs" />
     <None Include="Assets\Packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\useSharedDesignerContext.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.subsystems@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.11\package.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Library\PackageCache\com.unity.modules.jsonserialize@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.burst@1.8.18\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\Shine.shader" />
     <None Include="Assets\Spine\version.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.screencapture@1.0.0\package.json" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Demo scenes\Readme.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.cloth@1.0.0\package.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.inputsystem@1.11.2\package.json" />
+    <None Include="Library\PackageCache\com.unity.modules.ai@1.0.0\package.json" />
     <None Include="Assets\Arts\Spine\第三关\蚊子\json\wenzi.json" />
+    <None Include="Library\PackageCache\com.unity.inputsystem@1.11.2\ValidationConfig.json" />
     <None Include="Assets\Packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\netstandard2.0\System.Diagnostics.DiagnosticSource.xml" />
+    <None Include="Library\PackageCache\com.unity.ugui@1.0.0\package.json" />
     <None Include="Assets\External Resources\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_Decal.shader" />
     <None Include="Assets\Arts\Spine\第一关\树人BOSS\json\shurenBOSS.atlas.txt" />
     <None Include="Assets\Arts\Spine\第二关\boss\json\huoshanboss.json" />
+    <None Include="Library\PackageCache\com.unity.ext.nunit@2.0.3\package.json" />
     <None Include="Assets\Arts\Spine\第二关\boss\json\huoshanboss.atlas.txt" />
     <None Include="Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.0.0\useSharedDesignerContext.txt" />
     <None Include="Assets\Packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.xml" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.universal-config@14.0.10\package.json" />
     <None Include="Assets\Arts\Spine\第三关\青蛙\json\qingwa.json" />
     <None Include="Assets\Arts\Spine\第四关\雪蟑螂\json\xuezhanglang.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.assetbundle@1.0.0\package.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\package.json" />
+    <None Include="Library\PackageCache\com.unity.modules.imgui@1.0.0\package.json" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Prefabs\Readme.txt" />
     <None Include="Assets\Arts\Shaders\LcL\Gradient.shader" />
+    <None Include="Assets\Arts\Spine\胜利失败\胜利失败UI\Fail\bui_10.atlas.txt" />
     <None Include="Assets\Arts\Shaders\BGLight.shader" />
+    <None Include="Library\PackageCache\com.coffee.ui-particle@4b98abd746\package.json" />
     <None Include="Assets\Arts\Shaders\VacantEyeBullet.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.tilemap@1.0.0\package.json" />
     <None Include="Assets\Arts\Spine\第一关\蜜蜂\json\mf.json" />
     <None Include="Assets\Arts\Shaders\LcL\TikTok.shader" />
     <None Include="Assets\Arts\Spine\第四关\雪蟑螂\json\xuezhanglang.json" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\Arts\Shaders\EquipOutline.shader" />
+    <None Include="Library\PackageCache\com.unity.timeline@1.8.7\package.json" />
     <None Include="Assets\Arts\Shaders\Outline.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\External Resources\Hovl Studio\Toon Projectiles 2\Demo scene\Readme.txt" />
+    <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.22\ValidationConfig.json" />
     <None Include="Assets\Arts\Shaders\LcL\Ghost.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Arts\Shaders\LcL\Glow.shader" />
     <None Include="Assets\Arts\Shaders\Gleam.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.terrainphysics@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.mathematics@1.2.6\package.json" />
+    <None Include="Library\PackageCache\com.unity.burst@1.8.18\ValidationExceptions.json" />
     <None Include="Assets\Arts\Shaders\LightDissolve.shader" />
     <None Include="Assets\External Resources\Hovl Studio\Toon Projectiles 2\Shaders\DissolveNoise.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Arts\Spine\主角\json\zj.atlas.txt" />
     <None Include="Assets\Arts\Spine\第二关\小火怪\json\xiaohuoguai.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.visualscripting@1.9.4\package.json" />
     <None Include="Assets\Arts\Spine\第二关\虫子\json\congzi.json" />
     <None Include="Assets\Arts\Spine\第三关\青蛙\json\qingwa.atlas.txt" />
     <None Include="Assets\Arts\Shaders\HeadBG.shader" />
+    <None Include="Library\PackageCache\com.unity.collab-proxy@2.7.1\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\InnerOutline.shader" />
     <None Include="Assets\Arts\Spine\第一关\蜘蛛\json\zz.atlas.txt" />
     <None Include="Assets\Arts\Spine\第二关\遁地怪\json\dundiguai.json" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\PackageConversionData.json" />
+    <None Include="Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\ColorSwap.shader" />
     <None Include="Assets\Packages\MySqlConnector.2.4.0\lib\netstandard2.1\MySqlConnector.xml" />
+    <None Include="Assets\Arts\Spine\胜利失败\胜利失败UI\Fail\bui_10.json" />
+    <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.22\package.json" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.11\ValidationConfig.json" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.core@14.0.11\package.json" />
     <None Include="Assets\External Resources\ARPG Effects\Readme.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.imageconversion@1.0.0\package.json" />
     <None Include="Assets\Arts\Shaders\Shield.shader" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\ValidationExceptions.json" />
+    <None Include="Library\PackageCache\com.unity.shadergraph@14.0.11\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\Outline.shader" />
     <None Include="Assets\External Resources\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_DistortionEffect.shader" />
     <None Include="Assets\Arts\Shaders\LcL\Blur.shader" />
     <None Include="Assets\Arts\Spine\第四关\雪狼2\雪狼2\json\xuelang.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.unityanalytics@1.0.0\package.json" />
     <None Include="Assets\External Resources\Hovl Studio\Toon Projectiles 2\Shaders\Distortion.shader" />
     <None Include="Assets\External Resources\Hovl Studio\Toon Projectiles 2\Shaders\Blend_TwoSides.shader" />
+    <None Include="Library\PackageCache\com.unity.ide.rider@3.0.34\package.json" />
+    <None Include="Library\PackageCache\com.unity.searcher@4.9.2\package.json" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Shaders\Electricity.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.video@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.shadergraph@14.0.11\ValidationConfig.json" />
     <None Include="Assets\Arts\Spine\第一关\蜘蛛\json\zz.json" />
+    <None Include="Library\PackageCache\com.unity.ide.rider@3.0.34\ValidationExceptions.json" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Shaders\Blend_CenterGlow.shader" />
+    <None Include="Library\PackageCache\com.unity.test-framework@1.4.5\package.json" />
     <None Include="Assets\shader\ParticleAdditiveGlow 1.shader" />
     <None Include="Assets\Arts\Spine\第四关\雪狼2\雪狼2\json\xuelang.json" />
     <None Include="Assets\External Resources\VFX_Resources\Shaders\PFX_Particles_Cutout.shader" />
     <None Include="Assets\External Resources\VFX_Resources\Shaders\PFX_Aura.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.particlesystem@1.0.0\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\Pixel.shader" />
     <None Include="Assets\Arts\Spine\第三关\甲虫\json\jiachong.atlas.txt" />
     <None Include="Assets\Arts\Shaders\SqrtEdge.shader" />
     <None Include="Assets\Packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\Multiplicative\Electric_Multiplicative.shader" />
     <None Include="Assets\Arts\Shaders\LcL\Fade.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.physics2d@1.0.0\package.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Library\PackageCache\me.qiankanglai.loopscrollrect@b07d7b59b9\package.json" />
+    <None Include="Library\PackageCache\com.unity.modules.vr@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.visualscripting@1.9.4\ValidationExceptions.json" />
     <None Include="Assets\External Resources\VFX_Resources\Shaders\PFX_Trail.shader" />
     <None Include="Assets\Arts\Spine\第四关\雪人\雪人\json\xueren.json" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.22\ValidationExceptions.json" />
     <None Include="Assets\Packages\System.Diagnostics.DiagnosticSource.8.0.1\useSharedDesignerContext.txt" />
+    <None Include="Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\link.xml" />
     <None Include="Assets\Arts\Spine\第一关\蝙蝠\json\bf.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.wind@1.0.0\package.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Arts\Shaders\LcL\Glitch.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.umbra@1.0.0\package.json" />
     <None Include="Assets\Arts\Spine\第一关\蝙蝠\json\bf.json" />
+    <None Include="Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\package.json" />
     <None Include="Assets\Spine\package.json" />
     <None Include="Assets\Arts\Spine\第四关\雪人\雪人\json\xueren.atlas.txt" />
     <None Include="Assets\Arts\Spine\第二关\虫子\json\congzi.atlas.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Arts\Spine\第四关\雪蟑螂\images\xuezhanglang.json" />
     <None Include="Assets\Arts\Spine\第三关\蚊子\json\wenzi.atlas.txt" />
     <None Include="Assets\Arts\Spine\第四关\雪人\雪人\images\xueren.json" />
     <None Include="Assets\Arts\Shaders\UIScan.shader" />
     <None Include="Assets\External Resources\Hovl Studio\Toon Projectiles 2\Demo scene\HDRP and URP(LWRP).txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Library\PackageCache\com.unity.inputsystem@1.11.2\ValidationExceptions.json" />
+    <None Include="Library\PackageCache\com.unity.modules.audio@1.0.0\package.json" />
     <None Include="Assets\Arts\Spine\第一关\粘液怪\json\nyg.atlas.txt" />
     <None Include="Assets\Arts\Spine\第二关\大嘴怪\json\dazuiguai.json" />
+    <None Include="Library\PackageCache\com.unity.modules.physics@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.11\ValidationExceptions.json" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\Multiplicative\EdgeEffect_Electric_Multiplicative.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.vehicles@1.0.0\package.json" />
     <None Include="Assets\Arts\Spine\第二关\大嘴怪\json\dazuiguai.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0\package.json" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Shaders\AddTrail.shader" />
+    <None Include="Assets\Arts\Spine\胜利失败\胜利失败UI\SuccessSpine\bui_9.json" />
+    <None Include="Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0\package.json" />
     <None Include="Assets\Arts\Shaders\LcL\HueShift.shader" />
     <None Include="Assets\Arts\Spine\第一关\树人BOSS\json\shurenBOSS.json" />
     <None Include="Assets\Arts\Shaders\LcL\Shadow.shader" />
     <None Include="Assets\External Resources\闊抽\GameMusicPack_SUITE\Readme_ja.txt" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Editor Resources\Shaders\TMP_SDF_SSD.cginc" />
     <None Include="Assets\Arts\Spine\第三关\食人花\json\shirenhua.json" />
+    <None Include="Assets\Arts\Spine\胜利失败\胜利失败UI\SuccessSpine\bui_9.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.collab-proxy@2.7.1\ValidationConfig.json" />
     <None Include="Assets\Arts\Shaders\tongdaopianyi.shader" />
     <None Include="Assets\Arts\Spine\第二关\遁地怪\json\dundiguai.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.xr@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Editor Resources\Shaders\TMP_Properties.cginc" />
+    <None Include="Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\AOT\Newtonsoft.Json.xml" />
     <None Include="Assets\Arts\Texture\UI\排行榜\生成卡通皇座画面 (1).json" />
     <None Include="Assets\Arts\Shaders\LcL\Hologram.shader" />
     <None Include="Assets\Arts\Spine\第三关\石头BOSS\json\shitouBOSS.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
     <None Include="Assets\Arts\Spine\第一关\蜜蜂\json\mf.atlas.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Arts\Spine\第三关\食人花\json\shirenhua.atlas.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.director@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.coffee.ui-particle@4b98abd746\Shaders\UIAdditive.shader" />
     <None Include="Assets\Arts\Spine\主角\json\zj.json" />
+    <None Include="Library\PackageCache\com.unity.visualscripting@1.9.4\ValidationConfig.json" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\Electric_Additive.shader" />
     <None Include="Assets\External Resources\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_IntegratedEffect.shader" />
     <None Include="Assets\Packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\useSharedDesignerContext.txt" />
     <None Include="Assets\Arts\Spine\第二关\小火怪\json\xiaohuoguai.json" />
     <None Include="Assets\Arts\Shaders\Rage.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.terrain@1.0.0\package.json" />
     <None Include="Assets\Arts\Shaders\EdgeLight.shader" />
     <None Include="Assets\Arts\Shaders\Transparent.shader" />
     <None Include="Assets\External Resources\VFX_Resources\Shaders\PFX_Particles.shader" />
+    <None Include="Library\PackageCache\com.unity.modules.androidjni@1.0.0\package.json" />
     <None Include="Assets\External Resources\shot\AAA Projectiles Vol 1\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Arts\Spine\第四关\雪狼2\雪狼2\images\xuelang.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\Multiplicative\EdgeEffect_Multiplicative.shader" />
+    <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.9\PackageConversionData_Assets.json" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\EdgeEffect_Additive.shader" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\UIEffect.shader" />
+    <None Include="Library\PackageCache\com.unity.mathematics@1.2.6\ValidationExceptions.json" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Library\PackageCache\com.unity.modules.animation@1.0.0\package.json" />
     <None Include="Assets\shader\cgwell Add Zoff.shader" />
     <None Include="Assets\Arts\Spine\第三关\石头BOSS\json\shitouBOSS.json" />
     <None Include="Assets\Arts\Shaders\BGLightSprite.shader" />
+    <None Include="Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.xml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\External Resources\闊抽\GameMusicPack_SUITE\Readme.txt" />
+    <None Include="Library\PackageCache\com.unity.burst@1.8.18\Unity.Burst.Unsafe.xml" />
+    <None Include="Library\PackageCache\com.unity.render-pipelines.universal@14.0.11\ValidationConfig.json" />
+    <None Include="Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0\package.json" />
+    <None Include="Library\PackageCache\com.unity.modules.uielements@1.0.0\package.json" />
     <None Include="Assets\UIShaderEffects-EdgeEffects\Shader\EdgeEffect_Electric_Additive.shader" />
     <None Include="Assets\Arts\Spine\第三关\甲虫\json\jiachong.json" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
     <None Include="Assets\Packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <None Include="Library\PackageCache\com.unity.modules.ui@1.0.0\package.json" />
     <None Include="Assets\dilie\Material\Rock.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\Arts\Spine\第一关\粘液怪\json\nyg.json" />
     <Reference Include="UnityEngine">
       <HintPath>D:\2022.3.53f1c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -655,9 +797,6 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\2022.3.53f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Collections.LowLevel.ILSupport">
-      <HintPath>E:\Vampire\VampireUnity\Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>E:\Vampire\VampireUnity\Library\PackageCache\com.unity.ext.nunit@2.0.3\net40\unity-custom\nunit.framework.dll</HintPath>
@@ -1052,211 +1191,191 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>D:\2022.3.53f1c1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.IK.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Path.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Common">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="LoopScrollRect.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\LoopScrollRect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
-    </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-    </Reference>
-    <Reference Include="Coffee.UIParticle">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Coffee.UIParticle.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="LoopScrollRect.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\LoopScrollRect.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Editor">
-      <HintPath>E:\Vampire\VampireUnity\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="spine-csharp.csproj">
-      <Project>{cc05bfbf-c4ed-11dc-b3e7-ec0fd4797500}</Project>
-      <Name>spine-csharp</Name>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{596cd55e-f6bc-3c10-243e-bb76bcc8dce6}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="AmplifyShaderEditor.csproj">
-      <Project>{93bdff84-3818-f488-72a3-a04287c56c49}</Project>
-      <Name>AmplifyShaderEditor</Name>
+    <ProjectReference Include="Unity.VisualEffectGraph.Runtime.csproj">
+      <Project>{782fe60d-2cf2-0bc7-e303-8f187400763f}</Project>
+      <Name>Unity.VisualEffectGraph.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-unity.csproj">
-      <Project>{0988f295-7454-c435-f5fc-33274ad0853b}</Project>
-      <Name>spine-unity</Name>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
+      <Project>{9433afe3-6a28-f3e6-6c2d-cc8816d30110}</Project>
+      <Name>Unity.RenderPipelines.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
+      <Project>{cda9c0b7-8d84-aef2-0570-5103cbf73f8f}</Project>
+      <Name>Unity.RenderPipelines.Universal.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Burst.Editor.csproj">
+      <Project>{d6285167-92a7-6156-2640-e1f1f0fe4096}</Project>
+      <Name>Unity.Burst.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Burst.csproj">
+      <Project>{a029fe8e-9d50-9c85-5de4-4f5c014f079f}</Project>
+      <Name>Unity.Burst</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{46366e2e-5ad4-5120-7906-2acb4c2763da}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
+      <Project>{ec0aabb3-551f-733f-695d-7e87f33d78dc}</Project>
+      <Name>Unity.VisualScripting.Shared.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="LoopScrollRect.Runtime.csproj">
+      <Project>{b39c6dfa-788f-9b5e-7dfd-30d3f99b6580}</Project>
+      <Name>LoopScrollRect.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{b254195c-77b0-da71-0bfc-ee01ecb6f61e}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="spine-unity-examples.csproj">
       <Project>{c1570e6b-5fa6-56e2-eb51-b5d1dc81907b}</Project>
       <Name>spine-unity-examples</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
+      <Project>{f615235b-3b73-73ff-ac60-157eacf1c9ee}</Project>
+      <Name>Unity.VisualStudio.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-csharp.csproj">
+      <Project>{cc05bfbf-c4ed-11dc-b3e7-ec0fd4797500}</Project>
+      <Name>spine-csharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.csproj">
+      <Project>{8b64a56d-b25a-49d4-ed46-f58f65fd904f}</Project>
+      <Name>Unity.VisualScripting.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{4f644e03-7368-e12d-2ddc-c69bdcecb7b1}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Core.Editor.csproj">
+      <Project>{7a399a40-121b-d861-e215-71270be7f462}</Project>
+      <Name>Unity.VisualScripting.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{eda7e3cd-6180-80a2-c73d-bfe85648723d}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{8dcca48a-f77b-a0f4-914e-5840f961f0ff}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="AmplifyShaderEditor.csproj">
+      <Project>{93bdff84-3818-f488-72a3-a04287c56c49}</Project>
+      <Name>AmplifyShaderEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Config.Runtime.csproj">
+      <Project>{e3ad31c3-70c7-760c-10f9-356e150548b4}</Project>
+      <Name>Unity.RenderPipelines.Universal.Config.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
+      <Project>{393565e0-8b60-bbf1-5002-39e492112397}</Project>
+      <Name>Unity.RenderPipelines.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualEffectGraph.Editor.csproj">
+      <Project>{e7e69b5c-e3ab-ac98-3465-b259bae1ed39}</Project>
+      <Name>Unity.VisualEffectGraph.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
+      <Project>{29e469a5-749f-eaf1-ef55-d5f47994437b}</Project>
+      <Name>Unity.VisualScripting.Flow</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
+      <Project>{e97b0843-2a57-a133-3cf8-0f123ff201f0}</Project>
+      <Name>Unity.VisualScripting.Flow.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="LoopScrollRect.Editor.csproj">
+      <Project>{6425e495-b272-ecfc-3578-650ecef9cac4}</Project>
+      <Name>LoopScrollRect.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
+      <Project>{9270d897-dd9f-9c59-6f6c-b2c7173bda76}</Project>
+      <Name>Unity.Mathematics.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
+      <Project>{8b43f9e3-f55b-247d-0e60-3d50e9a76748}</Project>
+      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{46b70005-2777-3c08-ae42-ea27f42331b0}</Project>
+      <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.csproj">
+      <Project>{6b83c9f4-7f56-a943-8828-51e8a75914f3}</Project>
+      <Name>Unity.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.ForUI.csproj">
+      <Project>{8c1a7380-1848-a77c-f5b4-d1f6485791ac}</Project>
+      <Name>Unity.InputSystem.ForUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
+      <Project>{f648e61e-bcfc-c636-5f46-226e30a7b9e2}</Project>
+      <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
+      <Project>{ca49cbf4-9329-74d1-7920-2c09dff34c21}</Project>
+      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
+      <Project>{ecc1fb91-cca6-d2c5-1e61-abf16d8237d0}</Project>
+      <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
+      <Project>{dc5997e6-8446-d13a-5076-dce68f33c1a6}</Project>
+      <Name>Unity.VisualScripting.State.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="spine-unity-examples-editor.csproj">
       <Project>{e95310f4-8037-c347-0c86-198e641d42b3}</Project>
       <Name>spine-unity-examples-editor</Name>
     </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{0988f295-7454-c435-f5fc-33274ad0853b}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="PPv2URPConverters.csproj">
+      <Project>{90019a2b-f6e0-d2de-e3ae-2660014993fa}</Project>
+      <Name>PPv2URPConverters</Name>
+    </ProjectReference>
+    <ProjectReference Include="Coffee.UIParticle.csproj">
+      <Project>{1c6fbe56-df44-21d0-3c41-12f43f473534}</Project>
+      <Name>Coffee.UIParticle</Name>
+    </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{80b0e2e0-e955-51e3-865b-c1499227a59c}</Project>
       <Name>spine-unity-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.csproj">
+      <Project>{710d8f09-b542-6544-abfb-3cacfdfeedd3}</Project>
+      <Name>Unity.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
+      <Project>{13340336-7371-6c6d-9032-f6b52465ec7f}</Project>
+      <Name>Unity.RenderPipelines.Universal.Shaders</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Searcher.Editor.csproj">
+      <Project>{bab9ee84-329f-5ab5-9ec6-382c9461d7f9}</Project>
+      <Name>Unity.Searcher.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
+      <Project>{42161481-f503-da62-0509-8f43e5d52d07}</Project>
+      <Name>Unity.TextMeshPro.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualScripting.State.csproj">
+      <Project>{eb55ebce-6783-8500-b92b-09b1c8d9ae3a}</Project>
+      <Name>Unity.VisualScripting.State</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
+      <Project>{54c06cb3-ec45-ee80-3bc3-1100e605c426}</Project>
+      <Name>Unity.RenderPipelines.Universal.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{43f895d6-6a0e-2234-63fa-bdc3aeea9f60}</Project>
+      <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
