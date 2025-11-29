@@ -104,13 +104,6 @@ public class BagController : XSingleton<BagController>
 
     
     //player穿的装备的属性
-    [NonSerialized] public EquipTable PlayerClothAttribute=new EquipTable();
-    [NonSerialized] public EquipTable PlayerCloakAttribute=new EquipTable();
-    [NonSerialized] public EquipTable PlayerRingAttribute=new EquipTable();
-    [NonSerialized] public EquipTable PlayerNecklaceAttribute=new EquipTable();
-    [NonSerialized] public EquipTable PlayerShoeAttribute=new EquipTable();
-    [NonSerialized] public EquipTable PlayerHelmetAttribute=new EquipTable();
-    
     
     [NonSerialized] public BagGrid PlayerClothGrid=new BagGrid();
     [NonSerialized] public BagGrid PlayerCloakGrid=new BagGrid();
@@ -1494,51 +1487,7 @@ public class BagController : XSingleton<BagController>
             }
         }
     }
-
-    /// <summary>
-    /// 卸装备
-    /// </summary>
-    public void UnInstallCloth()
-    {
-        IsInstallCloth = false;
-        playerCloth.transform.Find("Image").gameObject.SetActive(false);
-        playerCloth.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
-
-    public void UnInstallCloak()
-    {
-        IsInstallCloak = false;
-        playerCloak.transform.Find("Image").gameObject.SetActive(false);
-        playerCloak.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
-
-    public void UnInstallRing()
-    {
-        IsInstallRing = false;
-        playerRing.transform.Find("Image").gameObject.SetActive(false);
-        playerRing.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
-
-    public void UnInstallNecklace()
-    {
-        IsInstallNecklace = false;
-        playerNecklace.transform.Find("Image").gameObject.SetActive(false);
-        playerNecklace.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
-
-    public void UnInstallShoe()
-    {
-        IsInstallShoe = false;
-        playerShoe.transform.Find("Image").gameObject.SetActive(false);
-        playerShoe.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
-
-    public void UnInstallHelmet()
-    {
-        IsInstallHelmet = false;
-        playerHelmet.transform.Find("Image").gameObject.SetActive(false);
-        playerHelmet.transform.Find("Image").GetComponent<Button>().image.sprite = null;
-    }
+    
     
     public bool IsClickInstalled(EquipTable equiptable)
     {
@@ -1798,135 +1747,7 @@ public class BagController : XSingleton<BagController>
         return item;
     }
 
-    public Sprite GetEquipSprite(string equipName)
-    {
-        if (equipName == "PrimaryCloth")
-        { GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryClothFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryClothSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        if (equipName == "PrimaryCloak")
-        { GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryCloakhFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryCloakSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        if (equipName == "PrimaryRing")
-        { GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryRingFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryRingSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        if (equipName == "PrimaryNecklace")
-        { GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryNecklaceFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryNecklaceSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        if (equipName == "PrimaryShoe")
-        { GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryShoeFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryShoeSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        if (equipName == "PrimaryHelmet")
-        { 
-            GameObject equipPrefab = Resources.Load<GameObject>("Prefabs/Equip/PrimaryHelmetFight"); // 加载 Prefab
-            if (equipPrefab != null) // 判断是否成功加载资源
-            {
-                Transform spriteTransform = equipPrefab.transform.Find("PrimaryHelmetSprite"); // 查找指定子对象
-                if (spriteTransform != null) // 确保子对象存在
-                {
-                    SpriteRenderer spriteRenderer = spriteTransform.GetComponent<SpriteRenderer>(); // 获取 SpriteRenderer 组件
-                    if (spriteRenderer != null) // 判断组件是否存在
-                    {
-                        return spriteRenderer.sprite; // 返回 Sprite
-                    }
-                }
-            }
-        }
-        // 如果未找到匹配项或出现问题，返回 null
-        return null;
-    }
-
-    public void ComputeEquipAttribute()
-    {
-        GlobalPlayerAttribute.EquipDamage=PlayerClothAttribute.Damage+PlayerCloakAttribute.Damage+
-            PlayerRingAttribute.Damage+PlayerNecklaceAttribute.Damage+PlayerShoeAttribute.Damage+
-            PlayerHelmetAttribute.Damage;
-        GlobalPlayerAttribute.EquipMaxHp=PlayerClothAttribute.HP+PlayerCloakAttribute.HP+
-            PlayerRingAttribute.HP+PlayerNecklaceAttribute.HP+PlayerShoeAttribute.HP+
-            PlayerHelmetAttribute.HP;
-        GlobalPlayerAttribute.EquipMoveSpeed=PlayerClothAttribute.MoveSpeed+PlayerCloakAttribute.MoveSpeed+
-            PlayerRingAttribute.MoveSpeed+PlayerNecklaceAttribute.MoveSpeed+PlayerShoeAttribute.MoveSpeed+
-            PlayerHelmetAttribute.MoveSpeed;
-        GlobalPlayerAttribute.EquipAttackSpeed=PlayerClothAttribute.DamageSpeed+PlayerCloakAttribute.DamageSpeed+
-            PlayerRingAttribute.DamageSpeed+PlayerNecklaceAttribute.DamageSpeed+PlayerShoeAttribute.DamageSpeed+
-            PlayerHelmetAttribute.DamageSpeed;
-        GlobalPlayerAttribute.EquipCRIT=PlayerClothAttribute.CRIT+PlayerCloakAttribute.CRIT+
-            PlayerRingAttribute.CRIT+PlayerNecklaceAttribute.CRIT+PlayerShoeAttribute.CRIT+
-            PlayerHelmetAttribute.CRIT;
-        GlobalPlayerAttribute.EquipCRITDamage=PlayerClothAttribute.CRITDamage+PlayerCloakAttribute.CRITDamage+
-            PlayerRingAttribute.CRITDamage+PlayerNecklaceAttribute.CRITDamage+PlayerShoeAttribute.CRITDamage+
-            PlayerHelmetAttribute.CRITDamage; 
-        GlobalPlayerAttribute.EquipBloodSuck=PlayerClothAttribute.BloodSuck+PlayerCloakAttribute.BloodSuck+
-            PlayerRingAttribute.BloodSuck+PlayerNecklaceAttribute.BloodSuck+PlayerShoeAttribute.BloodSuck+
-            PlayerHelmetAttribute.BloodSuck;
-        GlobalPlayerAttribute.EquipDefense=PlayerClothAttribute.Defense+PlayerCloakAttribute.Defense+
-            PlayerRingAttribute.Defense+PlayerNecklaceAttribute.Defense+PlayerShoeAttribute.Defense+
-            PlayerHelmetAttribute.Defense;
-        GlobalPlayerAttribute.EquipGoodFortune=PlayerClothAttribute.GoodFortune+PlayerCloakAttribute.GoodFortune+
-            PlayerRingAttribute.GoodFortune+PlayerNecklaceAttribute.GoodFortune+PlayerShoeAttribute.GoodFortune+
-            PlayerHelmetAttribute.GoodFortune;
-    }
     
-
     /// <summary>
     /// 出售所有选中类型的装备
     /// </summary>

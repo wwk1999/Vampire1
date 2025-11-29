@@ -86,24 +86,274 @@ public class GlobalPlayerAttribute
    public static int PlayerGoodFortune=0;
    
    //装备属性
-   public static int EquipMaxHp=0;
-   public static int EquipDamage=0;
-   public static int EquipMoveSpeed=0;
+   public static int EquipMaxHp
+   {
+       get => GetEquipMaxHp();
+   }
+
+   public static int EquipDamage
+   {
+       get => GetEquipDamage();
+   }
+
+   public static int EquipMoveSpeed
+   {
+       get => GetEquipMoveSpeed();
+   }
    public static int EquipAttackSpeed=0;
-   public static int EquipCRIT=0;
-   public static int EquipCRITDamage=0;
+
+   public static int EquipCRIT
+   {
+       get => GetEquipCRIT();
+   }
+
+   public static int EquipCRITDamage
+   {
+       get => GetEquipCRITDamage();
+   }
    public static int EquipBloodSuck=0;
-   public static int EquipDefense=0;
+
+   public static int EquipDefense
+   {
+       get => GetEquipDefense();
+   }
    public static int EquipGoodFortune=0;
    
    //总属性
    public static int TotalMaxHp => PlayerMaxHp + EquipMaxHp;
    public static int TotalDamage=> PlayerDamage + EquipDamage;
    public static int TotalMoveSpeed => PlayerMoveSpeed + EquipMoveSpeed;
-   public static int TotalAttackSpeed => PlayerAttackSpeed + EquipAttackSpeed;
+   //public static int TotalAttackSpeed => PlayerAttackSpeed + EquipAttackSpeed;
    public static int TotalCRIT => PlayerCRIT + EquipCRIT;
    public static int TotalCRITDamage => PlayerCRITDamage + EquipCRITDamage;
-   public static int TotalBloodSuck => PlayerBloodSuck + EquipBloodSuck;
+   //public static int TotalBloodSuck => PlayerBloodSuck + EquipBloodSuck;
    public static int TotalDefense => PlayerDefense + EquipDefense;
-   public static int TotalGoodFortune => PlayerGoodFortune + EquipGoodFortune;
+   //public static int TotalGoodFortune => PlayerGoodFortune + EquipGoodFortune;
+   
+   
+   
+   public static int GetEquipMaxHp()
+   {
+       int hp = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           hp+=cloak.HP;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           hp+=cloth.HP;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           hp+=shoe.HP;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           hp+=ring.HP;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           hp+=necklace.HP;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           hp+=helmet.HP;
+       }
+
+       return hp;
+   }
+   
+   
+   public static int GetEquipDamage()
+   {
+       int Damage = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           Damage+=cloak.Damage;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           Damage+=cloth.Damage;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           Damage+=shoe.Damage;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           Damage+=ring.Damage;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           Damage+=necklace.Damage;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           Damage+=helmet.Damage;
+       }
+
+       return Damage;
+   }
+   
+   public static int GetEquipMoveSpeed()
+   {
+       int MoveSpeed = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           MoveSpeed+=cloak.MoveSpeed;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           MoveSpeed+=cloth.MoveSpeed;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           MoveSpeed+=shoe.MoveSpeed;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           MoveSpeed+=ring.MoveSpeed;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           MoveSpeed+=necklace.MoveSpeed;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           MoveSpeed+=helmet.MoveSpeed;
+       }
+
+       return MoveSpeed;
+   }
+   
+   public static int GetEquipCRIT()
+   {
+       int CRIT = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           CRIT+=cloak.CRIT;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           CRIT+=cloth.CRIT;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           CRIT+=shoe.CRIT;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           CRIT+=ring.CRIT;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           CRIT+=necklace.CRIT;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           CRIT+=helmet.CRIT;
+       }
+
+       return CRIT;
+   }
+   
+   
+   public static int GetEquipCRITDamage()
+   {
+       int CRITDamage = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           CRITDamage+=cloak.CRITDamage;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           CRITDamage+=cloth.CRITDamage;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           CRITDamage+=shoe.CRITDamage;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           CRITDamage+=ring.CRITDamage;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           CRITDamage+=necklace.CRITDamage;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           CRITDamage+=helmet.CRITDamage;
+       }
+
+       return CRITDamage;
+   }
+   
+   
+   public static int GetEquipDefense()
+   {
+       int Defense = 0;
+       if(PlayerEquipConfig.CloakId!=0)
+       {
+           var cloak = BagController.S.EquipIdList[PlayerEquipConfig.CloakId];
+           Defense+=cloak.Defense;
+       }
+       if(PlayerEquipConfig.ClothId!=0)
+       {
+           var cloth = BagController.S.EquipIdList[PlayerEquipConfig.ClothId];
+           Defense+=cloth.Defense;
+       }
+       if(PlayerEquipConfig.ShoeId!=0)
+       {
+           var shoe = BagController.S.EquipIdList[PlayerEquipConfig.ShoeId];
+           Defense+=shoe.Defense;
+       }
+       if(PlayerEquipConfig.RingId!=0)
+       {
+           var ring = BagController.S.EquipIdList[PlayerEquipConfig.RingId];
+           Defense+=ring.Defense;
+       }
+       if(PlayerEquipConfig.NecklaceId!=0)
+       {
+           var necklace = BagController.S.EquipIdList[PlayerEquipConfig.NecklaceId];
+           Defense+=necklace.Defense;
+       }
+       if(PlayerEquipConfig.HelmetId!=0)
+       {
+           var helmet = BagController.S.EquipIdList[PlayerEquipConfig.HelmetId];
+           Defense+=helmet.Defense;
+       }
+
+       return Defense;
+   }
 }

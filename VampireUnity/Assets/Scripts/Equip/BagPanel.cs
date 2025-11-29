@@ -97,9 +97,6 @@ public class BagPanel : MonoBehaviour
             playerCRITAttributeText.text=GlobalPlayerAttribute.TotalCRIT.ToString();
             playerCRITDamageAttributeText.text=GlobalPlayerAttribute.TotalCRITDamage.ToString();
             playerMoveSpeedAttributeText.text=GlobalPlayerAttribute.TotalMoveSpeed.ToString();
-            playerAttackSpeedAttributeText.text=GlobalPlayerAttribute.TotalAttackSpeed.ToString();
-            playerGoodfortuneAttributeText.text=GlobalPlayerAttribute.TotalGoodFortune.ToString();
-            playerBloodSuckAttributeText.text=GlobalPlayerAttribute.TotalBloodSuck.ToString();
             
             detailedAttributesPanel.SetActive(true);
         });

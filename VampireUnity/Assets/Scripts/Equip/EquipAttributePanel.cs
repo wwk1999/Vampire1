@@ -157,7 +157,6 @@ public class EquipAttributePanel : MonoBehaviour
                     {
                         case 2:
                             //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerClothAttribute = equip;
                             if (BagController.S.PlayerClothGrid != null)
                             {
                                 BagController.S.PlayerClothGrid.E.gameObject.SetActive(false);
@@ -166,7 +165,6 @@ public class EquipAttributePanel : MonoBehaviour
                             break;
                         case 6:
                             //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerShoeAttribute = equip;
                             if (BagController.S.PlayerShoeGrid != null)
                             {
                                 BagController.S.PlayerShoeGrid.E.gameObject.SetActive(false);
@@ -175,7 +173,6 @@ public class EquipAttributePanel : MonoBehaviour
                             break;
                         case 5:
                             //将这个装备的属性传到Bagtroller
-                            BagController.S.PlayerRingAttribute =equip;
                             if (BagController.S.PlayerRingGrid != null)
                             {
                                 BagController.S.PlayerRingGrid.E.gameObject.SetActive(false);
@@ -183,7 +180,6 @@ public class EquipAttributePanel : MonoBehaviour
                             BagController.S.PlayerRingGrid = grid;
                             break;
                         case 4:
-                            BagController.S.PlayerNecklaceAttribute = equip;
                             if (BagController.S.PlayerNecklaceGrid != null)
                             {
                                 BagController.S.PlayerNecklaceGrid.E.gameObject.SetActive(false);
@@ -191,7 +187,6 @@ public class EquipAttributePanel : MonoBehaviour
                             BagController.S.PlayerNecklaceGrid = grid;
                             break;
                         case 3:
-                            BagController.S.PlayerHelmetAttribute = equip;
                             if (BagController.S.PlayerHelmetGrid != null)
                             {
                                 BagController.S.PlayerHelmetGrid.E.gameObject.SetActive(false);
@@ -199,7 +194,6 @@ public class EquipAttributePanel : MonoBehaviour
                             BagController.S.PlayerHelmetGrid = grid;
                             break;
                         case 1:
-                            BagController.S.PlayerCloakAttribute = equip;
                             if (BagController.S.PlayerCloakGrid != null)
                             {
                                 BagController.S.PlayerCloakGrid.E.gameObject.SetActive(false);
@@ -208,7 +202,6 @@ public class EquipAttributePanel : MonoBehaviour
                             break;
                     }
                     BagController.S.SetE();
-                    BagController.S.ComputeEquipAttribute();
                     BagController.S.RefreshPlayerEquip();
                     //BagController.S.ComputeTotalAttribute();//更新人物和装备属性
                     BagController.S.DestroyMaskLayer();

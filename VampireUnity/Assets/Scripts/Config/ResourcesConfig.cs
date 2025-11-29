@@ -236,7 +236,7 @@ public class ResourcesConfig : MonoBehaviour
     {
         switch (equipTable.suitid)
         {
-            case 0:
+            case 1:
                 switch (equipTable.Quality)
                 {
                     case 1:
@@ -256,43 +256,44 @@ public class ResourcesConfig : MonoBehaviour
                                 return PrimaryShoe;
                         }
                         break;
-                    case 2:
-                        switch (equipTable.equip_type_id)
-                        {
-                            case 1:
-                                return GreenCloak;
-                            case 2:
-                                return GreenCloth;
-                            case 3:
-                                return GreenHelmet;
-                            case 4:
-                                return GreenNecklace;
-                            case 5:
-                                return GreenRing;
-                            case 6:
-                                return GreenShoe;
-                        }
-                        break;
-                    case 3:
-                        switch (equipTable.equip_type_id)
-                        {
-                            case 1:
-                                return BlueCloak;
-                            case 2:
-                                return BlueCloth;
-                            case 3:
-                                return BlueHelmet;
-                            case 4:
-                                return BlueNecklace;
-                            case 5:
-                                return BlueRing;
-                            case 6:
-                                return BlueShoe;
-                        }
-                        break; 
                 }
                 break;
-            case 1:
+            case 2:
+                switch (equipTable.equip_type_id)
+                {
+                    case 1:
+                        return GreenCloak;
+                    case 2:
+                        return GreenCloth;
+                    case 3:
+                        return GreenHelmet;
+                    case 4:
+                        return GreenNecklace;
+                    case 5:
+                        return GreenRing;
+                    case 6:
+                        return GreenShoe;
+                }
+                break;
+            
+            case 3:
+                switch (equipTable.equip_type_id)
+                {
+                    case 1:
+                        return BlueCloak;
+                    case 2:
+                        return BlueCloth;
+                    case 3:
+                        return BlueHelmet;
+                    case 4:
+                        return BlueNecklace;
+                    case 5:
+                        return BlueRing;
+                    case 6:
+                        return BlueShoe;
+                }
+                break;
+            case 101:
                 switch (equipTable.equip_type_id)
                 {
                     case 1:
@@ -309,7 +310,7 @@ public class ResourcesConfig : MonoBehaviour
                         return TreeManShoe;
                 }
                 break;
-            case 2:
+            case 102:
                 switch (equipTable.equip_type_id)
                 {
                     case 1:
@@ -327,7 +328,7 @@ public class ResourcesConfig : MonoBehaviour
                 }
                 break;
             
-            case 3:
+            case 103:
                 switch (equipTable.equip_type_id)
                 {
                     case 1:
